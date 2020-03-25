@@ -9,6 +9,8 @@ const userSchema = new Schema({
     age: Number,
     size: String,
     park: Boolean,
+    vaccinated: Boolean,
+    neutered: Boolean,
     houers: TimeRanges,
     owner: {
         name: String,
