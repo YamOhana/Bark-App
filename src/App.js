@@ -40,6 +40,7 @@ class App extends Component {
       <div className="App">
         <div>
         <Header />
+        
         {this.state.user ? (<Home />) : (<Login />)}
         </div>
       </div>
