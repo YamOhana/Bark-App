@@ -18,12 +18,12 @@ export class Inputs {
 
     //dog
     @observable dogName
-    @observable gender
+    @observable dogGender
     @observable park
     @observable vaccinated
     @observable neutered
     @observable image
-    @observable age
+    @observable dogAge
     @observable size
     @observable type
     @observable nature
