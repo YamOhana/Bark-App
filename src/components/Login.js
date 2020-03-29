@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import fire from '../Fire';
+import AddUser from './AddUser';
+import axios from 'axios';
+
+import { inject } from 'mobx-react'
 
 
-class Signup extends Component {
-}
-
+@inject('InputStore')
 class Login extends Component {
     constructor(props) {
         super(props);
@@ -31,11 +33,44 @@ class Login extends Component {
 
     signup(e) {
         e.preventDefault();
+
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-        }).then((u) => { 
-            
-            console.log(u) 
-            this.props.
+            console.log(u.user.uid);
+            let newUser = {
+
+                userId: u.user.uid,
+                email: this.state.email
+
+                // firstName: this.props.InputStore.firstName,
+                // lastName: req.body.lastName,
+                // birthDate: req.body.birthDate,
+                // smoker: req.body.smoker,
+                // email: req.body.email,
+                // phoneNum: req.body.phoneNum,
+                // adress: req.body.adress,
+                // gender: req.body.gender,
+                // hours: [],
+                // friends: [],
+                // messeges: [],
+                // dogs:[]
+
+                //             this.props.InputStore.
+
+                // @observable name
+                // @observable birthDate
+                // @observable email
+                // @observable phoneNum
+                // @observable address
+                // @observable gender
+                // @observable smoker
+                // @observable hours
+
+            }
+            axios.post('http://localhost:3001/user', newUser).then(res => {
+                // this.props.clients.updateList(res.data)
+            })
+
+
         })
             .catch((error) => {
                 console.log(error);
@@ -54,6 +89,7 @@ class Login extends Component {
                         <label htmlFor="exampleInputPassword1">Password</label>
                         <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
                     </div>
+
                     <button type="submit" onClick={this.login} className="btn btn-primary">Login</button>
                     <button onClick={this.signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button>
                 </form>

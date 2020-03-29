@@ -42,6 +42,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     return (
         <div>
 
+
         <label for="firstName">First name:</label>
         <input type="text" id="firstName" value={firstName} name="firstName" onChange={inputHandler}></input>
         <br></br>
@@ -52,6 +53,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
 
         <label for="gender">Gender:</label>
         <select type="text" id="gender" value={gender} name="gender" onChange={inputHandler}>
+
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
