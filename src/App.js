@@ -6,6 +6,7 @@ import fire from './Fire';
 import Home from './components/Home';
 import Login from './components/Login';
 import Header from './components/Header'
+import SidePanel from './components/SidePanel';
 
 
 @observer
