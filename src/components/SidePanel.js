@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react'
 import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import Profile from './Profile'
 import Home from './Home'
-import Users from './Users'
+import Users from './Dogs'
 
 
 class SidePanel extends Component{

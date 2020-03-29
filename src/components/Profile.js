@@ -13,12 +13,10 @@ const { Header, Footer, Sider, Content } = Layout;
 
 class Profile extends Component {
 
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
-            dogList: true,
             dogs: []
-
         }
     }
 
@@ -34,32 +32,39 @@ class Profile extends Component {
     }
 
 
-    componentDidMount = async () =>{
+    componentDidMount = async () => {
         const currUserId = this.props.ownerStore.currUser.id
-        await this.props.Mainstore.getOwnerDogs(currUserId)
+        await props.Mainstore.getOwnerDogs(currUserId)
     }
 
 
 
-    render(){
+    render() {
 
         const state = this.state
 
-            return(
-                <div className="ProfileComponent">
+        return (
+            <div className="ProfileComponent">
                 <Layout id="profileLayout" style={{ height: "100vh" }}>
                     <Header id="header" >
-                    <div id="profileImgDiv">
-                    </div>
+                        <div id="profileImgDiv">
+                        </div>
                     </Header>
 
                     <Content className="profileContent">
+                        <div>
+                            <h3>My Dogs</h3>
+                            {this.props.Mainstore.currUser.dogs.map(d => <MyDog data={d} />)}
+                        </div>
 
-                        <Route exact path="/owner/dog${ownerId}"> </Route>
-                        
-                        <Route path="/owner/dog{ownerId}" exact render={({match}) => <ProfileList match = {match} />} />
-                        <Route path="/owner/dog{ownerId}" exact render={({match}) => <AddDog match = {match}/>} />
 
+                        <div>
+
+                        <span> {this.props.data.name}</span>
+                        <img src={this.data.img}></img>
+
+                        </div>
+                      
                     </Content>
                 </Layout>
 
@@ -67,7 +72,7 @@ class Profile extends Component {
             </div>
 
 
-            )
+        )
 
     }
 
