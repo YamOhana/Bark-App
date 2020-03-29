@@ -36,7 +36,7 @@ router.get('/map', (req, res) => {
 router.get('/onlineUser', (req, res) => {
 })
 //update profile
-router.put('/user-info', (req, res) => {
+router.put('/profile', (req, res) => {
 })
 //update dog profile
 router.put('/dog-info', (req, res) => {

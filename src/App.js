@@ -22,6 +22,13 @@ class App extends Component {
 
   componentDidMount() {
     this.authListener();
+
+      // const getUsers = async (req, res) =>{
+
+      //     await axios.get('http://localhost:3001/uesrs')
+      //     this
+      // }
+
   }
 
   authListener() {
