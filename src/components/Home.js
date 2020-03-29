@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import fire from '../Fire';
+import { observer, inject } from 'mobx-react'
+import Navbar from './Navbar'
+import Users from './Users'
 
+
+// @inject("MainStore")
+
+@observer
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +23,11 @@ class Home extends Component {
 
         return (
             <div>
-                Hello 
+          
+                I'm Home 
+                <Navbar />
+          
+                <Users />
             
             <button onClick={this.logout}>
                 Log Out
