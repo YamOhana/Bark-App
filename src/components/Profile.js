@@ -4,8 +4,6 @@ import AddDog from './AddDog';
 import Mainstore from '../Stores/MainStore'
 import { Layout, Divider, Avatar, Icon, Button } from 'antd';
 
-
-
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -32,8 +30,8 @@ class Profile extends Component {
     }
 
 
-    componentDidMount = async () => {
-        const currUserId = this.props.ownerStore.currUser.id
+    componentDidMount = async () =>{
+        const currUserId = props.ownerStore.currUser.id
         await props.Mainstore.getOwnerDogs(currUserId)
     }
 
@@ -60,8 +58,10 @@ class Profile extends Component {
 
                         <div>
 
-                        <span> {this.props.data.name}</span>
-                        <img src={this.data.img}></img>
+                        <Route exact path="/owner/dog${ownerId}"> </Route>
+                        {/* <MyDogs /> */}
+                        <Route path="/owner/dog{ownerId}" exact render={({match}) => <ProfileList match = {match} />} />
+                        <Route path="/owner/dog{ownerId}" exact render={({match}) => <AddDog match = {match}/>} />
 
                         </div>
                       
@@ -80,3 +80,16 @@ class Profile extends Component {
 }
 
 export default Profile;
+
+/////MyDogs component
+
+{/* <div>
+    <h3>My Dogs</h3>
+    {props.Mainstore.curUser.dogs.map(d => <MyDog data={d} />)}
+</div>
+
+/////MyDog component
+<div >
+    <span>{this.props.data.name}</span>
+    <img src={this.props.data.img}></img>
+</div> */}

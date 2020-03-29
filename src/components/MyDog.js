@@ -3,13 +3,13 @@ import { observer, inject } from 'mobx-react'
 
 
 // const Client = inject("MainStore", "InputStore")(observer((props) => { 
-    const Dog = () => { 
+    const MyDog = () => { 
 
         return (
             <div>
-                Im Dog
+                Im MyDog
             </div>
         )
     }
 
-    export default Dog
+    export default MyDog
