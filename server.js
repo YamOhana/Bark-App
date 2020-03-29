@@ -1,27 +1,27 @@
 const express = require('express')
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const api = require('./server/Routes/api')
 const http = require('http')
-const socketio = require('socket.io')
+// const socketio = require('socket.io')
 const app = express()
 
 
 //create server for socket
 const server = http.createServer(app)
-const io = socketio(server)
+// const io = socketio(server)
 
 
 //run when client connects
-io.on('connection', socket => {
-    socket.emit('chat-messege')
-    console.log('new websocket connection');
+// io.on('connection', socket => {
+//     socket.emit('chat-messege')
+//     console.log('new websocket connection');
     
-})
+// })
 
 
 //Database creation
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/usersDB', { useNewUrlParser: true })
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/usersDB', { useNewUrlParser: true })
 
 
 
