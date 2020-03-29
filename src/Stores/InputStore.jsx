@@ -6,7 +6,8 @@ export class Inputs {
 
 
     //owner
-    @observable name
+    @observable firstName
+    @observable lastName
     @observable birthDate
     @observable email
     @observable phoneNum
