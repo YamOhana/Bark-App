@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import fire from '../Fire';
 
+
+class Signup extends Component {
+}
+
 class Login extends Component {
     constructor(props) {
         super(props);
