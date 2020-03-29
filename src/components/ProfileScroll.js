@@ -8,6 +8,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 @inject("MainStore")
 @observer
+
 class ProfileList extends Component {
     constructor(){
         super()

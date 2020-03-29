@@ -14,9 +14,7 @@ class Profile extends Component {
     constructor(props) {
         super();
         this.state = {
-            dogList: true,
             dogs: []
-
         }
     }
 
@@ -39,25 +37,34 @@ class Profile extends Component {
 
 
 
-    render(){
+    render() {
 
         const state = this.state
 
-            return(
-                <div className="ProfileComponent">
+        return (
+            <div className="ProfileComponent">
                 <Layout id="profileLayout" style={{ height: "100vh" }}>
                     <Header id="header" >
-                    <div id="profileImgDiv">
-                    </div>
+                        <div id="profileImgDiv">
+                        </div>
                     </Header>
 
                     <Content className="profileContent">
+                        <div>
+                            <h3>My Dogs</h3>
+                            {this.props.Mainstore.currUser.dogs.map(d => <MyDog data={d} />)}
+                        </div>
+
+
+                        <div>
 
                         <Route exact path="/owner/dog${ownerId}"> </Route>
                         {/* <MyDogs /> */}
                         <Route path="/owner/dog{ownerId}" exact render={({match}) => <ProfileList match = {match} />} />
                         <Route path="/owner/dog{ownerId}" exact render={({match}) => <AddDog match = {match}/>} />
 
+                        </div>
+                      
                     </Content>
                 </Layout>
 
@@ -65,7 +72,7 @@ class Profile extends Component {
             </div>
 
 
-            )
+        )
 
     }
 
@@ -76,7 +83,7 @@ export default Profile;
 
 /////MyDogs component
 
-<div>
+{/* <div>
     <h3>My Dogs</h3>
     {props.Mainstore.curUser.dogs.map(d => <MyDog data={d} />)}
 </div>
@@ -85,4 +92,4 @@ export default Profile;
 <div >
     <span>{this.props.data.name}</span>
     <img src={this.props.data.img}></img>
-</div>
+</div> */}
