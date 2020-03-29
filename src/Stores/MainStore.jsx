@@ -6,88 +6,32 @@ import data from './data.json'
 export class MainStore {
     @observable owners =[...data]
     @observable curUser
+    @observable userIndex
 
-    @action getData = async dataArr => {
+    @action getData = dataArr => {
         this.owners = dataArr.owners
         this.curUser = dataArr.user
+        this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
     }
 
-    @action addDogToOwner(ownerId, dog) {
-        let owner = this.owners.find(o => o.id === ownerId)
-        owner.dogs.push(dog)
-    }
-
-    @action async getOwnerDogs(ownerId) {
-        // if (ownerId) {
-        //     let dogs = await axios.get(`owner/dog${ownerId}`)
-        //     dogs = dogs.data
-        //     if (dogs.length) {
-        //         this.dogs = dogs
-        //     }
-        // }
-    }
-
-
-
-
-    @action changeFriendShipStatus() {
-        // return axios.get('/changes-friendship-tatus')
-        //     .then(() => console.log('friend-added'));
-
-    }
-
-
-    @action  acceptFriendship(id) {
-
-        // return axios.post(`/api/accept-friendship/${id}`)
-        //     .then(() => {
-        //         return {type: "Friendship accepted"}
-        //     })
-    }
-
-    @action  deleteFriendship(id) {
-
-        // return axios.post(`/api/delete-friendship/${id}`)
-        //     .then(() => {
-        //         return {type: "Friendship-deleted"}
-        //     })
-    }
-
-
-
-
-    @action saveNewDog = async () => {
-        let dogOfOwner = await axios.post('/*owner rout */', {
-
-            name: this.name,
-            gender: this.gender,
-            park: this.park,
-            vaccinated: this.vaccinated,
-            neutered: this.neutered,
-            age: this.age,
-            size: this.size,
-            type: this.type,
-            nature: this.nature,
-            image: this.image
-        })
-        return dogOfOwner.data
-
-    }
-
-
-
-    @action editDogField = async (fieldName, dog) =>{
-        // const dogId = dog.id
-        // await axios.put(`/dog-profile/${dogId}`, {
-        //     fieldName,
-        //     fieldVal = dog[fieldName]
-        // })
-
-    }
-
-
-
-
+    @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)
     
+    @action  acceptFriendship = friendId => this.owners[this.userIndex].friends.push(friendId)
+
+    @action addFriend = friendId => {
+        let friend = this.owners.find(o => o.id === friendId)
+        friend.requerst.push(this.curUser.id)
+    }
+
+    @action  deleteFriendship = friendId => {
+        let owner = this.owners[this.userIndex]
+        const friendIndex = owner.friends.friendIndex(f => f === friendId)
+        owner.friends.splice(friendIndex, 1)
+    }
+
+    @action editDogField = (dogId, fieldName, data) =>{
+        let dog = this.owners[this.userIndex].dogs.find(d => d.id === dogId)
+        dog[fieldName] = data
+    }    
 
 }
