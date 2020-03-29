@@ -55,11 +55,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <br></br>
 
         <label for="dogGender">Dog's gender:</label>
-        <select type="text" id="dogGender" value={dogGender} name="dogGender" onChange={inputHandler}>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
+        <input type="text" id="dogGender" value={dogGender} name="dogGender" onChange={inputHandler}></input>
         <br></br>
 
         <label for="park">Favorie park:</label>
@@ -67,11 +63,11 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <br></br>
 
         <label for="vaccinated">Vaccinated:</label>
-        <input type="checkbox" id="vaccinated" value={vaccinated} name="vaccinated" onChange={inputHandler}></input>
+        <input type="text" id="vaccinated" value={vaccinated} name="vaccinated" onChange={inputHandler}></input>
         <br></br>
 
         <label for="neutered">Neutered:</label>
-        <input type="checkbox" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
+        <input type="text" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
         <br></br>
 
         <label for="image">Image src:</label>
@@ -79,15 +75,11 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <br></br>
 
         <label for="dogBirthDate">Dog Birth Date :</label>
-        <input type="date" id="dogBirthDate" value={dogBirthDate} name="dogBirthDate" onChange={inputHandler}></input>
+        <input type="text" id="dogBirthDate" value={dogBirthDate} name="dogBirthDate" onChange={inputHandler}></input>
         <br></br>
         
         <label for="size">Dog Size :</label>
-        <select type="text" id="size" value={size} name="size" onChange={inputHandler}>
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-        </select>
+        <input type="text" id="size" value={size} name="size" onChange={inputHandler}></input>
         <br></br>
 
         <label for="type">Dog type :</label>
@@ -95,15 +87,15 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <br></br>
 
         <label for="shy">Dog shy :</label>
-        <input type="checkbox" id="shy" value={shy} name="shy" onChange={inputHandler}></input>
+        <input type="text" id="shy" value={shy} name="shy" onChange={inputHandler}></input>
         <br></br>
 
         <label for="energetic">Dog energy :</label>
-        <input type="checkbox" id="energetic" value={energetic} name="energetic" onChange={inputHandler}></input>
+        <input type="text" id="energetic" value={energetic} name="energetic" onChange={inputHandler}></input>
         <br></br>
 
         <label for="dominant">Dog dominant :</label>
-        <input type="checkbox" id="dominant" value={dominant} name="dominant" onChange={inputHandler}></input>
+        <input type="text" id="dominant" value={dominant} name="dominant" onChange={inputHandler}></input>
         <br></br>
 
 
