@@ -40,11 +40,9 @@ app.use(function (req, res, next) {
 
 app.use('/', api)
 
-
-
 //port for server
-
-const port = process.env.PORT || 3001
+// process.env.PORT ||
+const port =  3001
 server.listen(port, function () {
     console.log(`Running on port ${port}`)
 })

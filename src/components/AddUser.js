@@ -50,11 +50,11 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     return (
         <div>
 
-        <label for="dogName">Dog's name:</label>
+        <label htmlFor="dogName">Dog's name:</label>
         <input type="text" id="dogName" value={dogName} name="dogName" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="dogGender">Dog's gender:</label>
+        <label htmlFor="dogGender">Dog's gender:</label>
         <select type="text" id="dogGender" value={dogGender} name="dogGender" onChange={inputHandler}>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -62,27 +62,27 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         </select>
         <br></br>
 
-        <label for="park">Favorie park:</label>
+        <label htmlFor="park">Favorie park:</label>
         <input type="text" id="park" value={park} name="park" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="vaccinated">Vaccinated:</label>
+        <label htmlFor="vaccinated">Vaccinated:</label>
         <input type="checkbox" id="vaccinated" value={vaccinated} name="vaccinated" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="neutered">Neutered:</label>
+        <label htmlFor="neutered">Neutered:</label>
         <input type="checkbox" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="image">Image src:</label>
+        <label htmlFor="image">Image src:</label>
         <input type="text" id="image" value={image} name="image" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="dogBirthDate">Dog Birth Date :</label>
+        <label htmlFor="dogBirthDate">Dog Birth Date :</label>
         <input type="date" id="dogBirthDate" value={dogBirthDate} name="dogBirthDate" onChange={inputHandler}></input>
         <br></br>
         
-        <label for="size">Dog Size :</label>
+        <label htmlFor="size">Dog Size :</label>
         <select type="text" id="size" value={size} name="size" onChange={inputHandler}>
             <option value="small">Small</option>
             <option value="medium">Medium</option>
@@ -90,35 +90,35 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         </select>
         <br></br>
 
-        <label for="type">Dog type :</label>
+        <label htmlFor="type">Dog type :</label>
         <input type="text" id="type" value={type} name="type" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="shy">Dog shy :</label>
+        <label htmlFor="shy">Dog shy :</label>
         <input type="checkbox" id="shy" value={shy} name="shy" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="energetic">Dog energy :</label>
+        <label htmlFor="energetic">Dog energy :</label>
         <input type="checkbox" id="energetic" value={energetic} name="energetic" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="dominant">Dog dominant :</label>
+        <label htmlFor="dominant">Dog dominant :</label>
         <input type="checkbox" id="dominant" value={dominant} name="dominant" onChange={inputHandler}></input>
         <br></br>
 
 
-        {/* <label for="lname">Last name:</label>
+        {/* <label htmlFor="lname">Last name:</label>
         <input type="text" id="lname" value={props.InputStore.lname} name="lname" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="countryInput">Country:</label>
+        <label htmlFor="countryInput">Country:</label>
         <input type="text" list='countryList' name="newCountry" onChange={inputHandler}></input>
         <datalist value={props.InputStore.newCountry} onChange={inputHandler} id='countryList'>
             {props.MainStore.countries.map(c => <option value={c}></option>)}
         </datalist>
         <br></br>
 
-        <label for="ownerInput">Owner:</label>
+        <label htmlFor="ownerInput">Owner:</label>
         <input type='text' list='ownerList' name='newOwner' onChange={inputHandler}></input>
         <datalist value={props.InputStore.owner} onChange={inputHandler} id="ownerList">
             {props.MainStore.owners.map(o => <option value={o}>{o}</option>)}
