@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
-import User from './User';
 
 
 // const Client = inject("MainStore", "InputStore")(observer((props) => { 
-    const Users = () => { 
+    const Dog = () => { 
 
         return (
             <div>
-                Im Users
-                <User />
+                Im Dog
             </div>
         )
     }
 
-    export default Users
+    export default Dog
