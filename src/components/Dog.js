@@ -13,3 +13,10 @@ import { observer, inject } from 'mobx-react'
     }
 
     export default Dog
+
+
+
+
+
+
+    

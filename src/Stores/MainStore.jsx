@@ -29,9 +29,11 @@ export class MainStore {
         owner.friends.splice(friendIndex, 1)
     }
 
-    @action editDogField = (dogId, fieldName, data) =>{
+    @action editDogField = (dogId, fieldName, data) => {
         let dog = this.owners[this.userIndex].dogs.find(d => d.id === dogId)
         dog[fieldName] = data
     }    
 
+    @action editProfilt = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
+    
 }
