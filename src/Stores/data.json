@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "firstName": "Larissa",
+        "lastName": "Andreev",
+        "birthDate": "10/01/1993",
+        "smoker": false,
+        "email": "larisA123@gmail.com",
+        "phoneNum": "0505123456",
+        "adress": "Shenkin 1, Tel Aviv",  
+        "gender": "female",
+        "hours": ["07:00-8:00", "19:00-21:00"],
+        "friends": [],
+        "messeges": [],
+        "dogs":[{
+            "dogId": "mike_Andreev1",
+            "name": "Mike",
+            "gender": "male",
+            "park": ["Gan Meir", "Ginat Shenkin"], 
+            "vaccinated": true,
+            "neutered": true,
+            "birthDate": "06/06/2017",
+            "type": "Mixed",
+            "nature": {
+                "shy": false,
+                "energetic": true,
+                "dominant": true
+            }
+        }]
+
+    }
+]

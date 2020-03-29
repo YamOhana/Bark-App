@@ -5,7 +5,7 @@ import Navbar from './Navbar'
 import Users from './Users'
 
 
-// @inject("MainStore")
+@inject("MainStore")
 
 @observer
 class Home extends Component {
@@ -24,9 +24,9 @@ class Home extends Component {
         return (
             <div>
           
-                I'm Home 
+            <div>I'm Home</div>
                 <Navbar />
-          
+                
                 <Users />
             
             <button onClick={this.logout}>

@@ -1,10 +1,10 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
-
+import data from './data.json'
 
 
 export class MainStore {
-    @observable owners =[]
+    @observable owners =[...data]
     @observable curUser
 
     @action getData = async dataArr => {
@@ -18,39 +18,39 @@ export class MainStore {
     }
 
     @action async getOwnerDogs(ownerId) {
-        if (ownerId) {
-            let dogs = await axios.get(`owner/dog${ownerId}`)
-            dogs = dogs.data
-            if (dogs.length) {
-                this.dogs = dogs
-            }
-        }
+        // if (ownerId) {
+        //     let dogs = await axios.get(`owner/dog${ownerId}`)
+        //     dogs = dogs.data
+        //     if (dogs.length) {
+        //         this.dogs = dogs
+        //     }
+        // }
     }
 
 
 
 
     @action changeFriendShipStatus() {
-        return axios.get('/changes-friendship-tatus')
-            .then(() => console.log('friend-added'));
+        // return axios.get('/changes-friendship-tatus')
+        //     .then(() => console.log('friend-added'));
 
     }
 
 
     @action  acceptFriendship(id) {
 
-        return axios.post(`/api/accept-friendship/${id}`)
-            .then(() => {
-                return {type: "Friendship accepted"}
-            })
+        // return axios.post(`/api/accept-friendship/${id}`)
+        //     .then(() => {
+        //         return {type: "Friendship accepted"}
+        //     })
     }
 
     @action  deleteFriendship(id) {
 
-        return axios.post(`/api/delete-friendship/${id}`)
-            .then(() => {
-                return {type: "Friendship-deleted"}
-            })
+        // return axios.post(`/api/delete-friendship/${id}`)
+        //     .then(() => {
+        //         return {type: "Friendship-deleted"}
+        //     })
     }
 
 
@@ -77,11 +77,11 @@ export class MainStore {
 
 
     @action editDogField = async (fieldName, dog) =>{
-        const dogId = dog.id
-        await axios.put(`/dog-profile/${dogId}`, {
-            fieldName,
-            fieldVal = dog[fieldName]
-        })
+        // const dogId = dog.id
+        // await axios.put(`/dog-profile/${dogId}`, {
+        //     fieldName,
+        //     fieldVal = dog[fieldName]
+        // })
 
     }
 
