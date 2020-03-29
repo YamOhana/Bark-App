@@ -1,5 +1,8 @@
 const express = require('express')
 const router = express.Router()
+import firebase from 'firebase'
+const database = firebase.database();
+
 //get map from google API
 router.get('/map', (req, res) =>{
 })
