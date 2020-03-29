@@ -3,7 +3,8 @@ import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
 import Users from './Users'
-import AddUser from './AddUser';
+import AddDog from './AddDog';
+import AddUser from './AddUser'
 
 
 @inject("MainStore")
