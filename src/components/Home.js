@@ -3,6 +3,7 @@ import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
 import Users from './Users'
+import AddUser from './AddUser';
 
 
 @inject("MainStore")
@@ -26,8 +27,8 @@ class Home extends Component {
           
             <div>I'm Home</div>
                 <Navbar />
-                
                 <Users />
+                <AddUser />
             
             <button onClick={this.logout}>
                 Log Out

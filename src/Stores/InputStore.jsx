@@ -7,7 +7,7 @@ export class Inputs {
 
     //owner
     @observable name
-    @observable age
+    @observable birthDate
     @observable email
     @observable phoneNum
     @observable address
@@ -23,10 +23,14 @@ export class Inputs {
     @observable vaccinated
     @observable neutered
     @observable image
-    @observable dogAge
+    @observable dogBirthDate
     @observable size
     @observable type
-    @observable nature
+    @observable shy
+    @observable energetic
+    @observable dominant
+    
+
 
 
     @action handleInput = (name, val) => {
