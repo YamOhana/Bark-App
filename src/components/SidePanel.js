@@ -1,43 +1,43 @@
-import React, {component, Component, Profiler} from 'react'
-import { inject, observer } from 'mobx-react'
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import Profile from './Profile'
-import Home from './Home'
-import Users from './Dogs'
+// import React, {component, Component, Profiler} from 'react'
+// import { inject, observer } from 'mobx-react'
+// import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
+// import Profile from './Profile'
+// import Home from './Home'
+// import Users from './Dogs'
 
 
-class SidePanel extends Component{
+// class SidePanel extends Component{
 
 
 
 
     
-        render(){
+//         render(){
 
-            return(
-                <Router>
-                    <div className="side-panel">
-                    <Link to='/'>Home</Link>
-                <Route path='/' exact component={Home} />
-                <Link to='/profile'>Profile</Link>
-                <Route path='profile' exact component={Profile} />
-                <Link to='/friends'>Friends</Link>
-                <Route path='friends' exact component={Users} />
-
-
-                {/* <Link to='/map'>Map</Link> */}
+//             return(
+//                 <Router>
+//                     <div className="side-panel">
+//                     <Link to='/'>Home</Link>
+//                 <Route path='/' exact component={Home} />
+//                 <Link to='/profile'>Profile</Link>
+//                 <Route path='profile' exact component={Profile} />
+//                 <Link to='/friends'>Friends</Link>
+//                 <Route path='friends' exact component={Users} />
 
 
-                    </div>
-                </Router>
-            )
+//                 {/* <Link to='/map'>Map</Link> */}
 
 
-
-        }
+//                     </div>
+//                 </Router>
+//             )
 
 
 
-}
+//         }
 
-export default SidePanel
+
+
+// }
+
+// export default SidePanel
