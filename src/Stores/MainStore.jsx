@@ -22,7 +22,9 @@ export class MainStore {
         this.posts = data
     }
 
-
+    @action addPost = post => {
+        this.posts.unshift(post)
+    }
 
     @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)
     
