@@ -9,27 +9,26 @@ export class Inputs {
     @observable firstName
     @observable lastName
     @observable birthDate
-    @observable email
     @observable phoneNum
     @observable address
-    @observable gender
-    @observable smoker
+    @observable gender = "male"
+    @observable smoker = false
     @observable hours
 
 
     //dog
     @observable dogName
     @observable dogGender
-    @observable park
-    @observable vaccinated
-    @observable neutered
+    @observable park = "null"
+    @observable vaccinated = false
+    @observable neutered = false
     @observable image
     @observable dogBirthDate
-    @observable size
+    @observable size = "small"
     @observable type
-    @observable shy
-    @observable energetic
-    @observable dominant
+    @observable shy = false
+    @observable energetic = false
+    @observable dominant = false
     
 
 
