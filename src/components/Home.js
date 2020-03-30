@@ -32,7 +32,6 @@ class Home extends Component {
         const currentUser = await this.getCurrentUser()
         console.log(currentUser.data);
 
-
         this.props.MainStore.getData({owners:users.data,user:currentUser.data})
     }
 
@@ -73,7 +72,7 @@ class Home extends Component {
 
                 <button onClick={this.logout}>
                     Log Out
-            </button>
+                </button>
 
                 </Router>
             </div>

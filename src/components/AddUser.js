@@ -17,21 +17,29 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
  
     
     const inputHandler = (e) => {
-        props.InputStore.handleInput(e.target.name, e.target.value)
+        const inp = props.InputStore
         e.target.name === "firstName" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setFirstName(e.target.value) :
         e.target.name === "lastName" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setLastName(e.target.value) :
         e.target.name === "gender" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setGender(e.target.value) :
         e.target.name === "birthDate" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setbirthDate(e.target.value) :
         e.target.name === "phoneNum" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setPhoneNum(e.target.value) :
         e.target.name === "address" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setAddress(e.target.value) :
         e.target.name === "smoker" ?
+        inp.handleInput(e.target.name, e.target.checked) &&
         setSmoker(e.target.checked) :
+        inp.handleInput(e.target.name, e.target.value) &&
         setHours(e.target.value) 
     }
         
