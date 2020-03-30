@@ -21,8 +21,8 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
     
     
     const inputHandler = (e) => {
-        console.log(e.target.name)
-        console.log(e.target.value)
+        // console.log(e.target.name)
+        // console.log(e.target.value)
         props.InputStore.handleInput(e.target.name, e.target.value)
         e.target.name === "dogName" ?
         setDogName(e.target.value) :

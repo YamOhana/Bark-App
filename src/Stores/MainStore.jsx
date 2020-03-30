@@ -14,10 +14,6 @@ export class MainStore {
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
     }
 
-    @action updateOwners = usersArr => {
-        this.owners = usersArr
-    }
-
     @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)
     
     @action  acceptFriendship = friendId => this.owners[this.userIndex].friends.push(friendId)
@@ -27,7 +23,7 @@ export class MainStore {
         friend.requerst.push(this.curUser.id)
     }
 
-    @action  deleteFriendship = friendId => {
+    @action  deleteFriend = friendId => {
         let owner = this.owners[this.userIndex]
         const friendIndex = owner.friends.friendIndex(f => f === friendId)
         owner.friends.splice(friendIndex, 1)
