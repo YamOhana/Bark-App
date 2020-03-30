@@ -21,6 +21,8 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
     
     
     const inputHandler = (e) => {
+        console.log(e.target.name)
+        console.log(e.target.value)
         props.InputStore.handleInput(e.target.name, e.target.value)
         e.target.name === "dogName" ?
         setDogName(e.target.value) :
@@ -29,9 +31,9 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         e.target.name === "park" ?
         setPark(e.target.value) :
         e.target.name === "vaccinated" ?
-        setVaccinated(e.target.value) :
+        setVaccinated(e.target.checked) :
         e.target.name === "neutered" ? 
-        setNeutered(e.target.value) :
+        setNeutered(e.target.checked)  :
         e.target.name === "image" ?
         setImage(e.target.value) :
         e.target.name === "dogBirthDate" ?
@@ -41,10 +43,10 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         e.target.name === "type" ?
         setType(e.target.value) :
         e.target.name === "shy" ?
-        setShy(e.target.value) :
+        setShy(e.target.checked) :
         e.target.name === "energetic" ?
-        setEnergetic(e.target.value) :
-        setDominant(e.target.value)
+        setEnergetic(e.target.checked) :
+        setDominant(e.target.checked) 
     }
         
     return (

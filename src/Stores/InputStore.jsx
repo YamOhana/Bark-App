@@ -36,8 +36,6 @@ export class Inputs {
 
     @action handleInput = (name, val) => {
         this[name] = val
-        console.log(name)
-        console.log(this[name])
     }
 
 }
