@@ -2,7 +2,6 @@
 import React, { Component, Profiler } from 'react'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import AddDog from '../AddDog';
-import Mainstore from '../../Stores/MainStore'
 import { Layout, Divider, Avatar, Icon, Button } from 'antd';
 import { observer, inject } from 'mobx-react'
 import MyDogs from './MyDog'
@@ -34,7 +33,7 @@ class Profile extends Component {
 
     componentDidMount = async () =>{
         const currUserId = this.props.ownerStore.currUser.id
-        await props.Mainstore.getOwnerDogs(currUserId)
+        await this.props.Mainstore.getOwnerDogs(currUserId)
     }
 
 
@@ -75,13 +74,3 @@ class Profile extends Component {
 
 export default Profile;
 
-<<<<<<< HEAD:src/components/Profile.js
-// /////MyDog component
-// <div >
-//     <span>{this.props.data.name}</span>
-//     <img src={this.props.data.img}></img>
-// </div> */
-// }
-
-=======
->>>>>>> 015e553b0200484808879d5daac9e8345c1acc1b:src/components/Profile/Profile.js
