@@ -32,9 +32,21 @@ const database = fire.firestore();
 router.post('/user', (req, res) => {
     console.log(req.body);
     
-    database.collection("users").add({
+    database.collection("users").doc(req.body.userId).set({
         id: req.body.userId,
-        email: req.body.email
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        birthDate: req.body.birthDate,
+        smoker: req.body.smoker,
+        phoneNum: req.body.phoneNum,
+        address: req.body.address,
+        gender: req.body.gender,
+        hours: [],
+        friends: [],
+        messeges: [],
+        dogs:[],
+        requests:[]
     })
     .then(function() {
         console.log("Document successfully written!");
@@ -42,23 +54,7 @@ router.post('/user', (req, res) => {
     .catch(function(error) {
         console.error("Error writing document: ", error);
     });
-    
 
-    // database.ref(req.body.userId).set({
-    //     id: req.body.userId,
-    //     // firstName: req.body.firstName,
-    //     // lastName: req.body.lastName,
-    //     // birthDate: req.body.birthDate,
-    //     // smoker: req.body.smoker,
-    //     email: req.body.email
-    //     // phoneNum: req.body.phoneNum,
-    //     // adress: req.body.adress,
-    //     // gender: req.body.gender,
-    //     // hours: [],
-    //     // friends: [],
-    //     // messeges: [],
-    //     // dogs:[]
-    // });
 })
 
 //return all users

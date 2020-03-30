@@ -9,7 +9,7 @@ const Header = () => {
 
 
     function openSideBar() {
-        document.getElementById('side-panel-button').style.width = "200px"
+        // document.getElementById('side-panel-button').style.width = "200px"
     }
 
 

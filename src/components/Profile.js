@@ -1,95 +1,95 @@
-import React, { component, Component, Profiler } from 'react'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
-import AddDog from './AddDog';
-import Mainstore from '../Stores/MainStore'
-import { Layout, Divider, Avatar, Icon, Button } from 'antd';
+// import React, { component, Component, Profiler } from 'react'
+// import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+// import AddDog from './AddDog';
+// import Mainstore from '../Stores/MainStore'
+// import { Layout, Divider, Avatar, Icon, Button } from 'antd';
 
-const { Header, Footer, Sider, Content } = Layout;
-
-
-@inject("MainStore")
-
-class Profile extends Component {
-
-    constructor(props) {
-        super();
-        this.state = {
-            dogs: []
-        }
-    }
-
-    onToggle = () => {
-        let opposite = !this.state.dogList
-        this.setState({
-            dogList: opposite
-        })
-    }
-
-    onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-    }
+// const { Header, Footer, Sider, Content } = Layout;
 
 
-    componentDidMount = async () =>{
-        const currUserId = props.ownerStore.currUser.id
-        await props.Mainstore.getOwnerDogs(currUserId)
-    }
+// @inject("MainStore")
+
+// class Profile extends Component {
+
+//     constructor(props) {
+//         super();
+//         this.state = {
+//             dogs: []
+//         }
+//     }
+
+//     onToggle = () => {
+//         let opposite = !this.state.dogList
+//         this.setState({
+//             dogList: opposite
+//         })
+//     }
+
+//     onChange = (e) => {
+//         console.log(`checked = ${e.target.checked}`);
+//     }
+
+
+//     componentDidMount = async () =>{
+//         const currUserId = props.ownerStore.currUser.id
+//         await props.Mainstore.getOwnerDogs(currUserId)
+//     }
 
 
 
-    render() {
+//     render() {
 
-        const state = this.state
+//         const state = this.state
 
-        return (
-            <div className="ProfileComponent">
-                <Layout id="profileLayout" style={{ height: "100vh" }}>
-                    <Header id="header" >
-                        <div id="profileImgDiv">
-                        </div>
-                    </Header>
+//         return (
+//             <div className="ProfileComponent">
+//                 <Layout id="profileLayout" style={{ height: "100vh" }}>
+//                     <Header id="header" >
+//                         <div id="profileImgDiv">
+//                         </div>
+//                     </Header>
 
-                    <Content className="profileContent">
-                        <div>
-                            <h3>My Dogs</h3>
-                            {this.props.Mainstore.currUser.dogs.map(d => <MyDog data={d} />)}
-                        </div>
+//                     <Content className="profileContent">
+//                         <div>
+//                             <h3>My Dogs</h3>
+//                             {this.props.Mainstore.currUser.dogs.map(d => <MyDog data={d} />)}
+//                         </div>
 
 
-                        <div>
+//                         <div>
 
-                        <Route exact path="/owner/dog${ownerId}"> </Route>
-                        {/* <MyDogs /> */}
-                        <Route path="/owner/dog{ownerId}" exact render={({match}) => <ProfileList match = {match} />} />
-                        <Route path="/owner/dog{ownerId}" exact render={({match}) => <AddDog match = {match}/>} />
+//                         <Route exact path="/owner/dog${ownerId}"> </Route>
+//                         {/* <MyDogs /> */}
+//                         <Route path="/owner/dog{ownerId}" exact render={({match}) => <ProfileList match = {match} />} />
+//                         <Route path="/owner/dog{ownerId}" exact render={({match}) => <AddDog match = {match}/>} />
 
-                        </div>
+//                         </div>
                       
-                    </Content>
-                </Layout>
+//                     </Content>
+//                 </Layout>
 
 
-            </div>
+//             </div>
 
 
-        )
+//         )
 
-    }
+//     }
 
 
-}
+// }
 
-export default Profile;
+// export default Profile;
 
-/////MyDogs component
+// /////MyDogs component
 
-{/* <div>
-    <h3>My Dogs</h3>
-    {props.Mainstore.curUser.dogs.map(d => <MyDog data={d} />)}
-</div>
+// {/* <div>
+//     <h3>My Dogs</h3>
+//     {props.Mainstore.curUser.dogs.map(d => <MyDog data={d} />)}
+// </div>
 
-/////MyDog component
-<div >
-    <span>{this.props.data.name}</span>
-    <img src={this.props.data.img}></img>
-</div> */}
+// /////MyDog component
+// <div >
+//     <span>{this.props.data.name}</span>
+//     <img src={this.props.data.img}></img>
+// </div> */}

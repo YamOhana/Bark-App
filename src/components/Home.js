@@ -3,8 +3,7 @@ import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
 import Users from './Dogs'
-import AddDog from './AddDog';
-import AddUser from './AddUser'
+import Header from './Header'
 
 
 @inject("MainStore")
@@ -25,14 +24,15 @@ class Home extends Component {
 
         return (
             <div>
-          
-            <div>I'm Home</div>
+
+                <div>I'm Home</div>
+
+                {/* <Header /> */}
                 <Navbar />
                 <Users />
-                <AddUser />
-            
-            <button onClick={this.logout}>
-                Log Out
+
+                <button onClick={this.logout}>
+                    Log Out
             </button>
 
             </div>
