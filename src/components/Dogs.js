@@ -3,15 +3,17 @@ import { observer, inject } from 'mobx-react'
 import Dog from './Dog';
 
 
-// const Client = inject("MainStore", "InputStore")(observer((props) => { 
-    const Dogs = () => { 
 
-        return (
-            <div>
-                Im Dogs
-                <Dog />
-            </div>
-        )
-    }
+const Dogs = inject("MainStore")(observer((props) => { 
 
-    export default Dogs
+    return (
+        <div>
+            Im Dogs
+            {props.MainStore.owners.map(o => {
+                    return o.dogs.map(d => <Dog d={d}/>)
+            })}
+        </div>
+    )
+}))
+
+export default Dogs
