@@ -63,6 +63,7 @@ class SidePanel extends Component {
             {/* to profile */}
             {/* <Link to={`/profile`}> */}
                 <ListItem button>
+                    
                     <ListItemIcon><DogFace /></ListItemIcon>
                     <ListItemText primary="Profile" />
                 </ListItem>

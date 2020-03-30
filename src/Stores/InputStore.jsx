@@ -19,7 +19,7 @@ export class Inputs {
     //dog
     @observable dogName
     @observable dogGender
-    @observable park = "null"
+    @observable park
     @observable vaccinated = false
     @observable neutered = false
     @observable image
