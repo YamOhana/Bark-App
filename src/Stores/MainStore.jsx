@@ -9,6 +9,7 @@ export class MainStore {
     @observable userIndex
 
     @action getData = dataArr => {
+        console.log(dataArr)
         this.owners = dataArr.owners
         this.curUser = dataArr.user
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
