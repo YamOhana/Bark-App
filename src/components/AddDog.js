@@ -21,32 +21,44 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
     
     
     const inputHandler = (e) => {
-        // console.log(e.target.name)
-        // console.log(e.target.value)
-        props.InputStore.handleInput(e.target.name, e.target.value)
+
+        //props.InputStore.handleInput(e.target.name, e.target.value)
+        const inp = props.InputStore
         e.target.name === "dogName" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setDogName(e.target.value) :
         e.target.name === "dogGender" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setDogGender(e.target.value) :
         e.target.name === "park" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setPark(e.target.value) :
         e.target.name === "vaccinated" ?
+        inp.handleInput(e.target.name, e.target.checked) &&
         setVaccinated(e.target.checked) :
         e.target.name === "neutered" ? 
-        setNeutered(e.target.checked)  :
+        inp.handleInput(e.target.name, e.target.checked) &&
+        setNeutered(e.target.checked) :
         e.target.name === "image" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setImage(e.target.value) :
         e.target.name === "dogBirthDate" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setBirthDate(e.target.value) :
         e.target.name === "size" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setSize(e.target.value) :
         e.target.name === "type" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setType(e.target.value) :
         e.target.name === "shy" ?
+        inp.handleInput(e.target.name, e.target.checked) &&
         setShy(e.target.checked) :
         e.target.name === "energetic" ?
+        inp.handleInput(e.target.name, e.target.checked) &&
         setEnergetic(e.target.checked) :
-        setDominant(e.target.checked) 
+        inp.handleInput(e.target.name, e.target.checked) &&
+        setDominant(e.target.checked)  
     }
         
     return (

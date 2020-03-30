@@ -15,8 +15,8 @@
         "messeges": [],
         "dogs":[{
             "dogId": "mike_Andreev1",
-            "name": "Mike",
-            "gender": "male",
+            "dogName": "Mike",
+            "dogGender": "male",
             "park": ["Gan Meir", "Ginat Shenkin"],
             "size": "medium", 
             "vaccinated": true,
@@ -47,8 +47,8 @@
         "messeges": [],
         "dogs":[{
             "dogId": "mateo_Shahar1",
-            "name": "Mateo",
-            "gender": "male",
+            "dogName": "Mateo",
+            "dogGender": "male",
             "park": ["Gan Meir", "Ginat Shenkin"], 
             "size": "large",
             "vaccinated": true,

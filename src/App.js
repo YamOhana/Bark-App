@@ -5,6 +5,7 @@ import { observer } from 'mobx-react'
 import fire from './Fire';
 import Home from './components/Home';
 import Login from './components/Login';
+import Landing from './components/Landing';
 
 
 @observer
@@ -37,7 +38,7 @@ class App extends Component {
       <div className="App">
         <div>
         
-        {this.state.user ? (<Home />) : (<Login />)}
+        {this.state.user ? (<Landing />) : (<Login />)}
         </div>
       </div>
     )

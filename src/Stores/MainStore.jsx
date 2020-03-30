@@ -9,6 +9,7 @@ export class MainStore {
     @observable userIndex
 
     @action getData = dataArr => {
+        console.log(dataArr)
         this.owners = dataArr.owners
         this.curUser = dataArr.user
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
@@ -34,6 +35,6 @@ export class MainStore {
         dog[fieldName] = data
     }    
 
-    @action editProfilt = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
+    @action editProfile = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
     
 }

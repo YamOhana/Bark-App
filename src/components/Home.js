@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
@@ -6,6 +7,7 @@ import SidePanel from './Menu/SidePanel'
 import NavbarLeftMenu from './Menu/NavbarLeftMenu'
 import Header from './Header'
 import Dogs from './Dogs'
+import Profile from './Profile/Profile'
 import AddDog from './AddDog';
 import AddUser from './AddUser'
 
@@ -23,50 +25,50 @@ class Home extends Component {
 
 
 
-    async componentDidMount() {
-        const users = await this.getUsers()
-        console.log(users.data)
+    // async componentDidMount() {
+    //     const users = await this.getUsers()
+    //     console.log(users.data)
 
-        const currentUser = await this.getCurrentUser()
-        console.log(currentUser.data);
+    //     const currentUser = await this.getCurrentUser()
+    //     console.log(currentUser.data);
 
+    //     this.props.MainStore.getData({owners:users.data,user:currentUser.data})
+    // }
 
-        this.props.MainStore.getData({owners:users.data,user:currentUser.data})
-    }
+    // getUsers = async () => {
+    //     return await axios.get('http://localhost:3001/users')
+    // }
+    // getCurrentUser = async () => {
 
-    getUsers = async () => {
-        return await axios.get('http://localhost:3001/users')
-    }
-    getCurrentUser = async () => {
+    //     const curUser = await fire.auth().currentUser
+    //     if (curUser) {
+    //         return await axios.get(`http://localhost:3001/user/${curUser.uid}`)
+    //     }
 
-        const curUser = await fire.auth().currentUser
-        if (curUser) {
-            return await axios.get(`http://localhost:3001/user/${curUser.uid}`)
-        }
+    // }
 
-    }
-
-
-    logout() {
-        fire.auth().signOut();
+static logout = () => {
+        console.log(`trying to logout`)
+        this.props.logout()
+        console.log(`loged out`)
     }
 
     render() {
 
         return (
             <div>
+                <Router>
 
                 <div>I'm Home</div>
-                <NavbarLeftMenu />
+
+                {/* <NavbarLeftMenu /> */}
                 <Navbar />
-
                 <Dogs />
-
-
                 <button onClick={this.logout}>
                     Log Out
-            </button>
+                </button>
 
+                </Router>
             </div>
         )
     }
