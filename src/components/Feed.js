@@ -18,6 +18,7 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
             comment: comment,
             senderId: props.MainStore.curUser.id
         }
+        console.log(post)
         props.MainStore.addPost(post)
         setComment("")
     }
@@ -30,7 +31,15 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
             <button onClick={addPost}>POST</button>
             <br></br>
             <div>
-                {props.MainStore.posts.map(p => {return <div>{p.comment}</div>})}
+                {props.MainStore.posts.map(p => {
+                    // const sender = props.MainStore.owners.find(o => o.id === p.senderId).name
+                    // console.log(sender)
+                    return (
+                    <div>
+                        {/* <span>{sender.name}</span> */}
+                        <span>{p.comment}</span>
+                    </div>
+                    )})}
             </div>
         </div>
     )
