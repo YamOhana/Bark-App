@@ -36,7 +36,6 @@ class Login extends Component {
         e.preventDefault();
 
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-            console.log(u.user.uid);
             let newUser = {
                 userId: u.user.uid,
                 email: this.state.email,
@@ -47,8 +46,26 @@ class Login extends Component {
                 address: this.props.InputStore.address,
                 gender: this.props.InputStore.gender,
                 smoker: this.props.InputStore.smoker,
-                hours: this.props.InputStore.hours
+                hours: this.props.InputStore.hours,
+                dog:{
+                    dogName: this.props.InputStore.dogName,
+                    dogGender: this.props.InputStore.dogGender,
+                    park: this.props.InputStore.park,
+                    vaccinated: this.props.InputStore.vaccinated,
+                    neutered: this.props.InputStore.neutered,
+                    image: this.props.InputStore.image,
+                    dogBirthDate: this.props.InputStore.dogBirthDate,
+                    size: this.props.InputStore.size,
+                    type: this.props.InputStore.type,
+                    shy: this.props.InputStore.shy,
+                    energetic: this.props.InputStore.energetic,
+                    dominant: this.props.InputStore.dominant
+                }
             }
+            console.log(this.props.InputStore.gender);
+            console.log(newUser.gender);
+            
+            
             axios.post('http://localhost:3001/user', newUser).then(res => {
                 // this.props.clients.updateList(res.data)
             })
@@ -60,7 +77,6 @@ class Login extends Component {
             })
     }
     render() {
-        console.log(this.state.signOrLog);
         return (
 
             <div className="col-md-6">
