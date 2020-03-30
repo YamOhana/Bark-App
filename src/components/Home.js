@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
@@ -6,6 +7,7 @@ import SidePanel from './Menu/SidePanel'
 import NavbarLeftMenu from './Menu/NavbarLeftMenu'
 import Header from './Header'
 import Dogs from './Dogs'
+import Profile from './Profile/Profile'
 import AddDog from './AddDog';
 import AddUser from './AddUser'
 
@@ -54,18 +56,25 @@ class Home extends Component {
 
         return (
             <div>
+                <Router>
 
                 <div>I'm Home</div>
+
                 <NavbarLeftMenu />
                 <Navbar />
-
                 <Dogs />
+
+
+                
+                <Route path='/home' exact component={Home}></Route>
+                <Route path="/profile" exact component={Profile}></Route>
 
 
                 <button onClick={this.logout}>
                     Log Out
                 </button>
 
+                </Router>
             </div>
         )
     }

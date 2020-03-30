@@ -11,18 +11,22 @@ import { Link } from 'react-router-dom';
 
 export const FolderListItems = ({ user }) => (
   <div>
+    <Link to='/'>
       <ListItem button>
         <ListItemIcon>
           <HomeIcon />
         </ListItemIcon>
         <ListItemText primary="Home" />
       </ListItem>
+      </Link>
+      <Link to='/profile'>
       <ListItem button>
         <ListItemIcon>
           <DogFace />
         </ListItemIcon>
         <ListItemText primary="Profile" />
       </ListItem>
+      </Link>
   </div>
 );
 
