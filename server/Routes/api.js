@@ -33,7 +33,7 @@ router.get('/users', (req, res) => {
 router.get('/map', (req, res) => {
 })
 //get all online users
-router.get('/onlineUser', (req, res) => {
+router.get('/profile', (req, res) => {
 })
 //update profile
 router.put('/user-info', (req, res) => {

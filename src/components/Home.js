@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
-
+import SidePanel from './Menu/SidePanel'
+import NavbarLeftMenu from './Menu/NavbarLeftMenu'
 import Header from './Header'
 import Dogs from './Dogs'
 import AddDog from './AddDog';
@@ -29,8 +30,7 @@ class Home extends Component {
             <div>
 
                 <div>I'm Home</div>
-
-                {/* <Header /> */}
+                <NavbarLeftMenu />
                 <Navbar />
 
                 <Dogs />
