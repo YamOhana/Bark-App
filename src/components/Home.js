@@ -16,7 +16,7 @@ import axios from 'axios'
 
 @observer
 class Home extends Component {
-    
+
     render() {
 
         return (

@@ -7,12 +7,16 @@ import DogFace from '@material-ui/icons/Pets'
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-
 import { Link } from 'react-router-dom';
+import logout from '../Home'
+import fire from '../Fire';
+
+
 
 export const FolderListItems = ({ user }) => {
 
   return (
+
   <div>
     <Link to='/'>
       <ListItem button>
@@ -33,6 +37,7 @@ export const FolderListItems = ({ user }) => {
   </div>
 );
 }
+
 
 
 

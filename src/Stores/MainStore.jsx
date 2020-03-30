@@ -17,9 +17,11 @@ export class MainStore {
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
     }
 
+
     @action getPosts = data => {
         this.posts = data
     }
+
 
 
     @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)

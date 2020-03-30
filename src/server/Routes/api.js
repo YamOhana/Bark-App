@@ -17,21 +17,19 @@ const firebaseConfig = {
 const fire = firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
-       
+
 fire.auth().signInWithEmailAndPassword("admin@me.com", "123456").then((u) => {
     console.log("connected");
-    
+
 }).catch((error) => {
     console.log(error);
 });
 
 const database = fire.firestore();
 
-// let userId = fire.auth().currentUser.uid
-
 router.post('/user', (req, res) => {
     console.log(req.body);
-    
+
     database.collection("users").doc(req.body.userId).set({
         id: req.body.userId,
         email: req.body.email,
@@ -45,15 +43,15 @@ router.post('/user', (req, res) => {
         hours: [],
         friends: [],
         messeges: [],
-        dogs:[req.body.dog],
-        requests:[]
+        dogs: [req.body.dog],
+        requests: []
     })
-    .then(function() {
-        console.log("Document successfully written!");
-    })
-    .catch(function(error) {
-        console.error("Error writing document: ", error);
-    });
+        .then(function () {
+            console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
+        });
 
 })
 
@@ -61,48 +59,113 @@ router.post('/user', (req, res) => {
 router.get('/users', async (req, res) => {
     const snapshot = await database.collection("users").get()
     res.send(snapshot.docs.map(doc => doc.data()))
-    // database.collection("users").get().then(function(querySnapshot) {
-    //     // querySnapshot.forEach(function(doc) {
-    //     //     // doc.data() is never undefined for query doc snapshots
-    //     //     console.log(doc.id, " => ", doc.data());
-    //     // });
-    //     console.log(querySnapshot);
-        
-    //     // res.send(querySnapshot)
-    // });
-
 })
 
+
+//get all online users
+router.get('/user/:id', async (req, res) => {
+    database.collection("users").doc(`${req.params.id}`).get().then(function (doc) {
+
+        if (doc.exists) {
+            user = doc.data();
+            res.status(200).send(user)
+        } else {
+            res.status(400).send("No User")
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
+})
+
+//add dog to user
+router.post('/addDog/:id', (req, res) => {
+    database.collection("users").doc(`${req.params.id}`).update({
+        dogs: firebase.firestore.FieldValue.arrayUnion(req.body)
+    }).then(function (doc) {
+
+        if (doc.exists) {
+            user = doc.data();
+            res.status(200).send(user)
+        } else {
+            res.status(400).send("Failed")
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
+})
+//update friends list, adding friend
+router.put('/addFriend/:currentUserId/:friendId', (req, res) => {
+    database.collection("users").doc(`${req.params.currentUserId}`).update({
+        friends: firebase.firestore.FieldValue.arrayUnion(req.params.friendId)
+    }).then(function (doc) {
+
+        if (doc.exists) {
+            user = doc.data();
+            res.status(200).send(user)
+        } else {
+            res.status(400).send("Failed")
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
+})
+//update friends list, adding friend
+router.put('/requestFriend/:currentUserId/:friendId', (req, res) => {
+    database.collection("users").doc(`${req.params.friendId}`).update({
+        requests: firebase.firestore.FieldValue.arrayUnion(req.params.currentUserId)
+    }).then(function (doc) {
+
+        if (doc.exists) {
+            user = doc.data();
+            res.status(200).send(user)
+        } else {
+            res.status(400).send("Failed")
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
+})
 //get map from google API
 router.get('/map', (req, res) => {
 })
-//get all online users
-router.get('/user/:id', async (req, res) => {
-    database.collection("users").doc(`${req.params.id}`).get().then(function(doc) {
+//update profile
+router.put('/user/:id/:fieldName', (req, res) => {
+    database.collection("users").doc(`${req.params.id}`).update({
+        [req.params.fieldName]:req.body
+    }).then(function (doc) {
 
-        if (doc.exists){
+        if (doc.exists) {
             user = doc.data();
             res.status(200).send(user)
-          } else {
+        } else {
             res.status(400).send("No User")
-          }}).catch(function(error) {
-            console.log("Error getting document:", error)
-          });
-      
-})
-//update profile
-router.put('/user-info', (req, res) => {
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
 })
 //update dog profile
 router.put('/dog-info', (req, res) => {
+    //can't update element in array, only remove or add to array
 })
 //liking an owner-dog profile, in order to save him in friends list
 router.put('/liked-user', (req, res) => {
 })
-//update friends list, adding friend
-router.put('/friends', (req, res) => {
-})
+
 //update friends list, deleting friend
-router.delete('/dogProfile', (req, res) => {
+router.delete('/deleteFriend/:currentUserId/:friendId', (req, res) => {
+    database.collection("users").doc(`${req.params.currentUserId}`).update({
+        friends: firebase.firestore.FieldValue.arrayRemove(req.params.friendId)
+    }).then(function (doc) {
+
+        if (doc.exists) {
+            user = doc.data();
+            res.status(200).send(user)
+        } else {
+            res.status(400).send("Failed")
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
 })
 module.exports = router
