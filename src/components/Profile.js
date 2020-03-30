@@ -73,3 +73,10 @@ class Profile extends Component {
 
 export default Profile;
 
+// /////MyDog component
+// <div >
+//     <span>{this.props.data.name}</span>
+//     <img src={this.props.data.img}></img>
+// </div> */
+}
+
