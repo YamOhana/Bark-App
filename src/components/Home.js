@@ -34,7 +34,7 @@ class Home extends Component {
                 <Navbar />
 
                 <Dogs />
-                <AddUser />
+                
             
             <button onClick={this.logout}>
                 Log Out

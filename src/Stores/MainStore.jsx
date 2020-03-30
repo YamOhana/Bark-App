@@ -34,6 +34,6 @@ export class MainStore {
         dog[fieldName] = data
     }    
 
-    @action editProfilt = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
+    @action editProfile = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
     
 }
