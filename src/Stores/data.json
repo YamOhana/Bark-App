@@ -28,5 +28,35 @@
             }
         }]
 
+    },
+    {
+        "id": 1,
+        "firstName": "Tamir",
+        "lastName": "Shahar",
+        "birthDate": "16/01/1992",
+        "smoker": true,
+        "email": "tamir123@gmail.com",
+        "phoneNum": "0505123457",
+        "adress": "Shenkin 2, Tel Aviv",  
+        "gender": "male",
+        "hours": ["07:00-8:00", "19:00-21:00"],
+        "friends": [],
+        "messeges": [],
+        "dogs":[{
+            "dogId": "mateo_Shahar1",
+            "name": "Mateo",
+            "gender": "male",
+            "park": ["Gan Meir", "Ginat Shenkin"], 
+            "vaccinated": true,
+            "neutered": true,
+            "birthDate": "01/04/2019",
+            "type": "Mixed",
+            "nature": {
+                "shy": false,
+                "energetic": false,
+                "dominant": true
+            }
+        }]
+
     }
 ]
