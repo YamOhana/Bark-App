@@ -15,7 +15,6 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     const [gender , setGender] = useState(props.InputStore.gender)
     const [smoker, setSmoker] = useState(props.InputStore.smoker)
     const [hours , setHours] = useState(props.InputStore.hours)
-    
  
     
     const inputHandler = (e) => {
@@ -43,15 +42,15 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <div>
 
 
-        <label for="firstName">First name:</label>
+        <label htmlFor="firstName">First name:</label>
         <input type="text" id="firstName" value={firstName} name="firstName" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="lastName">Last name:</label>
+        <label htmlFor="lastName">Last name:</label>
         <input type="text" id="lastName" value={lastName} name="lastName" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="gender">Gender:</label>
+        <label htmlFor="gender">Gender:</label>
         <select type="text" id="gender" value={gender} name="gender" onChange={inputHandler}>
 
             <option value="male">Male</option>
@@ -60,27 +59,27 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         </select>
         <br></br>
 
-        <label for="birthDate">Date of Birth:</label>
+        <label htmlFor="birthDate">Date of Birth:</label>
         <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="email">Email:</label>
+        <label htmlFor="email">Email:</label>
         <input type="text" id="email" value={email} name="email" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="phoneNum">Phone Number:</label>
+        <label htmlFor="phoneNum">Phone Number:</label>
         <input type="text" id="phoneNum" value={phoneNum} name="phoneNum" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="address">Address:</label>
+        <label htmlFor="address">Address:</label>
         <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="smoker">Smoking?</label>
+        <label htmlFor="smoker">Smoking?</label>
         <input type="checkbox" id="smoker" value={smoker} name="smoker" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="hours">Prefered Hours</label>
+        <label htmlFor="hours">Prefered Hours</label>
         <input type="text" id="hours" value={hours} name="hours" onChange={inputHandler}></input>
         <br></br>
         

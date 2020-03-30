@@ -1,3 +1,4 @@
+
 import React, { Component, Profiler } from 'react'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import AddDog from './AddDog';
@@ -79,19 +80,19 @@ class Profile extends Component {
     // }
 
 
-}
+// }
 
-export default Profile;
+// export default Profile;
 
-/////MyDogs component
+// /////MyDogs component
 
-{/* <div>
-    <h3>My Dogs</h3>
-    {props.Mainstore.curUser.dogs.map(d => <MyDog data={d} />)}
-</div>
+// {/* <div>
+//     <h3>My Dogs</h3>
+//     {props.Mainstore.curUser.dogs.map(d => <MyDog data={d} />)}
+// </div>
 
-/////MyDog component
-<div >
-    <span>{this.props.data.name}</span>
-    <img src={this.props.data.img}></img>
-</div> */}
+// /////MyDog component
+// <div >
+//     <span>{this.props.data.name}</span>
+//     <img src={this.props.data.img}></img>
+// </div> */}
