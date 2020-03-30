@@ -18,8 +18,8 @@ import axios from 'axios'
 @observer
 class Home extends Component {
     constructor(props) {
-        super();
-        // this.logout = this.logout.bind(this);
+        super(props);
+        this.logout = this.logout.bind(this);
 
     }
 
@@ -47,8 +47,7 @@ class Home extends Component {
 
     // }
 
-
-    logout = () => {
+static logout = () => {
         console.log(`trying to logout`)
         this.props.logout()
         console.log(`loged out`)

@@ -7,10 +7,17 @@ import DogFace from '@material-ui/icons/Pets'
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
-
 import { Link } from 'react-router-dom';
+import logout from '../Home'
+import fire from '../Fire';
+
+
 
 export const FolderListItems = ({ user }) => (
+  
+
+
+  
   <div>
     <Link to='/'>
       <ListItem button>
@@ -40,9 +47,9 @@ export const OtherFolderListItems = (
       <ListItemText primary="Settings" />
     </ListItem>
 
-    <ListItem button>
+    <ListItem button onClick={this.logout}>
       <ListItemIcon>
-        <ExitToAppIcon />
+        <ExitToAppIcon/>
       </ListItemIcon>
       <ListItemText primary='Log-Out' />
     </ListItem>
