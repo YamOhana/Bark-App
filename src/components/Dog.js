@@ -7,8 +7,17 @@ const Dog = inject("MainStore")(observer((props) => {
 
 
     return (
-        <div>
+        <div className="">
+
+
             I'M A DOG AND MY NAME IS {props.d.name}
+
+
+
+
+
+
+
         </div>
     )
 }))
