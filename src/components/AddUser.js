@@ -35,7 +35,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         e.target.name === "address" ?
         setAddress(e.target.value) :
         e.target.name === "smoker" ?
-        setSmoker(e.target.value) :
+        setSmoker(e.target.checked) :
         setHours(e.target.value) 
     }
         
