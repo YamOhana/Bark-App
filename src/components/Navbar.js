@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
+import '../styles/Navbar.css'
 
 
 // const Client = inject("MainStore", "InputStore")(observer((props) => { 
