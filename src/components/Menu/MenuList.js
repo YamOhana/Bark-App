@@ -13,11 +13,10 @@ import fire from '../Fire';
 
 
 
-export const FolderListItems = ({ user }) => (
-  
+export const FolderListItems = ({ user }) => {
 
+  return (
 
-  
   <div>
     <Link to='/'>
       <ListItem button>
@@ -37,24 +36,10 @@ export const FolderListItems = ({ user }) => (
     </Link>
   </div>
 );
+}
 
-export const OtherFolderListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <SettingsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Settings" />
-    </ListItem>
 
-    <ListItem button onClick={this.logout}>
-      <ListItemIcon>
-        <ExitToAppIcon/>
-      </ListItemIcon>
-      <ListItemText primary='Log-Out' />
-    </ListItem>
-  </div>
-);
+
 
 FolderListItems.propTypes = {
   user: PropTypes.object.isRequired

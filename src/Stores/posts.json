@@ -1,0 +1,20 @@
+[
+    {
+        "pid": 3,
+        "senderId": 1,
+        "comment": "Hey guys! still there?",
+        "time": "29/3/2020T09:10"
+    },
+    {
+        "pid": 2,
+        "senderId": 2,
+        "comment": "Great! I'll join you in a bit",
+        "time": "29/3/2020T08:20"
+    },
+    {
+        "pid": 1,
+        "senderId": 3,
+        "comment": "I'm at the Park! welcome to join",
+        "time": "29/3/2020T08:14"
+    }
+]

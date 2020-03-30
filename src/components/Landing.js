@@ -47,7 +47,7 @@ class Landing extends Component {
                 <div className="landing">
                 
                     <div id="main-links">
-                        <NavbarLeftMenu />
+                        <NavbarLeftMenu logout={this.logout}/>
                         {/* <Link to="/">Home</Link>
                         <Link to="/Profile">Profile</Link> */}
                     </div>
