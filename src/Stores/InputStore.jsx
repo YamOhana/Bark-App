@@ -31,8 +31,6 @@ export class Inputs {
     @observable dominant = false
     
 
-
-
     @action handleInput = (name, val) => {
         this[name] = val
     }
