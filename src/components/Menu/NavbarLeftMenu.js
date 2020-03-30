@@ -46,7 +46,7 @@ class NavbarLeftMenu extends React.Component {
     console.log(`loged out`)
   }
 
-  tryingSomething = () => {
+  OtherFolderListItems = () => {
 
     return (
       <div>
@@ -81,7 +81,7 @@ class NavbarLeftMenu extends React.Component {
           <FolderListItems user={user} />
         </List>
         <Divider />
-        <List>{this.tryingSomething()}</List>
+        <List>{this.OtherFolderListItems()}</List>
       </div>
     );
 
