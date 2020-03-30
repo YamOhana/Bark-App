@@ -78,5 +78,5 @@ export default Profile;
 //     <span>{this.props.data.name}</span>
 //     <img src={this.props.data.img}></img>
 // </div> */
-}
+// }
 

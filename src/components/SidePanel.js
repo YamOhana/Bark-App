@@ -32,11 +32,11 @@ export const SidePanelList = () => {
         })
     }
 
-    render(){
+    render() {
 
 
         const { left } = this.state
-    }
+    return (
     <div>
 
         <MenuIcon onClick={this.toggleDrawer(true)} />
@@ -71,7 +71,8 @@ export const SidePanelList = () => {
                 </ListItem>
             </Link>
         </div>
-    </div>
+    </div>)
+    }
 
 
 }
