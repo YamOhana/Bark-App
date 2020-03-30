@@ -5,7 +5,19 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import MenuIcon from '@material-ui/icons/Menu';
-import { FolderListItems, OtherFolderListItems } from './MenuList';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import DogFace from '@material-ui/icons/Pets'
+import HomeIcon from '@material-ui/icons/Home';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SettingsIcon from '@material-ui/icons/Settings';
+
+import { Link } from 'react-router-dom';
+import { FolderListItems } from './MenuList';
+
+
+
 
 const styles = theme => ({
   list: {
@@ -28,6 +40,35 @@ class NavbarLeftMenu extends React.Component {
     });
   };
 
+  logout = () => {
+    console.log(`trying to logout`)
+    this.props.logout()
+    console.log(`loged out`)
+  }
+
+  tryingSomething = () => {
+
+    return (
+      <div>
+          
+          <ListItem button>
+            <ListItemIcon>
+              <SettingsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Settings" />
+          </ListItem>
+        
+          <ListItem button onClick={this.logout}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary='Log-Out' />
+          </ListItem>
+        
+      </div>
+    )
+  }
+
   render() {
     const { classes, user } = this.props;
     const { left } = this.state;
@@ -40,7 +81,7 @@ class NavbarLeftMenu extends React.Component {
           <FolderListItems user={user} />
         </List>
         <Divider />
-        <List>{OtherFolderListItems}</List>
+        <List>{this.tryingSomething()}</List>
       </div>
     );
 

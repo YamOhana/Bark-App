@@ -10,7 +10,9 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { Link } from 'react-router-dom';
 
-export const FolderListItems = ({ user }) => (
+export const FolderListItems = ({ user }) => {
+
+  return (
   <div>
     <Link to='/'>
       <ListItem button>
@@ -30,24 +32,30 @@ export const FolderListItems = ({ user }) => (
     </Link>
   </div>
 );
+}
 
-export const OtherFolderListItems = (
-  <div>
-    <ListItem button>
-      <ListItemIcon>
-        <SettingsIcon />
-      </ListItemIcon>
-      <ListItemText primary="Settings" />
-    </ListItem>
+// export const OtherFolderListItems = (
+  
 
-    <ListItem button>
-      <ListItemIcon>
-        <ExitToAppIcon />
-      </ListItemIcon>
-      <ListItemText primary='Log-Out' />
-    </ListItem>
-  </div>
-);
+//     <div>
+        
+//         <ListItem button>
+//           <ListItemIcon>
+//             <SettingsIcon />
+//           </ListItemIcon>
+//           <ListItemText primary="Settings" />
+//         </ListItem>
+      
+//         <ListItem button>
+//           <ListItemIcon>
+//             <ExitToAppIcon />
+//           </ListItemIcon>
+//           <ListItemText primary='Log-Out' />
+//         </ListItem>
+       
+//     </div>
+//   );
+
 
 FolderListItems.propTypes = {
   user: PropTypes.object.isRequired

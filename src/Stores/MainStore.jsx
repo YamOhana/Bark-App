@@ -1,18 +1,24 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
 import data from './data.json'
+import allPosts from './posts.json'
 
 
 export class MainStore {
-    @observable owners =[...data]
+    @observable owners = [...data]
     @observable curUser
     @observable userIndex
+    @observable posts = [...allPosts]
 
     @action getData = dataArr => {
         console.log(dataArr)
         this.owners = dataArr.owners
         this.curUser = dataArr.user
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
+    }
+
+    @action getPosts = data => {
+        this.posts = data
     }
 
 
