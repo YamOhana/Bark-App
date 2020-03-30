@@ -65,13 +65,6 @@ class Home extends Component {
                 <NavbarLeftMenu />
                 <Navbar />
                 <Dogs />
-
-
-                
-                <Route path='/home' exact component={Home}></Route>
-                <Route path="/profile" exact component={Profile}></Route>
-
-
                 <button onClick={this.logout}>
                     Log Out
                 </button>
