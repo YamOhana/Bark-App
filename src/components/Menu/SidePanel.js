@@ -33,18 +33,9 @@ class SidePanel extends Component {
         })
     }
 
-<<<<<<< HEAD:src/components/SidePanel.js
-    render() {
-=======
->>>>>>> 015e553b0200484808879d5daac9e8345c1acc1b:src/components/Menu/SidePanel.js
 
     render() {
 
-<<<<<<< HEAD:src/components/SidePanel.js
-        const { left } = this.state
-    return (
-    <div>
-=======
         const {left} = this.state
         return (
 
@@ -53,7 +44,6 @@ class SidePanel extends Component {
 
    <MenuIcon onClick={this.toggleDrawer(true)} />
           <Drawer open={left} onClose={this.toggleDrawer(false)} />
->>>>>>> 015e553b0200484808879d5daac9e8345c1acc1b:src/components/Menu/SidePanel.js
 
 
                <div
@@ -86,11 +76,6 @@ class SidePanel extends Component {
                 </ListItem>
             {/* </Link> */}
         </div>
-<<<<<<< HEAD:src/components/SidePanel.js
-    </div>)
-    }
-=======
->>>>>>> 015e553b0200484808879d5daac9e8345c1acc1b:src/components/Menu/SidePanel.js
 
 
                 </div>

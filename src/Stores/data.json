@@ -11,11 +11,7 @@
         "gender": "female",
         "hours": ["07:00-8:00", "19:00-21:00"],
         "friends": [2],
-<<<<<<< HEAD
         "requests": [],
-=======
-        "request": [],
->>>>>>> 015e553b0200484808879d5daac9e8345c1acc1b
         "messeges": [],
         "dogs":[{
             "dogId": "mike_Andreev1",
@@ -47,11 +43,7 @@
         "gender": "male",
         "hours": ["07:00-8:00", "19:00-21:00"],
         "friends": [1],
-<<<<<<< HEAD
         "requests": [],
-=======
-        "request": [],
->>>>>>> 015e553b0200484808879d5daac9e8345c1acc1b
         "messeges": [],
         "dogs":[{
             "dogId": "mateo_Shahar1",
