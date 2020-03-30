@@ -9,7 +9,6 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     const [firstName, setFirstName] = useState(props.InputStore.firstName)
     const [lastName, setLastName] = useState(props.InputStore.lastName)
     const [birthDate, setbirthDate] = useState(props.InputStore.birthDate)
-    const [email, setEmail] = useState(props.InputStore.email)
     const [phoneNum, setPhoneNum] = useState(props.InputStore.phoneNum)
     const [address, setAddress] = useState(props.InputStore.address)
     const [gender , setGender] = useState(props.InputStore.gender)
@@ -18,23 +17,29 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
  
     
     const inputHandler = (e) => {
-        props.InputStore.handleInput(e.target.name, e.target.value)
+        const inp = props.InputStore
         e.target.name === "firstName" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setFirstName(e.target.value) :
         e.target.name === "lastName" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setLastName(e.target.value) :
         e.target.name === "gender" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setGender(e.target.value) :
         e.target.name === "birthDate" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setbirthDate(e.target.value) :
-        e.target.name === "email" ? 
-        setEmail(e.target.value) :
         e.target.name === "phoneNum" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setPhoneNum(e.target.value) :
         e.target.name === "address" ?
+        inp.handleInput(e.target.name, e.target.value) &&
         setAddress(e.target.value) :
         e.target.name === "smoker" ?
+        inp.handleInput(e.target.name, e.target.checked) &&
         setSmoker(e.target.checked) :
+        inp.handleInput(e.target.name, e.target.value) &&
         setHours(e.target.value) 
     }
         
@@ -61,10 +66,6 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
 
         <label htmlFor="birthDate">Date of Birth:</label>
         <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
-        <br></br>
-
-        <label htmlFor="email">Email:</label>
-        <input type="text" id="email" value={email} name="email" onChange={inputHandler}></input>
         <br></br>
 
         <label htmlFor="phoneNum">Phone Number:</label>

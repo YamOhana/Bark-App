@@ -10,7 +10,7 @@ const Dog = inject("MainStore")(observer((props) => {
     return (
 
         <div>
-            <span>I'm {props.d.name},a {props.d.size} size {props.d.type} {props.d.dogGender} Dog</span>
+            <span>I'm {props.d.dogName},a {props.d.size} size {props.d.type} {props.d.dogGender} Dog</span>
             <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
             <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
             <span>{props.d.shy ? 'Shy': null}</span>
