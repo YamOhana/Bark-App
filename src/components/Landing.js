@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
+import NavbarLeftMenu from './Menu/NavbarLeftMenu'      
 import Profile from './Profile/Profile'
 import Home from './Home'
 
@@ -45,10 +46,11 @@ class Landing extends Component {
             <Router>
                 <div className="landing">
                 
-                    {/* <div id="main-links">
-                        <Link to="/">Home</Link>
-                        <Link to="/Profile">Profile</Link>
-                    </div> */}
+                    <div id="main-links">
+                        <NavbarLeftMenu />
+                        {/* <Link to="/">Home</Link>
+                        <Link to="/Profile">Profile</Link> */}
+                    </div>
 
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>

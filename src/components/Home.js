@@ -62,7 +62,7 @@ class Home extends Component {
 
                 <div>I'm Home</div>
 
-                <NavbarLeftMenu />
+                {/* <NavbarLeftMenu /> */}
                 <Navbar />
                 <Dogs />
                 <button onClick={this.logout}>

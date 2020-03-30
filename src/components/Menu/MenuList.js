@@ -20,7 +20,7 @@ export const FolderListItems = ({ user }) => (
         <ListItemText primary="Home" />
       </ListItem>
     </Link>
-    <Link to='/profile'>
+    <Link to='/Profile'>
       <ListItem button>
         <ListItemIcon>
           <DogFace />

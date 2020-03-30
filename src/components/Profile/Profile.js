@@ -8,69 +8,53 @@ import MyDogs from './MyDog'
 
 const { Header, Footer, Sider, Content } = Layout;
 
-@inject("MainStore")
-@observer
-class Profile extends Component {
-
-    constructor(props) {
-        super();
-        this.state = {
-            dogs: []
-        }
-    }
-
-    onToggle = () => {
-        let opposite = !this.state.dogList
-        this.setState({
-            dogList: opposite
-        })
-    }
-
-    onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
-    }
-
-
-    componentDidMount = async () =>{
-        const currUserId = this.props.ownerStore.currUser.id
-        await this.props.Mainstore.getOwnerDogs(currUserId)
-    }
+const Profile = inject("MainStore", "InputStore")(observer((props) => {
 
 
 
-    render() {
-
-
-        const ownerId = this.props.Mainstore.currUser
-        const state = this.state
-
+        // const ownerId = this.props.Mainstore.currUser
+       
         return (
             <div className="ProfileComponent">
-                <Layout id="profileLayout" style={{ height: "100vh" }}>
-                    <Header id="header" >
-                        <div id="profileImgDiv">
-                             <Avatar className="profile-avatar" size={50} src={Image}/>
-                        </div>
-                    </Header>
-                        <div className="my-dogs-list">
-                            <h3>My Dogs</h3>
-                            {this.props.Mainstore.currUser.dogs.map(d => <MyDogs data={d} />)}
-                        </div>
-                    
-                </Layout>
-
+                {console.log(props.MainStore.curUser)}
+                <span>{props.MainStore.curUser.firstName  }  </span>
+                <span>{props.MainStore.curUser.lastName  }  </span>
+                <div>{props.MainStore.curUser.dogs.map(d => {
+                    return <div>{d.dogName}<span>{d.park}</span></div>
+                })}</div>
 
             </div>
 
         )
 
-    }
-
-
-}
+}))
 
 
 
 
 export default Profile;
+
+
+// onToggle = () => {
+//     let opposite = !this.state.dogList
+//     this.setState({
+//         dogList: opposite
+//     })
+// }
+// I Didnt know if to delete so i left it to you (there was no dogList...)
+
+
+
+{/* <Layout id="profileLayout" style={{ height: "100vh" }}>
+                <Header id="header" >
+                    <div id="profileImgDiv">
+                            <Avatar className="profile-avatar" size={50} src={Image}/>
+                    </div>
+                </Header>
+                    <div className="my-dogs-list">
+                        <h3>My Dogs</h3>
+                        {this.props.Mainstore.currUser.dogs.map(d => <MyDogs data={d} />)}
+                    </div>
+                
+            </Layout> */}
 
