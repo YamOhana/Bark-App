@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import '../styles/Navbar.css'
 
 
@@ -8,10 +9,10 @@ import '../styles/Navbar.css'
 
         return (
             <div>
-                <span className='mainFilter'>filter 1 </span>
-                <span className='mainFilter'> filter 2 </span>
-                <span className='mainFilter'> filter 3 </span>
-                <span className='mainFilter'> Advance </span>
+                <span className='mainFilter'><input placeholder='filter'></input></span>
+                <span className='mainFilter'><input placeholder='filter'></input></span>
+                <span className='mainFilter'><input placeholder='filter'></input></span>
+                <span className='mainFilter'><button>Advanced</button> </span>
             </div>
         )
     }

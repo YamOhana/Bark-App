@@ -1,13 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link, Router } from 'react-router-dom';
 import List from '@material-ui/core/List';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
+import { withStyles} from '@material-ui/core/styles'
 import MenuIcon from '@material-ui/icons/Menu';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import FaceIcon from '@material-ui/icons/Face';
+import DogFace from '@material-ui/icons/Pets'
 import EmojiPeople from '@material-ui/icons/EmojiPeople'
 import HomeIcon from '@material-ui/icons/Home';
 
@@ -21,7 +22,7 @@ const styles = theme => ({
     toolbar: theme.mixins.toolbar
 });
 
-export const SidePanelList = () => {
+class SidePanel extends Component {
     state = {
         left: false
     }
@@ -32,46 +33,55 @@ export const SidePanelList = () => {
         })
     }
 
-    render(){
+
+    render() {
+
+        const {left} = this.state
+        return (
+
+            <div>
+                <div className='side-panel'>
+
+   <MenuIcon onClick={this.toggleDrawer(true)} />
+          <Drawer open={left} onClose={this.toggleDrawer(false)} />
 
 
-        const { left } = this.state
-    }
-    <div>
-
-        <MenuIcon onClick={this.toggleDrawer(true)} />
-        <Drawer open={left} onClose={this.toggleDrawer(false)} />
-        <div
+               <div
             tabIndex={0}
             role="button"
             onClick={this.toggleDrawer(false)}
             onKeyDown={this.toggleDrawer(false)}>
 
             {/* to home */}
-            <Link to='/' >
+            {/* <Link to='/' > */}
                 <ListItem button>
                     <ListItemIcon><HomeIcon /></ListItemIcon>
                     <ListItemText primary='Home' />
                 </ListItem>
-            </Link>
+            {/* </Link> */}
 
             {/* to profile */}
-            <Link to={`/profile`}>
+            {/* <Link to={`/profile`}> */}
                 <ListItem button>
-                    <ListItemIcon><FaceIcon /></ListItemIcon>
+                    <ListItemIcon><DogFace /></ListItemIcon>
                     <ListItemText primary="Profile" />
                 </ListItem>
-            </Link>
+            {/* </Link> */}
 
             {/* to friends */}
-            <Link to='/friends'>
+            {/* <Link to='/friends'> */}
                 <ListItem button>
                     <ListItemIcon><EmojiPeople /></ListItemIcon>
                     <ListItemText primary="friends" />
                 </ListItem>
-            </Link>
+            {/* </Link> */}
         </div>
-    </div>
 
+
+                </div>
+            </div>
+        )
+    }
 
 }
+ export default withStyles(styles)(SidePanel)
