@@ -15,7 +15,6 @@ export class MainStore {
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
     }
 
-
     @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)
     
     @action  acceptFriendship = friendId => this.owners[this.userIndex].friends.push(friendId)
