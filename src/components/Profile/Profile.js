@@ -1,31 +1,93 @@
-
 import React, { Component, Profiler } from 'react'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import AddDog from '../AddDog';
-import { Layout, Divider, Avatar, Icon, Button } from 'antd';
-import { observer, inject } from 'mobx-react'
 import MyDogs from './MyDog'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+import { observer, inject } from 'mobx-react'
+import clsx from 'clsx';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
+import Collapse from '@material-ui/core/Collapse';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import EditIcon from '@material-ui/icons/Edit';
+import { red } from '@material-ui/core/colors';
+import { makeStyles } from '@material-ui/core/styles';
 
-const { Header, Footer, Sider, Content } = Layout;
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        maxWidth: 345,
+    },
+    media: {
+        height: 0,
+        paddingTop: '56.25%', // 16:9
+    },
+    expand: {
+        transform: 'rotate(0deg)',
+        marginLeft: 'auto',
+        transition: theme.transitions.create('transform', {
+            duration: theme.transitions.duration.shortest,
+        }),
+    },
+    expandOpen: {
+        transform: 'rotate(180deg)',
+    },
+    avatar: {
+        backgroundColor: red[500],
+    },
+}));
 
 const Profile = inject("MainStore", "InputStore")(observer((props) => {
 
+    const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
+
+    // const ownerId = this.props.Mainstore.currUser
+
+    return (
+
+        <div>
 
 
-        // const ownerId = this.props.Mainstore.currUser
-       
-        return (
-            <div className="ProfileComponent">
-                {console.log(props.MainStore.curUser)}
-                <span>{props.MainStore.curUser.firstName  }  </span>
-                <span>{props.MainStore.curUser.lastName  }  </span>
-                <div>{props.MainStore.curUser.dogs.map(d => {
-                    return <div>{d.dogName}<span>{d.park}</span></div>
-                })}</div>
+            <Card className='ProfileComponent'>
+                <CardHeader
+                    avatar={
+                        <Avatar aria-label="recipe" className='profile-avatar'>
+                            R
+          </Avatar>
+                    }
 
-            </div>
+                    title={props.MainStore.curUser.firstName}
+                />
+                <CardMedia
+                    className={classes.media}
+                    image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
+                    title={props.MainStore.curUser.firstName}{...props.MainStore.curUser.lastName}
+                />
+                <CardContent>
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        <div>{props.MainStore.curUser.dogs.map(d => {
+                            return <div>{d.dogName}<span>{d.park}</span></div>
+                        })}</div>
+                    </Typography>
+                </CardContent>
+                <CardActions disableSpacing>
+                    <IconButton aria-label="edit">
+                        <EditIcon />
+                    </IconButton>
+                </CardActions>
+            </Card>
 
-        )
+
+        </div>
+
+
+
+    )
 
 }))
 
@@ -35,26 +97,17 @@ const Profile = inject("MainStore", "InputStore")(observer((props) => {
 export default Profile;
 
 
-// onToggle = () => {
-//     let opposite = !this.state.dogList
-//     this.setState({
-//         dogList: opposite
-//     })
-// }
-// I Didnt know if to delete so i left it to you (there was no dogList...)
 
 
+    //  <div className="ProfileComponent">
+    //     {console.log(props.MainStore.curUser)}
+    //     <span>{props.MainStore.curUser.firstName }  </span>
+    //     <span>{props.MainStore.curUser.lastName  }  </span>
+    //     <div>{props.MainStore.curUser.dogs.map(d => {
+    //         return <div>{d.dogName}<span>{d.park}</span></div>
+    //     })}</div>
 
-{/* <Layout id="profileLayout" style={{ height: "100vh" }}>
-                <Header id="header" >
-                    <div id="profileImgDiv">
-                            <Avatar className="profile-avatar" size={50} src={Image}/>
-                    </div>
-                </Header>
-                    <div className="my-dogs-list">
-                        <h3>My Dogs</h3>
-                        {this.props.Mainstore.currUser.dogs.map(d => <MyDogs data={d} />)}
-                    </div>
-                
-            </Layout> */}
+    // </div> 
+
+
 

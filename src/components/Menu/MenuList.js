@@ -8,8 +8,6 @@ import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from 'react-router-dom';
-import logout from '../Home'
-import fire from '../Fire';
 
 
 
@@ -47,7 +45,7 @@ export const OtherFolderListItems = (
       <ListItemText primary="Settings" />
     </ListItem>
 
-    <ListItem button onClick={this.logout}>
+    <ListItem button >
       <ListItemIcon>
         <ExitToAppIcon/>
       </ListItemIcon>

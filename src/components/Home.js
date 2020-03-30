@@ -19,7 +19,7 @@ import axios from 'axios'
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.logout = this.logout.bind(this);
+        // this.logout = this.logout.bind(this);
 
     }
 

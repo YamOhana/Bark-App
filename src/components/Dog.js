@@ -73,8 +73,8 @@ const Dog = inject("MainStore")(observer((props) => {
                     title={props.d.dogName}
                 />
                 <CardMedia
-                    className='dog-media'
-                    //   image="/static/images/cards/paella.jpg"
+                    className={classes.media}
+                      image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
                     title={props.d.dogName}
                 />
                 <CardContent>
@@ -104,11 +104,19 @@ const Dog = inject("MainStore")(observer((props) => {
                     <CardContent>
                         <Typography paragraph>More Information:</Typography>
                         <Typography paragraph>
+                            <div> 
                             <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
+                            </div>
+                            <div>
                             <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
-                            <span>{props.d.shy ? 'Shy' : null}</span>
-                            <span>{props.d.energetic ? 'Dnergetic' : null}</span>
-                            <span>{props.d.dominant ? 'Dominant' : null}</span>
+                            </div>
+                            <div>
+                            <span>I'm {props.d.shy ? 'Shy' : null} </span>
+                            <span>I'm {props.d.energetic ? 'energetic' : null} </span>
+                            <span>I'm {props.d.dominant ? 'Dominant' : null} </span>
+                            </div>
+
+                         
 
                         </Typography>
 

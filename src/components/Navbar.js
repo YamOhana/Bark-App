@@ -1,20 +1,65 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
-import '../styles/Navbar.css'
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
+
+const filters = [
+    {
+        value: 'Age'
+    },
+    {
+        value: 'Size'
+    },
+    {
+        value: 'Nature',
+    },
+   
+];
 
 
-// const Client = inject("MainStore", "InputStore")(observer((props) => { 
-    const Navbar = () => { 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& .MuiTextField-root': {
+            margin: theme.spacing(1),
+            width: '10ch',
+        },
+    },
+}));
 
-        return (
-            <div>
-                <span className='mainFilter'><input placeholder='filter'></input></span>
-                <span className='mainFilter'><input placeholder='filter'></input></span>
-                <span className='mainFilter'><input placeholder='filter'></input></span>
+const Navbar = () => {
+
+    const classes = useStyles();
+    const [filter, setFilter] = React.useState('EUR');
+
+    const handleChange = (event) => {
+        setFilter(event.target.value);
+    };
+
+    return (
+        <div>
+            <form className={classes.root} noValidate autoComplete='off'>
+                <TextField
+                    id="standard-basic"
+                    select
+                    label="Age"
+                    value={filter}
+                    onChange={handleChange}
+                >
+                    {filters.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.value}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <TextField id="standard-basic" label="Size" />
+                <TextField id="standard-basic" label="Nature" />
                 <span className='mainFilter'><button>Advanced</button> </span>
-            </div>
-        )
-    }
 
-    export default Navbar
+            </form>
+        </div>
+    )
+}
+
+export default Navbar
