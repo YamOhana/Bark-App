@@ -16,8 +16,6 @@ const Dog = inject("MainStore")(observer((props) => {
             <span>{props.d.shy ? 'Shy': null}</span>
             <span>{props.d.energetic ? 'Dnergetic': null}</span>
             <span>{props.d.dominant ? 'Dominant': null}</span>
-
-
         </div>
     )
 }))
