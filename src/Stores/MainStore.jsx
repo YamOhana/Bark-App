@@ -5,10 +5,10 @@ import allPosts from './posts.json'
 
 
 export class MainStore {
-    @observable owners = [...data]
+    @observable owners = []
     @observable curUser
     @observable userIndex
-    @observable posts = [...allPosts]
+    @observable posts = []
 
     @action getData = dataArr => {
         console.log(dataArr)

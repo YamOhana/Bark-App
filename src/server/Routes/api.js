@@ -162,7 +162,9 @@ router.delete('/deleteFriend/:currentUserId/:friendId', (req, res) => {
 
 // returns all posts
 router.get('/posts', async (req, res) => {
-    const snapshot = await database.collection("posts").get()
+    const snapshot = await database.collection("posts")
+    .orderBy("time", "desc")
+    .get()
     res.send(snapshot.docs.map(doc => doc.data()))
 })
 
