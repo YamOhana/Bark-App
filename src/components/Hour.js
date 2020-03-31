@@ -9,7 +9,7 @@ const Hour = inject("MainStore", "InputStore")(observer((props) => {
     const [hour, setHour] = useState(props.time)
      
     const deleteTime = () => {
-        props.InputStore.deleteHour(hour)
+        props.delete(hour)
     }
 
     return (
