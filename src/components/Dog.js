@@ -100,8 +100,8 @@ const Dog = inject("MainStore")(observer((props) => {
                 </CardContent>
                 <CardActions disableSpacing>
 
-                    {/* { 
-                        props.o.requsets.includes(props.MainStore.curUser.id) ? 
+                     {/* { 
+                        (props.o.requsets.includes(props.MainStore.curUser.id)) ? 
                         <IconButton aria-label="friendship requested">
                             <FriendRequest />
                         </IconButton>
@@ -109,7 +109,7 @@ const Dog = inject("MainStore")(observer((props) => {
                         <IconButton aria-label="add to favorites" onClick={addFriend}>
                             <FavoriteIcon />
                         </IconButton>
-                    } */}
+                    }  */}
 
                     <IconButton aria-label="add to favorites" onClick={addFriend}>
                         <FavoriteIcon />

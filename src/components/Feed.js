@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
+import axios from 'axios';
 
 
 
@@ -14,12 +15,18 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
 
     const addPost = () => {
         const post = {
-            pid: props.MainStore.posts[0].uid + 1,
             comment: comment,
-            senderId: props.MainStore.curUser.id
+            senderId: props.MainStore.curUser.id,
+            time: new Date()
         }
         console.log(post)
         props.MainStore.addPost(post)
+
+        axios.post('http://localhost:3001/post', post)
+        .then(res => {
+            console.log(`post sent`)
+        })
+
         setComment("")
     }
 
