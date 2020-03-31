@@ -59,7 +59,8 @@ const AddHour = inject("MainStore", "InputStore")(observer((props) => {
             </select>
             <br></br>
 
-            {hours.length ? (hours.length > 1 ? hours.map(h => <Hour delete={deleteTime} time={h}/>) : <Hour delete={deleteTime} time={hours[0]}/> ): null}
+            {/* {hours.length ? (hours.length > 1 ? props.InputStore.hours.map(h => <Hour delete={deleteTime} time={h}/>) : <Hour delete={deleteTime} time={hours[0]}/> ): null} */}
+            {hours.length ?  props.InputStore.hours.map(h => <Hour delete={deleteTime} time={h}/>) : null}
         </div>
     )
 }))
