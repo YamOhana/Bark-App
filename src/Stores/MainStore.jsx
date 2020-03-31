@@ -9,6 +9,12 @@ export class MainStore {
     @observable curUser
     @observable userIndex
     @observable posts = []
+    @observable filters = { 
+        age: 'none', 
+        size: 'none',
+        nature: 'none'
+    }
+    
 
     @action getData = dataArr => {
         console.log(dataArr)
@@ -49,5 +55,10 @@ export class MainStore {
     }    
 
     @action editProfile = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
+
+    @action updateFilters = (filterType, val) => this.filters[filterType] = val
+    
+
+
     
 }
