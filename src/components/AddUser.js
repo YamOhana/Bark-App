@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import AddDog from './AddDog';
+import AddHour from './addHour';
 
 
 
@@ -13,7 +14,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     const [address, setAddress] = useState(props.InputStore.address)
     const [gender , setGender] = useState(props.InputStore.gender)
     const [smoker, setSmoker] = useState(props.InputStore.smoker)
-    const [hours , setHours] = useState(props.InputStore.hours)
+    // const [hours , setHours] = useState(props.InputStore.hours)
  
     
     const inputHandler = (e) => {
@@ -36,11 +37,9 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         e.target.name === "address" ?
         inp.handleInput(e.target.name, e.target.value) &&
         setAddress(e.target.value) :
-        e.target.name === "smoker" ?
         inp.handleInput(e.target.name, e.target.checked) &&
-        setSmoker(e.target.checked) :
-        inp.handleInput(e.target.name, e.target.value) &&
-        setHours(e.target.value) 
+        setSmoker(e.target.checked) 
+        
     }
         
     return (
@@ -80,12 +79,8 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <input type="checkbox" id="smoker" value={smoker} name="smoker" onChange={inputHandler}></input>
         <br></br>
 
-        <label htmlFor="hours">Prefered Hours</label>
-        <input type="text" id="hours" value={hours} name="hours" onChange={inputHandler}></input>
-        <br></br>
+        <AddHour />
         
-        <div><b>Dog details:</b></div>
-        <AddDog />
     </div>
     )
 }))
