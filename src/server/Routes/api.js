@@ -97,30 +97,18 @@ router.post('/addDog/:id', (req, res) => {
 router.put('/addFriend/:currentUserId/:friendId', (req, res) => {
     database.collection("users").doc(`${req.params.currentUserId}`).update({
         friends: firebase.firestore.FieldValue.arrayUnion(req.params.friendId)
-    }).then(function (doc) {
-
-        if (doc.exists) {
-            user = doc.data();
-            res.status(200).send(user)
-        } else {
-            res.status(400).send("Failed")
-        }
+    }).then(function () {
+        res.end()
     }).catch(function (error) {
         console.log("Error getting document:", error)
     });
 })
-//update friends list, adding friend
+//update request list, friend request
 router.put('/requestFriend/:currentUserId/:friendId', (req, res) => {
     database.collection("users").doc(`${req.params.friendId}`).update({
         requests: firebase.firestore.FieldValue.arrayUnion(req.params.currentUserId)
-    }).then(function (doc) {
-
-        if (doc.exists) {
-            user = doc.data();
-            res.status(200).send(user)
-        } else {
-            res.status(400).send("Failed")
-        }
+    }).then(function () {
+        res.end()
     }).catch(function (error) {
         console.log("Error getting document:", error)
     });

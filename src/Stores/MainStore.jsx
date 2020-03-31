@@ -32,7 +32,9 @@ export class MainStore {
 
     @action addFriend = friendId => {
         let friend = this.owners.find(o => o.id === friendId)
-        friend.requerst.push(this.curUser.id)
+        
+        friend.requests.push(this.curUser.id)
+        
     }
 
     @action  deleteFriend = friendId => {
