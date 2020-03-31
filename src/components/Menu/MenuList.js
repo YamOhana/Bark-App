@@ -5,17 +5,19 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DogFace from '@material-ui/icons/Pets'
 import HomeIcon from '@material-ui/icons/Home';
+import DynamicFeedOutlinedIcon from '@material-ui/icons/DynamicFeedOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import { Link } from 'react-router-dom';
 
+// import fire from '../Fire';
 
 
-export const FolderListItems = ({ user }) => (
-  
 
+export const FolderListItems = ({ user }) => {
 
-  
+  return (
+
   <div>
     <Link to='/'>
       <ListItem button>
@@ -33,8 +35,19 @@ export const FolderListItems = ({ user }) => (
         <ListItemText primary="Profile" />
       </ListItem>
     </Link>
+    <Link to='/Feed'>
+      <ListItem button>
+        <ListItemIcon>
+          <DynamicFeedOutlinedIcon />
+        </ListItemIcon>
+        <ListItemText primary="Feed" />
+      </ListItem>
+    </Link>
   </div>
 );
+}
+
+
 
 export const OtherFolderListItems = (
   <div>

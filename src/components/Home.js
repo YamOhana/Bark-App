@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import Navbar from './Navbar'
 import SidePanel from './Menu/SidePanel'
@@ -57,18 +56,8 @@ static logout = () => {
 
         return (
             <div>
-                <Router>
-
-                <div>I'm Home</div>
-
-                {/* <NavbarLeftMenu /> */}
                 <Navbar />
                 <Dogs />
-                <button onClick={this.logout}>
-                    Log Out
-                </button>
-
-                </Router>
             </div>
         )
     }

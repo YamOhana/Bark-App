@@ -29,6 +29,9 @@ export class Inputs {
     @observable shy = false
     @observable energetic = false
     @observable dominant = false
+
+    //feed
+    @observable comment
     
 
     @action handleInput = (name, val) => {

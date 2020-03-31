@@ -5,6 +5,7 @@ import { observer, inject } from 'mobx-react'
 import NavbarLeftMenu from './Menu/NavbarLeftMenu'      
 import Profile from './Profile/Profile'
 import Home from './Home'
+import Feed from './Feed'
 
 import axios from 'axios'
 
@@ -47,13 +48,14 @@ class Landing extends Component {
                 <div className="landing">
                 
                     <div id="main-links">
-                        <NavbarLeftMenu />
+                        <NavbarLeftMenu logout={this.logout}/>
                         {/* <Link to="/">Home</Link>
                         <Link to="/Profile">Profile</Link> */}
                     </div>
 
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
+                    <Route path="/Feed" exact render={() => <Feed key='feedPage'/>}/>
                 </div>
             </Router>
         )

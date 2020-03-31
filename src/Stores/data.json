@@ -62,5 +62,37 @@
             }
         }]
 
+    },
+    {
+        "id": 3,
+        "firstName": "Sheldon",
+        "lastName": "Cooper",
+        "birthDate": "16/01/1992",
+        "smoker": true,
+        "email": "sheldor@gmail.com",
+        "phoneNum": "0505126656",
+        "adress": "Shenkin 3, Tel Aviv",  
+        "gender": "other",
+        "hours": ["07:00-8:00", "19:00-21:00"],
+        "friends": [1],
+        "requests": [],
+        "messeges": [],
+        "dogs":[{
+            "dogId": "leonard_cooper1",
+            "dogName": "Leonard",
+            "dogGender": "male",
+            "park": ["Gan Meir"], 
+            "size": "small",
+            "vaccinated": true,
+            "neutered": true,
+            "birthDate": "09/06/2018",
+            "type": "Mixed",
+            "nature": {
+                "shy": false,
+                "energetic": true,
+                "dominant": true
+            }
+        }]
+
     }
 ]
