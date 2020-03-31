@@ -9,9 +9,31 @@ const AddHour = inject("MainStore", "InputStore")(observer((props) => {
 
     const [hours , setHours] = useState(props.InputStore.hours)
 
-    const inputHandler = (e) => {
-        props.InputStore.handleHours(e.target.value)
-        setHours(e.target.value) 
+    const inputHandler = async (e) => {
+        if(hours.length) {
+            const newHours = [...hours]
+            newHours.push(e.target.value)
+            setHours(newHours)
+            props.InputStore.handleHours(e.target.value)
+        } else {
+            props.InputStore.handleHours(e.target.value)
+            setHours([e.target.value])
+        }
+         
+    }
+
+
+    const deleteTime = hour => {
+        if(hours.length > 1) {
+            const newHours = [...hours]
+            const i = newHours.findIndex(h => h === hour)
+            newHours.splice(i, 1)
+            setHours(newHours)
+            props.InputStore.deleteHour(hour)
+        } else {
+            props.InputStore.deleteHour(hour)
+            setHours([])
+        }
     }
     
     return (
@@ -37,8 +59,7 @@ const AddHour = inject("MainStore", "InputStore")(observer((props) => {
             </select>
             <br></br>
 
-            {props.InputStore.hours ? props.InputStore.hours.map(h => <Hour time={h}/>) : null}
-            {/* {props.InputStore.hours ? props.InputStore.hours.map(h => {return <div>{h}<span onClick={props.InputStore.deleteHour(h)}>      -</span></div>}) : null} */}
+            {hours.length ? (hours.length > 1 ? hours.map(h => <Hour delete={deleteTime} time={h}/>) : <Hour delete={deleteTime} time={hours[0]}/> ): null}
         </div>
     )
 }))
