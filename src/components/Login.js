@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fire from '../Fire';
 import AddUser from './AddUser';
+import AddDog from './AddDog';
 import axios from 'axios';
 import '../styles/Login.css'
 import { inject } from 'mobx-react'
@@ -96,6 +97,8 @@ class Login extends Component {
                     {this.state.signOrLog ? <button type="submit" onClick={this.login} className="btn btn-primary">Send</button> :
                         <div>
                             <AddUser />
+                            <div><b>Dog details:</b></div>
+                            <AddDog />
                             <button onClick={this.signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button>
                         </div>
                     }
