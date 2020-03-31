@@ -29,6 +29,7 @@ fire.auth().signInWithEmailAndPassword("admin@me.com", "123456").then((u) => {
 
 const database = fire.firestore();
 
+// Create new User
 router.post('/user', (req, res) => {
     console.log(req.body);
 
@@ -158,4 +159,29 @@ router.delete('/deleteFriend/:currentUserId/:friendId', (req, res) => {
         console.log("Error getting document:", error)
     });
 })
+
+// returns all posts
+router.get('/posts', async (req, res) => {
+    const snapshot = await database.collection("posts")
+    .orderBy("time", "desc")
+    .get()
+    res.send(snapshot.docs.map(doc => doc.data()))
+})
+
+// create new post
+router.post('/post', (req, res) => {
+    console.log(req.body);
+
+    database.collection("posts")
+    .add(req.body)
+    .then(function () {
+        console.log("Document successfully written!");
+    })
+    .catch(function (error) {
+        console.error("Error writing document: ", error);
+    });
+
+})
+
+
 module.exports = router

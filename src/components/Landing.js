@@ -25,6 +25,10 @@ class Landing extends Component {
         const currentUser = await this.getCurrentUser()
         console.log(currentUser.data);
         this.props.MainStore.getData({owners:users.data,user:currentUser.data})
+        const posts = await this.getPosts()
+        console.log(posts.data);
+        this.props.MainStore.getPosts(posts.data)
+        
     }
 
     getUsers = async () => {
@@ -35,6 +39,10 @@ class Landing extends Component {
         if (curUser) {
             return await axios.get(`http://localhost:3001/user/${curUser.uid}`)
         }
+    }
+
+    getPosts = async () => {
+        return await axios.get('http://localhost:3001/posts')
     }
 
     logout() {
@@ -54,8 +62,8 @@ class Landing extends Component {
                     </div>
 
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
-                    <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
                     <Route path="/Feed" exact render={() => <Feed key='feedPage'/>}/>
+                    <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
                 </div>
             </Router>
         )
