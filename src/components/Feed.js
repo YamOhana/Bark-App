@@ -1,10 +1,43 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import axios from 'axios';
+import TextField from '@material-ui/core/TextField';
+import AddComment from '@material-ui/icons/AddCircleOutline'
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            margin: theme.spacing(1),
+            width: '45ch',
+        },
+    },
+}));
 
-const Feed = inject("MainStore", "InputStore")(observer((props) => { 
+
+const useStylesComment = makeStyles((theme) => ({
+    rooter: {
+        flexGrow: 1,
+        overflow: 'hidden',
+        padding: theme.spacing(0, 3),
+    },
+    paper: {
+        maxWidth: 400,
+        margin: `${theme.spacing(1)}px auto`,
+        padding: theme.spacing(2),
+    },
+}));
+
+
+const Feed = inject("MainStore", "InputStore")(observer((props) => {
+
+    const commentClasses = useStylesComment()
+    const classes = useStyles();
 
     const [comment, setComment] = useState(props.InputStore.comment)
 
@@ -14,6 +47,8 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
     }
 
     const addPost = () => {
+
+
         const post = {
             comment: comment,
             senderId: props.MainStore.curUser.id,
@@ -23,31 +58,50 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
         props.MainStore.addPost(post)
 
         axios.post('http://localhost:3001/post', post)
-        .then(res => {
-            console.log(`post sent`)
-        })
+            .then(res => {
+                console.log(`post sent`)
+            })
 
         setComment("")
     }
 
     return (
         <div>
-            <div>Im feed</div>
             <label htmlFor="comment"><b>Add Post : </b></label>
-            <input type="text" id="comment" value={comment} name="comment" onChange={inputHandler}></input>
-            <button onClick={addPost}>POST</button>
+            <form className={classes.root} noValidate autoComplete='off'>
+                <TextField id="comment" value={comment} name="comment" onChange={inputHandler} label="What's on your mind?" variant="outlined" />
+                <AddComment onClick={addPost} />
+            </form>
             <br></br>
             <div>
                 {props.MainStore.posts.map(p => {
-                    // const sender = await props.MainStore.owners.find(o => o.id === p.senderId)
-                    // console.log(sender)
+                    const sender = props.MainStore.owners.find(o => o.id === p.senderId)
+                    console.log(sender)
+
                     return (
-                    <div>
-                        {/* <span>{sender.firstName}</span> */}
-                        <span>{p.comment}</span>
-                        {/* <span>{p.time}</span> */}
+
+                        <div>
+
+                        {/* <div className={commentClasses.rooter}>
+                            <Paper className={commentClasses.paper}>
+                                <Grid container wrap="nowrap" spacing={2}>
+                                    <Grid item>
+                                        <Avatar>W</Avatar>
+                                    </Grid>
+                                    <Grid item xs>
+                                        <Typography>{p.time}</Typography>
+                                        <Typography>{sender.firstName}</Typography>
+                                        <Typography>{p.comment}</Typography>
+                                    </Grid>
+                                </Grid>
+                            </Paper>
+                        </div> */}
+
+
+                    <span>{p.comment}</span>
                     </div>
-                    )})}
+                    )
+                })}
             </div>
         </div>
     )
