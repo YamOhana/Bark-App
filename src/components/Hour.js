@@ -6,15 +6,15 @@ import { observer, inject } from 'mobx-react'
 
 const Hour = inject("MainStore", "InputStore")(observer((props) => {
 
-    const [hour, setHour] = useState(props.time)
+    // const [hour, setHour] = useState(props.time)
      
     const deleteTime = () => {
-        props.delete(hour)
+        props.delete(props.time)
     }
 
     return (
         <div>
-            <span>{hour}</span>
+            <span>{props.time}</span>
             <span onClick={deleteTime}>-</span>
         </div>
     )
