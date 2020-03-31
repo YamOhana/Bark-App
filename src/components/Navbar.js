@@ -1,65 +1,81 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
-import MenuItem from '@material-ui/core/MenuItem';
-
-const filters = [
-    {
-        value: 'Age'
-    },
-    {
-        value: 'Size'
-    },
-    {
-        value: 'Nature',
-    },
-   
-];
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import { makeStyles } from '@material-ui/core/styles';
 
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '10ch',
-        },
-    },
-}));
+const filterOptions = createFilterOptions({
+    matchFrom: 'start',
+    stringify: (option) => option.Age,
+    stringify: (option) => option.Size,
+    stringify: (option) => option.Nature,
+
+  });
+  
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const Navbar = () => {
 
-    const classes = useStyles();
-    const [filter, setFilter] = React.useState('EUR');
-
-    const handleChange = (event) => {
-        setFilter(event.target.value);
-    };
 
     return (
         <div>
-            <form className={classes.root} noValidate autoComplete='off'>
-                <TextField
-                    id="standard-basic"
-                    select
-                    label="Age"
-                    value={filter}
-                    onChange={handleChange}
-                >
-                    {filters.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.value}
-                        </MenuItem>
-                    ))}
-                </TextField>
-                <TextField id="standard-basic" label="Size" />
-                <TextField id="standard-basic" label="Nature" />
-                <span className='mainFilter'><button>Advanced</button> </span>
+            <Autocomplete
+            id="filter-demo"
+            options={AgeFilter}
+            getOptionLabel={(option) => option.Age}
+            filterOptions={filterOptions}
+            style={{ width: 95 }}
+            renderInput={(params) => <TextField {...params} label="Age" variant="outlined" />}
+            />
+            <Autocomplete
+            id="filter-demo"
+            options={SizeFilter}
+            getOptionLabel={(option) => option.Size}
+            filterOptions={filterOptions}
+            style={{ width: 95 }}
+            renderInput={(params) => <TextField {...params} label="Size" variant="outlined" />}
+            />
+            <Autocomplete
+            id="filter-demo"
+            options={NatureFilter}
+            getOptionLabel={(option) => option.Nature}
+            filterOptions={filterOptions}
+            style={{ width: 95 }}
+            renderInput={(params) => <TextField {...params} label="Nature" variant="outlined" />}
+            />
 
-            </form>
+         
         </div>
     )
 }
 
 export default Navbar
+
+
+const AgeFilter = [
+    { Age: '0.5-4' },
+    { Age: '5-10' },
+    { Age: '11-15' }
+]
+
+const SizeFilter = [
+    { Size: 'Small' },
+    { Size: 'Medium' },
+    { Size: 'Big' }
+]
+
+
+const NatureFilter = [
+    { Nature: 'Shy' },
+    { Nature: 'Energetic' },
+    { Nature: 'Dominant' }
+]
+
+
+
