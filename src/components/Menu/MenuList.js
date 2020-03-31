@@ -49,6 +49,23 @@ export const FolderListItems = ({ user }) => {
 
 
 
+export const OtherFolderListItems = (
+  <div>
+    <ListItem button>
+      <ListItemIcon>
+        <SettingsIcon />
+      </ListItemIcon>
+      <ListItemText primary="Settings" />
+    </ListItem>
+
+    <ListItem button >
+      <ListItemIcon>
+        <ExitToAppIcon/>
+      </ListItemIcon>
+      <ListItemText primary='Log-Out' />
+    </ListItem>
+  </div>
+);
 
 FolderListItems.propTypes = {
   user: PropTypes.object.isRequired
