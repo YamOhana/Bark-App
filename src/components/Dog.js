@@ -16,8 +16,10 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FriendRequest from '@material-ui/icons/StarOutlined';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import axios from 'axios'
 
 
 
@@ -52,19 +54,24 @@ const Dog = inject("MainStore")(observer((props) => {
         setExpanded(!expanded);
     };
 
+    const addFriend = () => {
+        props.MainStore.addFriend(props.o.id)
+        axios.put(`http://localhost:3001/requestFriend/${props.MainStore.curUser.id}/${props.o.id}`)
+
+    }
 
     return (
 
-    //    <div>
-      //      <span>I'm {props.d.dogName},a {props.d.size} size {props.d.type} {props.d.dogGender} Dog</span>
+        //    <div>
+        //      <span>I'm {props.d.dogName},a {props.d.size} size {props.d.type} {props.d.dogGender} Dog</span>
         //    <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
-          //  <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
-            //<span>{props.d.shy ? 'Shy': null}</span>
-            //<span>{props.d.energetic ? 'Dnergetic': null}</span>
-            //<span>{props.d.dominant ? 'Dominant': null}</span>
+        //  <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
+        //<span>{props.d.shy ? 'Shy': null}</span>
+        //<span>{props.d.energetic ? 'Dnergetic': null}</span>
+        //<span>{props.d.dominant ? 'Dominant': null}</span>
 
         <div className='dog-container'>
-           
+
             <Card className='dog-card'>
                 <CardHeader
                     avatar={
@@ -81,18 +88,30 @@ const Dog = inject("MainStore")(observer((props) => {
                 />
                 <CardMedia
                     className={classes.media}
-                      image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
+                    image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
                     title={props.d.dogName}
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                     <div>{props.d.size}</div>   
-                     <div>{props.d.dogGender}</div>   
-                     <div>{props.d.type}</div>   
+                        <div>{props.d.size}</div>
+                        <div>{props.d.dogGender}</div>
+                        <div>{props.d.type}</div>
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
+
+                    {/* { 
+                        props.o.requsets.includes(props.MainStore.curUser.id) ? 
+                        <IconButton aria-label="friendship requested">
+                            <FriendRequest />
+                        </IconButton>
+                        : 
+                        <IconButton aria-label="add to favorites" onClick={addFriend}>
+                            <FavoriteIcon />
+                        </IconButton>
+                    } */}
+
+                    <IconButton aria-label="add to favorites" onClick={addFriend}>
                         <FavoriteIcon />
                     </IconButton>
 
@@ -111,19 +130,19 @@ const Dog = inject("MainStore")(observer((props) => {
                     <CardContent>
                         <Typography paragraph>More Information:</Typography>
                         <Typography paragraph>
-                            <div> 
-                            <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
+                            <div>
+                                <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
                             </div>
                             <div>
-                            <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
+                                <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
                             </div>
                             <div>
-                            <span>I'm {props.d.shy ? 'Shy' : null} </span>
-                            <span>I'm {props.d.energetic ? 'energetic' : null} </span>
-                            <span>I'm {props.d.dominant ? 'Dominant' : null} </span>
+                                <span>I'm {props.d.shy ? 'Shy' : null} </span>
+                                <span>I'm {props.d.energetic ? 'energetic' : null} </span>
+                                <span>I'm {props.d.dominant ? 'Dominant' : null} </span>
                             </div>
 
-                         
+
 
                         </Typography>
 
@@ -132,8 +151,8 @@ const Dog = inject("MainStore")(observer((props) => {
                 </Collapse>
             </Card>
 
-    
-        </div>
+
+        </div >
 
 
 

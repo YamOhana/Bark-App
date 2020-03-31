@@ -10,7 +10,7 @@ const Dogs = inject("MainStore")(observer((props) => {
         <div>
             Im Dogs
             {props.MainStore.owners.map(o => {
-                    return o.dogs.map(d => <Dog d={d}/>)
+                    return o.dogs.map(d => <Dog d={d} o={o} />)
             })}
         </div>
     )
