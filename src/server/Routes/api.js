@@ -18,6 +18,8 @@ const fire = firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
 
+// fire.auth().createUserWithEmailAndPassword("ilai@me.com", "123456")
+
 fire.auth().signInWithEmailAndPassword("admin@me.com", "123456").then((u) => {
     console.log("connected");
 

@@ -50,6 +50,7 @@ const Dog = inject("MainStore")(observer((props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -93,27 +94,33 @@ const Dog = inject("MainStore")(observer((props) => {
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        <div>{props.d.size}</div>
-                        <div>{props.d.dogGender}</div>
-                        <div>{props.d.type}</div>
+                        {props.d.size}
+                        {props.d.dogGender}
+                        {props.d.type}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
 
-                    {/* { 
-                        props.o.requsets.includes(props.MainStore.curUser.id) ? 
-                        <IconButton aria-label="friendship requested">
-                            <FriendRequest />
-                        </IconButton>
-                        : 
-                        <IconButton aria-label="add to favorites" onClick={addFriend}>
-                            <FavoriteIcon />
-                        </IconButton>
-                    } */}
+                    {
+                        props.MainStore.curUser?(
+                        props.o.requests.includes(props.MainStore.curUser.id) ?
+                            (<IconButton aria-label="friendship requested">
+                                <FriendRequest />
+                            </IconButton>)
+                            :
+                            (<IconButton aria-label="add to favorites" onClick={addFriend}>
+                                <FavoriteIcon />
+                            </IconButton>)
+                            ):
+                            (<IconButton aria-label="add to favorites" onClick={addFriend}>
+                                <FavoriteIcon />
+                            </IconButton>)
+                        
+                    }
 
-                    <IconButton aria-label="add to favorites" onClick={addFriend}>
+                    {/* <IconButton aria-label="add to favorites" onClick={addFriend}>
                         <FavoriteIcon />
-                    </IconButton>
+                    </IconButton> */}
 
                     <IconButton
                         className={clsx(classes.expand, {
@@ -130,17 +137,12 @@ const Dog = inject("MainStore")(observer((props) => {
                     <CardContent>
                         <Typography paragraph>More Information:</Typography>
                         <Typography paragraph>
-                            <div>
-                                <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
-                            </div>
-                            <div>
-                                <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
-                            </div>
-                            <div>
-                                <span>I'm {props.d.shy ? 'Shy' : null} </span>
-                                <span>I'm {props.d.energetic ? 'energetic' : null} </span>
-                                <span>I'm {props.d.dominant ? 'Dominant' : null} </span>
-                            </div>
+
+                            I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated
+                            I'm {props.d.neutered ? null : 'NOT!'} Neutered
+                            I'm {props.d.shy ? 'Shy' : null}
+                            I'm {props.d.energetic ? 'energetic' : null}
+                            I'm {props.d.dominant ? 'Dominant' : null}
 
 
 
