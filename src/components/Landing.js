@@ -23,12 +23,9 @@ class Landing extends Component {
 
     async componentDidMount() {
         const users = await this.getUsers()
-        console.log(users.data)
         const currentUser = await this.getCurrentUser()
-        console.log(currentUser.data);
         this.props.MainStore.getData({owners:users.data,user:currentUser.data})
         const posts = await this.getPosts()
-        console.log(posts.data);
         this.props.MainStore.getPosts(posts.data)
         
     }

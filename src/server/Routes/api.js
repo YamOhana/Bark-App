@@ -35,6 +35,7 @@ router.post('/user', (req, res) => {
 
     database.collection("users").doc(req.body.userId).set({
         id: req.body.userId,
+        onwalk: false,
         email: req.body.email,
         firstName: req.body.firstName,
         lastName: req.body.lastName,

@@ -21,6 +21,7 @@ import AcceptRequest from '@material-ui/icons/NotificationsActive';
 import FriendsIcon from '@material-ui/icons/CheckCircle';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
 
 const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
@@ -46,7 +47,17 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: red[500],
     },
+    orange: {
+        color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: deepOrange[500],
+      },
+    green: {
+        color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: "#76ff03",
+    }
 }));
+
+
 
 const Dog = inject("MainStore")(observer((props) => {
     const classes = useStyles();
@@ -68,6 +79,7 @@ const Dog = inject("MainStore")(observer((props) => {
         axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
     }
 
+
     return (
 
         //    <div>
@@ -85,11 +97,19 @@ const Dog = inject("MainStore")(observer((props) => {
                     avatar={
                         <Avatar aria-label="dog" className='dog-avatar'>
                             R
-    </Avatar>
+                        </Avatar>
                     }
                     action={
                         <IconButton aria-label="settings">
-                            <MoreVertIcon />
+                            {props.o.onwalk ?
+                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
+                                W
+                            </Avatar> :
+                            <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.orange} >
+                            H
+                            </Avatar> 
+
+                            }
                         </IconButton>
                     }
                     title={props.d.dogName}

@@ -11,9 +11,10 @@ const useStyles = makeStyles({
   root: {
     width: "100vw",
     bottom: 0,
-    position: "fixed"
+    position: "fixed",
   },
-});
+});  
+
 
 export default function SimpleBottomNavigation() {
   const classes = useStyles();

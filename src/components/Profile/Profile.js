@@ -17,6 +17,7 @@ import Typography from '@material-ui/core/Typography';
 import EditIcon from '@material-ui/icons/Edit';
 import { red } from '@material-ui/core/colors';
 import { makeStyles } from '@material-ui/core/styles';
+import { deepOrange } from '@material-ui/core/colors';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +41,14 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: red[500],
     },
+    red: {
+        color: theme.palette.getContrastText(red[500]),
+        backgroundColor: red[500],
+      },
+    green: {
+        color: theme.palette.getContrastText(red[500]),
+        backgroundColor: "#76ff03",
+    }
 }));
 
 const Profile = inject("MainStore", "InputStore")(observer((props) => {
@@ -57,9 +66,15 @@ const Profile = inject("MainStore", "InputStore")(observer((props) => {
             <Card className='ProfileComponent'>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="recipe" className='profile-avatar'>
-                            R
-          </Avatar>
+                        props.MainStore.curUser.onwalk ?
+                            <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
+                            W
+                        </Avatar> :
+                        <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.red} >
+                        H
+                        </Avatar> 
+
+                        
                     }
 
                     title={props.MainStore.curUser.firstName}

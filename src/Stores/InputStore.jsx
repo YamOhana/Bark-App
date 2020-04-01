@@ -32,6 +32,9 @@ export class Inputs {
 
     //feed
     @observable comment
+
+    //OnWalk button
+    @observable onwalk = false
     
     //upload image
     @observable newImage

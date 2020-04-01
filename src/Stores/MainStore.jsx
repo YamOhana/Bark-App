@@ -34,12 +34,22 @@ export class MainStore {
 
     @action getPosts = data => this.posts = data
     
+    @action goOnWalk = bool => {
+        this.owners[this.userIndex].onwalk = bool
+        this.curUser.onwalk = bool
+    }
 
     @action addPost = post => this.posts.unshift(post)
 
-    @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)
+    @action addDogToOwner = dog => {
+        this.owners[this.userIndex].dogs.push(dog)
+        this.curUser.dogs.push(dog)
+    }
     
-    @action  acceptFriendship = friendId => this.owners[this.userIndex].friends.push(friendId)
+    @action  acceptFriendship = friendId => {
+        this.owners[this.userIndex].friends.push(friendId)
+        this.curUser.friends.push(friendId)
+    }
 
     @action addFriend = friendId => {
         let friend = this.owners.find(o => o.id === friendId)
@@ -51,14 +61,20 @@ export class MainStore {
         let owner = this.owners[this.userIndex]
         const friendIndex = owner.friends.friendIndex(f => f === friendId)
         owner.friends.splice(friendIndex, 1)
+        this.curUser.friends.splice(friendIndex, 1)
     }
 
     @action editDogField = (dogId, fieldName, data) => {
         let dog = this.owners[this.userIndex].dogs.find(d => d.id === dogId)
+        let curDog = this.curUser.dogs.find(d => d.id === dogId)
         dog[fieldName] = data
+        curDog[fieldName] = data
     }    
 
-    @action editProfile = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
+    @action editProfile = (fieldName, data) => {
+        this.owners[this.userIndex][fieldName] = data
+        this.curUser[fieldName] = data
+    }
 
     @action updateFilters = (filterType, val) => this.filters[filterType] = val
 
@@ -141,13 +157,9 @@ export class MainStore {
         let myFriends = []
         for(let owner of this.owners) {
             if(friendsId.includes(owner.id)) {
-                console.log(owner)
                 myFriends.push(owner)
             }
         }
-        console.log(myFriends);
         return myFriends
     }
-
-    
 }
