@@ -53,12 +53,12 @@ export const FolderListItems = ({ user }) => {
         <ListItemText primary="Friends" />
       </ListItem>
     </Link>
-    <Link to='/Map'>
+    <Link to='/Maps'>
       <ListItem button>
         <ListItemIcon>
           <Map />
         </ListItemIcon>
-        <ListItemText primary="Map" />
+        <ListItemText primary="Maps" />
       </ListItem>
     </Link>
   </div>

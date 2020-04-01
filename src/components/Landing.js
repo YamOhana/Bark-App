@@ -6,7 +6,7 @@ import NavbarLeftMenu from './Menu/NavbarLeftMenu'
 import Profile from './Profile/Profile'
 import Home from './Home'
 import Feed from './Feed'
-import Map from './Map'
+import Maps from './Maps'
 import axios from 'axios'
 
 @inject("MainStore")
@@ -64,7 +64,7 @@ class Landing extends Component {
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
                     <Route path="/Feed" exact render={() => <Feed key='feedPage'/>}/>
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
-                    <Route path="/Map" exact render={() => <Map key='mappage'/>}/>
+                    <Route path="/Maps" exact render={() => <Maps key='mappage'/>}/>
                 </div>
             </Router>
         )
