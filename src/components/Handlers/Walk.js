@@ -1,39 +1,58 @@
 import React from 'react';
+import { observer, inject } from 'mobx-react'
 import Switch from '@material-ui/core/Switch';
+import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
+import { lightGreen } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { deepOrange } from '@material-ui/core/colors';
 
-export default function Walk() {
-  const [state, setState] = React.useState({
-    checkedA: true,
-    checkedB: true,
-  });
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     width: "100vw",
+//     bottom: 0,
+//     position: "fixed",
+//   },
+//   green: {
+//     color: lightGreen["A400"]
+//     ,
+//     // backgroundColor: "#76ff03",
+// }
+// }))
+const GreenSwitch = withStyles({
+  switchBase: {
+    color: red[500],
+    '&$checked': {
+      color: lightGreen["A400"],
+    },
+    '&$checked + $track': {
+      backgroundColor: lightGreen["A400"],
+    },
+  },
+  checked: {},
+  track: {},
+})(Switch);
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
+       
+
+
+const Walk = inject("MainStore", "InputStore")(observer((props) => {
+  // const classes = useStyles()
+  const [onwalk, setOnWalk] = React.useState(props.InputStore.onwalk);
+
+  const handleChange = () => {
+    console.log(!onwalk)
+    props.InputStore.handleInput(!onwalk)
+    props.MainStore.goOnWalk(!onwalk)
+    setOnWalk(!onwalk)
   };
 
   return (
     <div>
-      {/* <Switch
-        checked={state.checkedA}
-        onChange={handleChange}
-        name="checkedA"
-        inputProps={{ 'aria-label': 'secondary checkbox' }}
-      /> */}
-      <Switch
-        checked={state.checkedB}
-        onChange={handleChange}
-        color="primary"
-        name="checkedB"
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
-      {/* <Switch inputProps={{ 'aria-label': 'primary checkbox' }} />
-      <Switch disabled inputProps={{ 'aria-label': 'disabled checkbox' }} />
-      <Switch disabled checked inputProps={{ 'aria-label': 'primary checkbox' }} />
-      <Switch
-        defaultChecked
-        color="default"
-        inputProps={{ 'aria-label': 'checkbox with default color' }}
-      /> */}
+      <GreenSwitch checked={onwalk} onChange={handleChange} name="onwalk" />
     </div>
   );
-}
+}))
+
+export default Walk
