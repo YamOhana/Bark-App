@@ -153,7 +153,7 @@ router.delete('/deleteFriend/:currentUserId/:friendId', (req, res) => {
     database.collection("users").doc(`${req.params.currentUserId}`).update({
         friends: firebase.firestore.FieldValue.arrayRemove(req.params.friendId)
     }).then(function (doc) {
-
+        
         if (doc.exists) {
             user = doc.data();
             res.status(200).send(user)
@@ -186,6 +186,20 @@ router.post('/post', (req, res) => {
         console.error("Error writing document: ", error);
     });
 
+})
+
+//Go to work
+router.put('/walk/:id', (req, res) => {
+    console.log(req.body.data)
+    database.collection("users").doc(`${req.params.id}`).update({
+        onwalk: req.body.data
+    }).then(function () {
+        console.log(req.params.id)
+        req.body.data ? console.log(`go out`) : console.log(`go back`)
+        res.end()
+    }).catch(function (error) {
+        console.log("Error While trying to walk:", error)
+    });
 })
 
 
