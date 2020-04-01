@@ -23,7 +23,7 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import axios from 'axios'
 
-
+const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -96,9 +96,9 @@ const Dog = inject("MainStore")(observer((props) => {
                 />
                 <CardMedia
                     className={classes.media}
-                    image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
+                    image={props.d.image}
                     title={props.d.dogName}
-                />
+                      />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.d.size}

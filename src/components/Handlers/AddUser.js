@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import AddDog from './AddDog';
 import AddHour from './addHour';
+import UploadFile from './UploadFile';
 
 
 

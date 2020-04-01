@@ -11,14 +11,14 @@ export class Inputs {
     @observable birthDate
     @observable phoneNum
     @observable address
-    @observable gender 
+    @observable gender = 'male'
     @observable smoker = false
     @observable hours =[]
 
 
     //dog
     @observable dogName
-    @observable dogGender
+    @observable dogGender = 'male'
     @observable park
     @observable vaccinated = false
     @observable neutered = false
@@ -33,9 +33,13 @@ export class Inputs {
     //feed
     @observable comment
     
+    //upload image
+    @observable newImage
 
     @action handleInput = (name, val) => {
         this[name] = val
+        console.log(name);
+        console.log(val);
     }
 
     @action handleHours = val => {
