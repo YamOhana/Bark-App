@@ -6,6 +6,7 @@ import allPosts from './posts.json'
 
 export class MainStore {
     @observable owners = []
+    @observable filteredOwners = []
     @observable curUser
     @observable userIndex
     @observable posts = []
@@ -58,6 +59,12 @@ export class MainStore {
 
     @action updateFilters = (filterType, val) => this.filters[filterType] = val
     
+    @action getFilteredOwners = () => {
+        let newOwners = [...this.owners]
+        for(let owner of newOwners) {
+            
+        }
+    }
 
 
     
