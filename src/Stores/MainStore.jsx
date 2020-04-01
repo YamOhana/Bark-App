@@ -8,6 +8,7 @@ export class MainStore {
     @observable owners = []
     @observable filteredOwners = []
     @observable curUser
+    @observable curFriends = []
     @observable userIndex
     @observable posts = []
     @observable filters = { 
@@ -24,20 +25,17 @@ export class MainStore {
     }
 
     @action getData = dataArr => {
-        console.log(dataArr)
         this.owners = dataArr.owners
         this.curUser = dataArr.user
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
+        this.curFriends = this.getMyFriends()
     }
 
 
-    @action getPosts = data => {
-        this.posts = data
-    }
+    @action getPosts = data => this.posts = data
+    
 
-    @action addPost = post => {
-        this.posts.unshift(post)
-    }
+    @action addPost = post => this.posts.unshift(post)
 
     @action addDogToOwner = dog => this.owners[this.userIndex].dogs.push(dog)
     
@@ -45,9 +43,8 @@ export class MainStore {
 
     @action addFriend = friendId => {
         let friend = this.owners.find(o => o.id === friendId)
-        
         friend.requests.push(this.curUser.id)
-        
+        this.curFriends.push(friend)
     }
 
     @action  deleteFriend = friendId => {
@@ -68,8 +65,6 @@ export class MainStore {
     @action filterAge = (owner, term) => {
         const range = term.split("-")
         const dogAge = this.calculateAge(owner.dogs[0].dogBirthDate)
-        console.log(range)
-        console.log(dogAge)
         if(dogAge[0] === 0 && range[0] == "0.5") {
             if(dogAge[1] > 5) {
                 return 1
@@ -113,7 +108,6 @@ export class MainStore {
                 filterCheck += this.filterNature(owner, this.filters.nature)
             }
             if(control === filterCheck) {
-                console.log(`pushed`);
                 newOwners.push(owner)
             }
         }
@@ -142,6 +136,18 @@ export class MainStore {
         
     }
 
+    @action getMyFriends = () => {
+        const friendsId = this.curUser.friends
+        let myFriends = []
+        for(let owner of this.owners) {
+            if(friendsId.includes(owner.id)) {
+                console.log(owner)
+                myFriends.push(owner)
+            }
+        }
+        console.log(myFriends);
+        return myFriends
+    }
 
     
 }
