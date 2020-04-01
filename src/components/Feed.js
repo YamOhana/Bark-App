@@ -38,8 +38,10 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
 
     const commentClasses = useStylesComment()
     const classes = useStyles();
-
     const [comment, setComment] = useState(props.InputStore.comment)
+
+    
+    const [myFriendsOrAll, setMyFriendsOrAll] = useState(true);
 
     const inputHandler = (e) => {
         props.InputStore.handleInput(e.target.name, e.target.value)
@@ -54,7 +56,6 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
             senderId: props.MainStore.curUser.id,
             time: new Date()
         }
-        console.log(post)
         props.MainStore.addPost(post)
 
         axios.post('http://localhost:3001/post', post)
@@ -73,16 +74,20 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
                 <AddComment onClick={addPost} />
             </form>
             <br></br>
+            <button onClick={() => {setMyFriendsOrAll(true); console.log(myFriendsOrAll);
+            }}>My Friends</button>
+            <button onClick={() => {setMyFriendsOrAll(false); console.log(myFriendsOrAll);
+            }}>All</button>
             <div>
-                {props.MainStore.posts.map(p => {
+                {props.MainStore.posts.filter(p =>
+                    (myFriendsOrAll ? props.MainStore.curUser.friends.includes(p.senderId) : true)
+                ).map(p => {
                     const sender = props.MainStore.owners.find(o => o.id === p.senderId)
-                    console.log(sender)
-
                     return (
 
                         <div>
 
-                        {/* <div className={commentClasses.rooter}>
+                            {/* <div className={commentClasses.rooter}>
                             <Paper className={commentClasses.paper}>
                                 <Grid container wrap="nowrap" spacing={2}>
                                     <Grid item>
@@ -98,8 +103,8 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
                         </div> */}
 
 
-                    <span>{p.comment}</span>
-                    </div>
+                            <span>{p.comment}</span>
+                        </div>
                     )
                 })}
             </div>
