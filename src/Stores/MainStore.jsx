@@ -67,8 +67,15 @@ export class MainStore {
 
     @action filterAge = (owner, term) => {
         const range = term.split("-")
-        console.log(term);
-        if(owner.dogs[0].age >= range[0] && owner.dogs[0].age <= range[1]) {
+        const dogAge = this.calculateAge(owner.dogs[0].dogBirthDate)
+        console.log(range)
+        console.log(dogAge)
+        if(dogAge[0] === 0 && range[0] == "0.5") {
+            if(dogAge[1] > 5) {
+                return 1
+            }
+        }
+        if(dogAge[0] >= parseInt(range[0]) && dogAge[0] <= parseInt(range[1])) {
             return 1
         }
         return 0
@@ -93,10 +100,10 @@ export class MainStore {
         for(let owner of this.owners) {
             let control = 0
             let filterCheck = 0
-            // if(this.filters.age !== 'none') {
-            //     control++
-            //     filterCheck += this.filterAge(owner, this.filters.age)
-            // }
+            if(this.filters.age !== 'none') {
+                control++
+                filterCheck += this.filterAge(owner, this.filters.age)
+            }
             if(this.filters.size !== 'none') {
                 control++
                 filterCheck += this.filterSize(owner, this.filters.size)
@@ -110,7 +117,6 @@ export class MainStore {
                 newOwners.push(owner)
             }
         }
-        // console.log(newOwners)
         this.filteredOwners = newOwners
     }
 
@@ -134,13 +140,6 @@ export class MainStore {
             }
         }
         
-        
-        // console.log(today);
-        // console.log(year);
-        // console.log(month);
-        // console.log(day);
-        // console.log(birth);
-        // console.log(birthday);
     }
 
 
