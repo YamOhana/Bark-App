@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
+import UploadFile from './UploadFile';
 
 
 
@@ -88,8 +89,11 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         <input type="checkbox" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
         <br></br>
 
-        <label for="image">Image src:</label>
+        {/* <label for="image">Image src:</label>
         <input type="text" id="image" value={image} name="image" onChange={inputHandler}></input>
+        <br></br> */}
+        
+        <UploadFile />
         <br></br>
 
         <label for="dogBirthDate">Dog Birth Date :</label>

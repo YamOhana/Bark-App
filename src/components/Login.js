@@ -83,7 +83,7 @@ class Login extends Component {
             <div className="col-md-6">
                 <button onClick={() => { this.setState({ signOrLog: true }) }} className="chooseLog">Login</button>
                 <button onClick={() => { this.setState({ signOrLog: false }) }} style={{ marginLeft: '25px' }} className="chooseSign">Signup</button>
-                <form>
+                <div>
 
                     <div className="form-group1">
                         <label htmlFor="exampleInputEmail1">Email address</label>
@@ -102,7 +102,7 @@ class Login extends Component {
                             <button onClick={this.signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button>
                         </div>
                     }
-                </form>
+                </div>
 
             </div>
         );
