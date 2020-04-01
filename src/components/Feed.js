@@ -10,6 +10,9 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 
 
+
+
+
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -40,7 +43,7 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
     const classes = useStyles();
     const [comment, setComment] = useState(props.InputStore.comment)
 
-    
+
     const [myFriendsOrAll, setMyFriendsOrAll] = useState(true);
 
     const inputHandler = (e) => {
@@ -69,14 +72,17 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
     return (
         <div>
             <label htmlFor="comment"><b>Add Post : </b></label>
+        
             <form className={classes.root} noValidate autoComplete='off'>
                 <TextField id="comment" value={comment} name="comment" onChange={inputHandler} label="What's on your mind?" variant="outlined" />
                 <AddComment onClick={addPost} />
             </form>
             <br></br>
-            <button onClick={() => {setMyFriendsOrAll(true); console.log(myFriendsOrAll);
+            <button onClick={() => {
+                setMyFriendsOrAll(true); console.log(myFriendsOrAll);
             }}>My Friends</button>
-            <button onClick={() => {setMyFriendsOrAll(false); console.log(myFriendsOrAll);
+            <button onClick={() => {
+                setMyFriendsOrAll(false); console.log(myFriendsOrAll);
             }}>All</button>
             <div>
                 {props.MainStore.posts.filter(p =>

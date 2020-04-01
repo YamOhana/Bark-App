@@ -94,7 +94,7 @@ const Dog = inject("MainStore")(observer((props) => {
                     }
                     title={props.d.dogName}
                 />
-                <CardMedia
+                <CardMedia 
                     className={classes.media}
                     image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
                     title={props.d.dogName}

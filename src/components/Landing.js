@@ -7,7 +7,7 @@ import Profile from './Profile/Profile'
 import Friends from './Profile/Friends'
 import Home from './Home'
 import Feed from './Feed'
-import Maps from './Maps'
+import Maps from './Map/Maps'
 import axios from 'axios'
 
 @inject("MainStore")

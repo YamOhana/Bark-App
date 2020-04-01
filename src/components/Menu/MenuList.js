@@ -9,7 +9,7 @@ import DynamicFeedOutlinedIcon from '@material-ui/icons/DynamicFeedOutlined';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import Friends from '@material-ui/icons/PersonAdd'
-import Map from '@material-ui/icons/Map'
+import Maps from '@material-ui/icons/Map'
 import { Link } from 'react-router-dom';
 
 // import fire from '../Fire';
@@ -56,7 +56,7 @@ export const FolderListItems = ({ user }) => {
     <Link to='/Maps'>
       <ListItem button>
         <ListItemIcon>
-          <Map />
+          <Maps />
         </ListItemIcon>
         <ListItemText primary="Maps" />
       </ListItem>
