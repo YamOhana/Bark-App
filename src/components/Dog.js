@@ -157,15 +157,15 @@ const Dog = inject("MainStore")(observer((props) => {
                         <Typography paragraph>More Information:</Typography>
                         <Typography paragraph>
 
-                            I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated
-                            <br></br>
-                            I'm {props.d.neutered ? null : 'NOT!'} Neutered
-                            <br></br>
-                            {props.d.shy ? `I'm Shy` : null}
-                            <br></br>
-                            {props.d.energetic ? `I'm energetic` : null}
-                            <br></br>
-                            {props.d.dominant ? `I'm Dominant` : null}
+
+                            I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated <br></br>
+                            I'm {props.d.neutered ? null : 'NOT!'} Neutered <br></br>
+                            I'm {props.d.shy ? null : 'NOT!'} Shy <br></br>
+                            I'm {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
+                            I'm {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
+                            I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years 
+                            and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
+                            
 
 
 
