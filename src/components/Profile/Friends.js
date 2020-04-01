@@ -1,108 +1,19 @@
-import React, { Component, Profiler } from 'react'
+import React from 'react'
 import { observer, inject } from 'mobx-react'
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import EditIcon from '@material-ui/icons/Edit';
-import { red } from '@material-ui/core/colors';
-import { makeStyles } from '@material-ui/core/styles';
+import Dog from '../Dog';
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
-    },
-    avatar: {
-        backgroundColor: red[500],
-    },
-}));
-
-const Friends = inject("MainStore", "InputStore")(observer((props) => {
-
-    const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
-
-    // const ownerId = this.props.Mainstore.currUser
-
+   
+const Friends = inject("MainStore")(observer((props) => { 
     return (
-
         <div>
-
-
-            <Card className='ProfileComponent'>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="recipe" className='profile-avatar'>
-                            R
-          </Avatar>
-                    }
-
-                    title={props.MainStore.curUser.firstName}
-                />
-                <CardMedia
-                    className={classes.media}
-                    image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
-                    title={props.MainStore.curUser.firstName}{...props.MainStore.curUser.lastName}
-                />
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <div>{props.MainStore.curUser.dogs.map(d => {
-                            return <div>{d.dogName}<span>{d.park}</span></div>
-                        })}</div>
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label="edit">
-                        <EditIcon />
-                    </IconButton>
-                </CardActions>
-            </Card>
-
-
+            Im Friends
+            {
+            props.MainStore.curFriends.map(f => {
+                    return f.dogs.map(d => <Dog d={d} o={f} />)
+            })
+            }
         </div>
-
-
-
-    )
-
-}))
-
-
-
+    )}
+))
 
 export default Friends;
-
-
-
-
-    //  <div className="ProfileComponent">
-    //     {console.log(props.MainStore.curUser)}
-    //     <span>{props.MainStore.curUser.firstName }  </span>
-    //     <span>{props.MainStore.curUser.lastName  }  </span>
-    //     <div>{props.MainStore.curUser.dogs.map(d => {
-    //         return <div>{d.dogName}<span>{d.park}</span></div>
-    //     })}</div>
-
-    // </div> 
-
-
-

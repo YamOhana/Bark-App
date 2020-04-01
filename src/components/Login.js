@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import fire from '../Fire';
-import AddUser from './AddUser';
-import AddDog from './AddDog';
+import AddUser from './Handlers/AddUser';
+import AddDog from './Handlers/AddDog';
 import axios from 'axios';
 import '../styles/Login.css'
 import { inject } from 'mobx-react'
