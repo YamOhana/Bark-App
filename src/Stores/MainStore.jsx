@@ -16,6 +16,12 @@ export class MainStore {
         nature: 'none'
     }
     
+    @computed get isFiltering() {
+        if(this.filters. age === 'none' && this.filters.nature === 'none' && this.filters.size === 'none') {
+            return 0
+        } 
+        return 1
+    }
 
     @action getData = dataArr => {
         console.log(dataArr)
@@ -58,12 +64,70 @@ export class MainStore {
     @action editProfile = (fieldName, data) => this.owners[this.userIndex][fieldName] = data
 
     @action updateFilters = (filterType, val) => this.filters[filterType] = val
-    
-    @action getFilteredOwners = () => {
-        let newOwners = [...this.owners]
-        for(let owner of newOwners) {
-            
+
+    @action filterAge = (owner, term) => {
+        const range = term.split("-")
+        console.log(term);
+        if(owner.dogs[0].age >= range[0] && owner.dogs[0].age <= range[1]) {
+            return 1
         }
+        return 0
+    }
+
+    @action filterSize = (owner, term) => {
+        if(owner.dogs[0].size === term) {
+            return 1
+        }
+        return 0
+    }
+
+    @action filterNature = (owner, term) => {
+        if(owner.dogs[0][term]) {
+            return 1
+        }
+        return 0
+    }
+
+    @action filterOwners = () => {
+        let newOwners = []
+        for(let owner of this.owners) {
+            let control = 0
+            let filterCheck = 0
+            // if(this.filters.age !== 'none') {
+            //     control++
+            //     filterCheck += this.filterAge(owner, this.filters.age)
+            // }
+            if(this.filters.size !== 'none') {
+                control++
+                filterCheck += this.filterSize(owner, this.filters.size)
+            }
+            if(this.filters.nature !== 'none') {
+                control++
+                filterCheck += this.filterNature(owner, this.filters.nature)
+            }
+            if(control === filterCheck) {
+                console.log(`pushed`);
+                newOwners.push(owner)
+            }
+        }
+        // console.log(newOwners)
+        this.filteredOwners = newOwners
+    }
+
+    @action getFilteredOwners = () => {
+        // let newOwners = []
+        // for(let f in this.filters) {
+        //     let counter = 0
+        //     if(this.filters[f] !== 'none') {
+        //         if(counter) {
+        //             for(let owner of this.owners) {
+        //                 if(owner.dogs[0][f]){}
+        //             } 
+        //         }
+        //     }
+        //     counter++
+        // }
+        
     }
 
 
