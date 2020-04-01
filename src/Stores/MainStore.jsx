@@ -114,20 +114,33 @@ export class MainStore {
         this.filteredOwners = newOwners
     }
 
-    @action getFilteredOwners = () => {
-        // let newOwners = []
-        // for(let f in this.filters) {
-        //     let counter = 0
-        //     if(this.filters[f] !== 'none') {
-        //         if(counter) {
-        //             for(let owner of this.owners) {
-        //                 if(owner.dogs[0][f]){}
-        //             } 
-        //         }
-        //     }
-        //     counter++
-        // }
+    @action calculateAge = birthday => {
+        const today = new Date()
+        const todayYear = today.getFullYear()
+        const todayMonth = today.getMonth() + 1
+        const birth = birthday.split("-")
+        const birthYear = parseInt(birth[0])
+        const birthMonth = parseInt(birth[1])
+        if(todayMonth >= birthMonth) {
+                const age = [(todayYear - birthYear), (todayMonth - birthMonth)]
+                return age
+        } else {
+            if(todayYear > birthYear) {
+                const age = [(todayYear - birthYear - 1), (12 + todayMonth - birthMonth)]
+                return age
+            } else {
+                const age = [0, (12 + todayMonth - birthMonth)]
+                return age
+            }
+        }
         
+        
+        // console.log(today);
+        // console.log(year);
+        // console.log(month);
+        // console.log(day);
+        // console.log(birth);
+        // console.log(birthday);
     }
 
 
