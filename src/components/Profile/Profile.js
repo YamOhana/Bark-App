@@ -1,7 +1,8 @@
 import React, { Component, Profiler } from 'react'
-import AddDog from '../AddDog';
-import MyDogs from './MyDog'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
+// import AddDog from '../AddDog';
+// import MyDogs from './MyDog'
+// import { BrowserRout../Handlers/AddDogter, Route, Link, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Link, Redirect } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';

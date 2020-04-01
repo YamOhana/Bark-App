@@ -35,9 +35,6 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
         props.MainStore.filterOwners()
     };
 
-    const filterOwners = () => {
-        props.MainStore.filterOwners()
-    }
 
     return (
     <div>
@@ -101,7 +98,6 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
         </NativeSelect>
         <FormHelperText>With visually hidden label</FormHelperText>
         </FormControl>
-        {/* <button onClick={filterOwners}>Filter</button> */}
         
     </div>
 );

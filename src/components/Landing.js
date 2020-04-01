@@ -65,10 +65,9 @@ class Landing extends Component {
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
                     <Route path="/Feed" exact render={() => <Feed key='feedPage'/>}/>
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
-
                     <Route path="/Maps" exact render={() => <Maps key='mappage'/>}/>
-
                     <Route path="/Friends" exact render={() => <Friends key='friendsPage'/>}/>
+                    {/* <Route path="/Friends/:id" exact render={({ match }) => <Friends match={match} key='friendsPage'/>}/> */}
 
                 </div>
             </Router>

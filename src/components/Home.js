@@ -7,8 +7,8 @@ import NavbarLeftMenu from './Menu/NavbarLeftMenu'
 import Header from './Header'
 import Dogs from './Dogs'
 import Profile from './Profile/Profile'
-import AddDog from './AddDog';
-import AddUser from './AddUser'
+import AddDog from './Handlers/AddDog';
+import AddUser from './Handlers/AddUser'
 
 import axios from 'axios'
 
