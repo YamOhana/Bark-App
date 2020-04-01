@@ -9,9 +9,15 @@ const Dogs = inject("MainStore")(observer((props) => {
     return (
         <div>
             Im Dogs
-            {props.MainStore.owners.map(o => {
+            { props.MainStore.isFiltering ?
+            props.MainStore.filteredOwners.map(o => {
+                return o.dogs.map(d => <Dog d={d} o={o} />)
+            }) :
+
+            props.MainStore.owners.map(o => {
                     return o.dogs.map(d => <Dog d={d} o={o} />)
-            })}
+            })
+            }
         </div>
     )
 }))

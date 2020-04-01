@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
-import Navbar from './Navbar'
+import Navbar from './Filters/Navbar'
 import SidePanel from './Menu/SidePanel'
 import NavbarLeftMenu from './Menu/NavbarLeftMenu'
 import Header from './Header'
