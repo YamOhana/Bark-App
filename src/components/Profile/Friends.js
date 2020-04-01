@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
-import Dog from '../Dog';
+import Dog from '../Dogs/Dog';
 
    
 const Friends = inject("MainStore")(observer((props) => { 
