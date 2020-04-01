@@ -24,6 +24,10 @@ export class MainStore {
         return 1
     }
 
+    @computed get isOnWalk() {
+        return this.curUser.onwalk
+    }
+
     @action getData = dataArr => {
         this.owners = dataArr.owners
         this.curUser = dataArr.user

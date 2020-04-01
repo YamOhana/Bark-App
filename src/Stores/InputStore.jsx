@@ -34,7 +34,7 @@ export class Inputs {
     @observable comment
 
     //OnWalk button
-    @observable onwalk = false
+    @observable onwalk 
     
 
     @action handleInput = (name, val) => {

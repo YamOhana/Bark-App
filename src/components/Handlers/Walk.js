@@ -1,25 +1,12 @@
 import React from 'react';
 import { observer, inject } from 'mobx-react'
 import Switch from '@material-ui/core/Switch';
-import { makeStyles } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
 import { lightGreen } from '@material-ui/core/colors';
 import { red } from '@material-ui/core/colors';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { deepOrange } from '@material-ui/core/colors';
+import axios from 'axios'
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     width: "100vw",
-//     bottom: 0,
-//     position: "fixed",
-//   },
-//   green: {
-//     color: lightGreen["A400"]
-//     ,
-//     // backgroundColor: "#76ff03",
-// }
-// }))
+
 const GreenSwitch = withStyles({
   switchBase: {
     color: red[500],
@@ -36,21 +23,27 @@ const GreenSwitch = withStyles({
 
        
 
-
 const Walk = inject("MainStore", "InputStore")(observer((props) => {
-  // const classes = useStyles()
   const [onwalk, setOnWalk] = React.useState(props.InputStore.onwalk);
 
-  const handleChange = () => {
-    console.log(!onwalk)
+  const handleChange = async () => {
     props.InputStore.handleInput(!onwalk)
     props.MainStore.goOnWalk(!onwalk)
+    await axios.put(`http://localhost:3001/walk/${props.MainStore.curUser.id}`, {data: !onwalk})
     setOnWalk(!onwalk)
-  };
+  }
+  const goWalk = async () => {
+    await axios.put(`http://localhost:3001/walk/${props.MainStore.curUser.id}`, {data: !onwalk})
+  }
 
   return (
     <div>
-      <GreenSwitch checked={onwalk} onChange={handleChange} name="onwalk" />
+      {
+        props.MainStore.curUser ?
+          <GreenSwitch checked={props.MainStore.isOnWalk} onChange={handleChange} name="onwalk" /> :
+          // <GreenSwitch checked={onwalk} onChange={handleChange} name="onwalk" /> 
+          null
+      }
     </div>
   );
 }))
