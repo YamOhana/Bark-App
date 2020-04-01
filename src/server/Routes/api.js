@@ -101,7 +101,11 @@ router.put('/addFriend/:currentUserId/:friendId', (req, res) => {
     database.collection("users").doc(`${req.params.currentUserId}`).update({
         friends: firebase.firestore.FieldValue.arrayUnion(req.params.friendId)
     }).then(function () {
-        res.end()
+        database.collection("users").doc(`${req.params.friendId}`).update({
+            friends: firebase.firestore.FieldValue.arrayUnion(req.params.currentUserId)
+        }).then(function () {
+            res.end()
+        })
     }).catch(function (error) {
         console.log("Error getting document:", error)
     });

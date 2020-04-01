@@ -17,6 +17,8 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FriendRequest from '@material-ui/icons/StarOutlined';
+import AcceptRequest from '@material-ui/icons/NotificationsActive';
+import FriendsIcon from '@material-ui/icons/CheckCircle';
 import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import axios from 'axios'
@@ -61,6 +63,11 @@ const Dog = inject("MainStore")(observer((props) => {
 
     }
 
+    const acceptFriend = () => {
+        props.MainStore.acceptFriendship(props.o.id)
+        axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
+    }
+
     return (
 
         //    <div>
@@ -95,27 +102,39 @@ const Dog = inject("MainStore")(observer((props) => {
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.d.size}
+                        <br></br>
                         {props.d.dogGender}
+                        <br></br>
                         {props.d.type}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
 
                     {
-                        props.MainStore.curUser?(
-                        props.o.requests.includes(props.MainStore.curUser.id) ?
-                            (<IconButton aria-label="friendship requested">
-                                <FriendRequest />
-                            </IconButton>)
-                            :
+                        props.MainStore.curUser ? (
+                            props.MainStore.curUser.friends.includes(props.o.id) ?
+                                (<IconButton aria-label="my friend">
+                                    <FriendsIcon />
+                                </IconButton>) : (
+                                    props.MainStore.curUser.requests.includes(props.o.id) ?
+                                        (<IconButton aria-label="accept friendship requested" onClick={acceptFriend}>
+                                            <AcceptRequest />
+                                        </IconButton>) : (
+                                            props.o.requests.includes(props.MainStore.curUser.id) ?
+                                                (<IconButton aria-label="friendship requested">
+                                                    <FriendRequest />
+                                                </IconButton>)
+                                                :
+                                                (<IconButton aria-label="add to favorites" onClick={addFriend}>
+                                                    <FavoriteIcon />
+                                                </IconButton>)
+                                        )
+                                )
+                        ) :
                             (<IconButton aria-label="add to favorites" onClick={addFriend}>
                                 <FavoriteIcon />
                             </IconButton>)
-                            ):
-                            (<IconButton aria-label="add to favorites" onClick={addFriend}>
-                                <FavoriteIcon />
-                            </IconButton>)
-                        
+
                     }
 
                     {/* <IconButton aria-label="add to favorites" onClick={addFriend}>
@@ -139,10 +158,14 @@ const Dog = inject("MainStore")(observer((props) => {
                         <Typography paragraph>
 
                             I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated
+                            <br></br>
                             I'm {props.d.neutered ? null : 'NOT!'} Neutered
-                            I'm {props.d.shy ? 'Shy' : null}
-                            I'm {props.d.energetic ? 'energetic' : null}
-                            I'm {props.d.dominant ? 'Dominant' : null}
+                            <br></br>
+                            {props.d.shy ? `I'm Shy` : null}
+                            <br></br>
+                            {props.d.energetic ? `I'm energetic` : null}
+                            <br></br>
+                            {props.d.dominant ? `I'm Dominant` : null}
 
 
 

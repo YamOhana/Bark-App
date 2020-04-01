@@ -4,6 +4,7 @@ import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
 import NavbarLeftMenu from './Menu/NavbarLeftMenu'      
 import Profile from './Profile/Profile'
+import Friends from './Profile/Friends'
 import Home from './Home'
 import Feed from './Feed'
 import Map from './Map'
@@ -64,6 +65,7 @@ class Landing extends Component {
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
                     <Route path="/Feed" exact render={() => <Feed key='feedPage'/>}/>
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
+                    <Route path="/Friends" exact render={() => <Friends key='friendsPage'/>}/>
                     <Route path="/Map" exact render={() => <Map key='mappage'/>}/>
                 </div>
             </Router>
