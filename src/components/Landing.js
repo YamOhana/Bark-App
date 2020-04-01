@@ -5,10 +5,11 @@ import { observer, inject } from 'mobx-react'
 import NavbarLeftMenu from './Menu/NavbarLeftMenu'      
 import Profile from './Profile/Profile'
 import Friends from './Profile/Friends'
-import Home from './Home'
-import Feed from './Feed'
+import Home from './Main Pages/Home'
+import Feed from './Main Pages/Feed'
 import Maps from './Maps'
 import axios from 'axios'
+import Footer from './Handlers/Onwalk'
 
 @inject("MainStore")
 
@@ -58,6 +59,7 @@ class Landing extends Component {
                 
                     <div id="main-links">
                         <NavbarLeftMenu logout={this.logout}/>
+                        {/* <Footer /> */}
                         {/* <Link to="/">Home</Link>
                         <Link to="/Profile">Profile</Link> */}
                     </div>
@@ -68,7 +70,10 @@ class Landing extends Component {
                     <Route path="/Maps" exact render={() => <Maps key='mappage'/>}/>
                     <Route path="/Friends" exact render={() => <Friends key='friendsPage'/>}/>
                     {/* <Route path="/Friends/:id" exact render={({ match }) => <Friends match={match} key='friendsPage'/>}/> */}
-
+                    <Footer />
+                    {/* <div id='footer'>
+                        <Footer />
+                    </div> */}
                 </div>
             </Router>
         )
