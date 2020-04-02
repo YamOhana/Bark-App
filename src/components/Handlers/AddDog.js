@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import UploadFile from '../UploadFile';
-import MapInput from '../Map'
+import AdressInput from '../Map'
 
 
 
@@ -69,7 +69,7 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         
     return (
         <div>
-            {/* <MapInput /> */}
+            {/* <AdressInput /> */}
 
         <label for="dogName">Dog's name:</label>
         <input type="text" id="dogName" value={dogName} name="dogName" onChange={inputHandler}></input>
@@ -84,7 +84,8 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         <br></br>
 
         <label for="park">Favorie park:</label>
-        <input type="text" id="park" value={park} name="park" onChange={inputHandler}></input>
+        {/* <input type="text" id="park" value={park} name="park" onChange={inputHandler}></input> */}
+        <AdressInput call={'park'} input={props.InputStore.park}/>
         <br></br>
 
         <label for="vaccinated">Vaccinated:</label>
@@ -94,10 +95,6 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         <label for="neutered">Neutered:</label>
         <input type="checkbox" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
         <br></br>
-
-        {/* <label for="image">Image src:</label>
-        <input type="text" id="image" value={image} name="image" onChange={inputHandler}></input>
-        <br></br> */}
         
         <UploadFile />
         <br></br>
