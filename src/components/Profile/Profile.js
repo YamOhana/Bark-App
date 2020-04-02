@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     red: {
         color: theme.palette.getContrastText(red[500]),
         backgroundColor: red[500],
-      },
+    },
     green: {
         color: theme.palette.getContrastText(red[500]),
         backgroundColor: "#76ff03",
@@ -59,50 +59,53 @@ const Profile = inject("MainStore", "InputStore")(observer((props) => {
     // const ownerId = this.props.Mainstore.currUser
 
     return (
+        
+            props.MainStore.curUser ? (
 
-        <div>
+                <div>
 
 
-            <Card className='ProfileComponent'>
-                <CardHeader
-                    avatar={
-                        props.MainStore.curUser ?
-                            props.MainStore.curUser.onwalk ?
-                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
-                                W
+                    <Card className='ProfileComponent'>
+                        <CardHeader
+                            avatar={
+
+                                props.MainStore.curUser.onwalk ?
+                                    <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
+                                        W
                             </Avatar> :
-                            <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.red} >
-                            H
-                            </Avatar> :
-                            null
-
-                        
-                    }
-
-                    title={props.MainStore.curUser.firstName}
-                />
-                <CardMedia
-                    className={classes.media}
-                    image='https://vignette.wikia.nocookie.net/sanicsource/images/9/97/Doge.jpg/revision/latest?cb=20160112233015'
-                    title={props.MainStore.curUser.firstName}{...props.MainStore.curUser.lastName}
-                />
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        <div>{props.MainStore.curUser.dogs.map(d => {
-                            return <div>{d.dogName}<span>{d.park}</span></div>
-                        })}</div>
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label="edit">
-                        <EditIcon />
-                    </IconButton>
-                </CardActions>
-            </Card>
+                                    <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.red} >
+                                        H
+                            </Avatar>
 
 
-        </div>
+                            }
 
+                            title={props.MainStore.curUser.firstName}
+                        />
+                        <CardMedia
+                            className={classes.media}
+                            image={props.MainStore.curUser.images}
+                            title={props.MainStore.curUser.firstName}{...props.MainStore.curUser.lastName}
+                        />
+                        <CardContent>
+                            <Typography variant="body2" color="textSecondary" component="p">
+                                <div>{props.MainStore.curUser.dogs.map(d => {
+                                    return <div>{d.dogName}<span>{d.park}</span></div>
+                                })}</div>
+                            </Typography>
+                        </CardContent>
+                        <CardActions disableSpacing>
+                            <IconButton aria-label="edit">
+                                <EditIcon />
+                            </IconButton>
+                        </CardActions>
+                    </Card>
+
+
+                </div>
+            )
+                : <Redirect to='/' />
+        
 
 
     )

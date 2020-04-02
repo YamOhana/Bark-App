@@ -20,6 +20,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
+import UploadFile from '../UploadFile';
 
 
 
@@ -120,6 +121,10 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
             />
             <br></br>
         </Grid>
+
+
+        <UploadFile imagesInputName='userImages' />
+
         <Grid>
         <label htmlFor="gender">Gender:</label>
         <select type="text" id="gender" value={gender} name="gender" onChange={inputHandler}>

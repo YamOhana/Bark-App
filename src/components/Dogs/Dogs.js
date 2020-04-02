@@ -5,7 +5,7 @@ import Dog from './Dog';
 
 
 const Dogs = inject("MainStore")(observer((props) => { 
-
+    
     return (
         <div>
             Im Dogs

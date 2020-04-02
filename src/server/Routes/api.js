@@ -45,6 +45,7 @@ router.post('/user', (req, res) => {
         address: req.body.address,
         gender: req.body.gender,
         hours: req.body.hours,
+        images: req.body.images,
         friends: [],
         messeges: [],
         dogs: [req.body.dog],
@@ -127,7 +128,7 @@ router.get('/map', (req, res) => {
 //update profile
 router.put('/user/:id/:fieldName', (req, res) => {
     database.collection("users").doc(`${req.params.id}`).update({
-        [req.params.fieldName]:req.body
+        [req.params.fieldName]: req.body
     }).then(function (doc) {
 
         if (doc.exists) {
@@ -153,7 +154,7 @@ router.delete('/deleteFriend/:currentUserId/:friendId', (req, res) => {
     database.collection("users").doc(`${req.params.currentUserId}`).update({
         friends: firebase.firestore.FieldValue.arrayRemove(req.params.friendId)
     }).then(function (doc) {
-        
+
         if (doc.exists) {
             user = doc.data();
             res.status(200).send(user)
@@ -168,8 +169,8 @@ router.delete('/deleteFriend/:currentUserId/:friendId', (req, res) => {
 // returns all posts
 router.get('/posts', async (req, res) => {
     const snapshot = await database.collection("posts")
-    .orderBy("time", "desc")
-    .get()
+        .orderBy("time", "desc")
+        .get()
     res.send(snapshot.docs.map(doc => doc.data()))
 })
 
@@ -178,13 +179,13 @@ router.post('/post', (req, res) => {
     console.log(req.body);
 
     database.collection("posts")
-    .add(req.body)
-    .then(function () {
-        console.log("Document successfully written!");
-    })
-    .catch(function (error) {
-        console.error("Error writing document: ", error);
-    });
+        .add(req.body)
+        .then(function () {
+            console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+            console.error("Error writing document: ", error);
+        });
 
 })
 

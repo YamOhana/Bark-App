@@ -96,7 +96,7 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         <input type="checkbox" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
         <br></br>
         
-        <UploadFile />
+        <UploadFile imagesInputName='dogImages' />
         <br></br>
 
         <label for="dogBirthDate">Dog Birth Date :</label>
