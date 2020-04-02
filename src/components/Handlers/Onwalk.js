@@ -7,6 +7,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { lightGreen } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 import Walk from './Walk'
 
 const useStyles = makeStyles({
@@ -15,6 +17,8 @@ const useStyles = makeStyles({
     height: "10vh",
     bottom: 0,
     position: "fixed",
+    // backgroundColor: lightGreen["A400"]
+    boxShadow: "0 0 2px 2px grey" 
   },
 });  
 
@@ -34,19 +38,13 @@ export default function SimpleBottomNavigation() {
     >
       <FormControl component="fieldset">
         <FormGroup aria-label="position" row>
-          {/* <FormControlLabel
-            value={value}
-            control={<Walk />}
-            label="Walk"
-            labelPlacement="top"
-          /> */}
           <Typography component="div">
             <Grid component="label" container alignItems="center" spacing={1}>
-            <Grid item>At Home</Grid>
-            <Grid item>
-              <Walk />
-            </Grid>
-            <Grid item>On Walk</Grid>
+              <Grid color="" item>At Home</Grid>
+                <Grid item>
+                  <Walk />
+                </Grid>
+              <Grid item>On Walk</Grid>
             </Grid>
           </Typography>
         </FormGroup>
