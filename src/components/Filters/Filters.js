@@ -6,6 +6,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
+import Slider from './Slider'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -15,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  sliderControl: {
+    margin: theme.spacing(1),
+    width: 200,
+  }
 }));
 
 const NativeSelects = inject("MainStore", "InputStore")(observer((props) => { 
@@ -56,7 +61,7 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             <option value={'5-10'}>5-10</option>
             <option value={'11-15'}>11-15</option>
         </Select>
-        <FormHelperText>Some important helper text</FormHelperText>
+        {/* <FormHelperText>Some important helper text</FormHelperText> */}
         </FormControl>
 
         <FormControl className={classes.formControl}>
@@ -76,7 +81,7 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             <option value={'medium'}>Medium</option>
             <option value={'large'}>Large</option>
         </NativeSelect>
-        <FormHelperText>Some important helper text</FormHelperText>
+        {/* <FormHelperText>Some important helper text</FormHelperText> */}
         </FormControl>
 
         <FormControl className={classes.formControl}>
@@ -96,8 +101,15 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             <option value={'energetic'}>Energetic</option>
             <option value={'dominant'}>Dominant</option>
         </NativeSelect>
-        <FormHelperText>With visually hidden label</FormHelperText>
+        {/* <FormHelperText>With visually hidden label</FormHelperText> */}
         </FormControl>
+
+        <FormControl className={classes.sliderControl}>
+        {/* <InputLabel htmlFor="size-native-helper">Range</InputLabel> */}
+            <Slider />
+        {/* <FormHelperText>Some important helper text</FormHelperText> */}
+        </FormControl>
+
         
     </div>
 );
