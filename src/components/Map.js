@@ -1,4 +1,5 @@
 import React from 'react';
+import { observer, inject } from 'mobx-react'
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
@@ -33,11 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function GoogleMaps() {
+const addressInput = inject("MainStore", "InputStore")(observer((props) => { 
 
 
   const classes = useStyles();
-  const [inputValue, setInputValue] = React.useState('');
+  const [inputValue, setInputValue] = React.useState(props.input || '');
   const [options, setOptions] = React.useState([]);
   const loaded = React.useRef(false);
 
@@ -56,6 +57,7 @@ export default function GoogleMaps() {
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
+    props.InputStore.handleInput(props.call, event.target.value)
   };
 
   const fetch = React.useMemo(
@@ -99,6 +101,7 @@ export default function GoogleMaps() {
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
       filterOptions={(x) => x}
       options={options}
+      onSelect={handleChange}
       autoComplete
       includeInputInList
       renderInput={(params) => (
@@ -140,4 +143,6 @@ export default function GoogleMaps() {
       }}
     />
   );
-}
+}))
+
+export default addressInput

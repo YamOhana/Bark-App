@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import AddHour from './addHour';
+
+import AdressInput from '../Map'
+
+
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -16,6 +20,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
+
 
 
 
@@ -143,7 +148,8 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <br></br>
 
         <label htmlFor="address">Address:</label>
-        <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input>
+        {/* <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input> */}
+        <AdressInput call={"address"} input={props.InputStore.address}/>
         <br></br>
 
         <label htmlFor="smoker">Smoking?</label>
