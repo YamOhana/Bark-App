@@ -32,6 +32,40 @@ class Login extends Component {
             console.log(error);
         });
     }
+    checkField(field) {
+        if(this.props.InputStore[field] == undefined) {
+            let val = ""
+            switch (field) {
+                case "firstName":
+                    val = prompt(`You forgot to fill your First Name`)
+                    return val
+                case "lastName":
+                    val = prompt(`You forgot to fill your Last Name`)
+                    return val
+                case "dogName":
+                    val = prompt(`You forgot to fill your Dog's Name`)
+                    return val
+                case "smoker":
+                    return false
+                case "hours":
+                    console.log(`hours false`)
+                    return []
+                case "vaccinated":
+                    return false
+                case "neutered":
+                    return false
+                case "shy":
+                    return false
+                case "energetic":
+                    return false
+                case "dominant":
+                    return false
+                default:
+                    return null
+          }
+        }
+        return this.props.InputStore[field] 
+    }
 
     signup(e) {
         e.preventDefault();
@@ -40,27 +74,27 @@ class Login extends Component {
             let newUser = {
                 userId: u.user.uid,
                 email: this.state.email,
-                firstName: this.props.InputStore.firstName,
-                lastName: this.props.InputStore.lastName,
-                birthDate: this.props.InputStore.birthDate,
-                phoneNum: this.props.InputStore.phoneNum,
-                address: this.props.InputStore.address,
-                gender: this.props.InputStore.gender,
-                smoker: this.props.InputStore.smoker,
-                hours: this.props.InputStore.hours,
+                firstName: this.checkField('firstName'),
+                lastName: this.checkField('lastName'),
+                birthDate: this.checkField('birthDate'),
+                phoneNum: this.checkField('phoneNum'),
+                address: this.checkField('address'),
+                gender: this.checkField('gender'),
+                smoker: this.checkField('smoker'),
+                hours: this.checkField('hours'),
                 dog:{
-                    dogName: this.props.InputStore.dogName,
-                    dogGender: this.props.InputStore.dogGender,
-                    park: this.props.InputStore.park,
-                    vaccinated: this.props.InputStore.vaccinated,
-                    neutered: this.props.InputStore.neutered,
-                    image: this.props.InputStore.image,
-                    dogBirthDate: this.props.InputStore.dogBirthDate,
-                    size: this.props.InputStore.size,
-                    type: this.props.InputStore.type,
-                    shy: this.props.InputStore.shy,
-                    energetic: this.props.InputStore.energetic,
-                    dominant: this.props.InputStore.dominant
+                    dogName: this.checkField('dogName'),
+                    dogGender: this.checkField('dogGender'),
+                    park: this.checkField('park'),
+                    vaccinated: this.checkField('vaccinated'),
+                    neutered: this.checkField('neutered'),
+                    image: this.checkField('image'),
+                    dogBirthDate: this.checkField('dogBirthDate'),
+                    size: this.checkField('size'),
+                    type: this.checkField('type'),
+                    shy: this.checkField('shy'),
+                    energetic: this.checkField('energetic'),
+                    dominant: this.checkField('dominant')
                 }
             }
             console.log(this.props.InputStore.gender);
@@ -77,6 +111,7 @@ class Login extends Component {
                 console.log(error);
             })
     }
+
     render() {
         return (
 

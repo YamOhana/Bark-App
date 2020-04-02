@@ -66,13 +66,15 @@ const Profile = inject("MainStore", "InputStore")(observer((props) => {
             <Card className='ProfileComponent'>
                 <CardHeader
                     avatar={
-                        props.MainStore.curUser.onwalk ?
-                            <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
-                            W
-                        </Avatar> :
-                        <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.red} >
-                        H
-                        </Avatar> 
+                        props.MainStore.curUser ?
+                            props.MainStore.curUser.onwalk ?
+                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
+                                W
+                            </Avatar> :
+                            <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.red} >
+                            H
+                            </Avatar> :
+                            null
 
                         
                     }
