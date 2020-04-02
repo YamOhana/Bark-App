@@ -79,7 +79,6 @@ const Dog = inject("MainStore")(observer((props) => {
         axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
     }
 
-
     return (
 
         //    <div>
@@ -90,13 +89,14 @@ const Dog = inject("MainStore")(observer((props) => {
         //<span>{props.d.energetic ? 'Dnergetic': null}</span>
         //<span>{props.d.dominant ? 'Dominant': null}</span>
 
-        <div className='dog-container'>
+       
 
+        <div className='dog-container'>
             <Card className='dog-card'>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="dog" className='dog-avatar'>
-                            R
+                        <Avatar aria-label="dog" className='user-avatar' src={props.o.images}>
+                            {props.d.dogName[0]}
                         </Avatar>
                     }
                     action={
@@ -116,7 +116,7 @@ const Dog = inject("MainStore")(observer((props) => {
                 />
                 <CardMedia
                     className={classes.media}
-                    image={props.d.image}
+                    image={props.d.images || props.d.image}
                     title={props.d.dogName}
                       />
                 <CardContent>

@@ -33,7 +33,7 @@ class Login extends Component {
         });
     }
     checkField(field) {
-        if(this.props.InputStore[field] == undefined) {
+        if (this.props.InputStore[field] == undefined) {
             let val = ""
             switch (field) {
                 case "firstName":
@@ -44,6 +44,12 @@ class Login extends Component {
                     return val
                 case "dogName":
                     val = prompt(`You forgot to fill your Dog's Name`)
+                    return val
+                case "dogImages":
+                    val = prompt(`You forgot to put your Dog's image`)
+                    return val
+                case "userImages":
+                    val = prompt(`You forgot to put your image`)
                     return val
                 case "smoker":
                     return false
@@ -62,9 +68,9 @@ class Login extends Component {
                     return false
                 default:
                     return null
-          }
+            }
         }
-        return this.props.InputStore[field] 
+        return this.props.InputStore[field]
     }
 
     signup(e) {
@@ -82,13 +88,14 @@ class Login extends Component {
                 gender: this.checkField('gender'),
                 smoker: this.checkField('smoker'),
                 hours: this.checkField('hours'),
-                dog:{
+                images: this.checkField('userImages'),
+                dog: {
                     dogName: this.checkField('dogName'),
                     dogGender: this.checkField('dogGender'),
                     park: this.checkField('park'),
                     vaccinated: this.checkField('vaccinated'),
                     neutered: this.checkField('neutered'),
-                    image: this.checkField('image'),
+                    images: this.checkField('dogImages'),
                     dogBirthDate: this.checkField('dogBirthDate'),
                     size: this.checkField('size'),
                     type: this.checkField('type'),
@@ -99,8 +106,8 @@ class Login extends Component {
             }
             console.log(this.props.InputStore.gender);
             console.log(newUser.gender);
-            
-            
+
+
             axios.post('http://localhost:3001/user', newUser).then(res => {
                 // this.props.clients.updateList(res.data)
             })

@@ -11,31 +11,33 @@ export class Inputs {
     @observable birthDate
     @observable phoneNum
     @observable address
-    @observable gender 
-    @observable smoker 
+    @observable gender
+    @observable smoker
     @observable hours = []
+    @observable userImages = []
 
 
     //dog
     @observable dogName
-    @observable dogGender 
+    @observable dogGender
     @observable park
-    @observable vaccinated 
-    @observable neutered 
-    @observable image
+    @observable vaccinated
+    @observable neutered
+    @observable dogImages = []
     @observable dogBirthDate
-    @observable size 
+    @observable size
     @observable type
-    @observable shy 
-    @observable energetic 
-    @observable dominant 
+    @observable shy
+    @observable energetic
+    @observable dominant
 
     //feed
     @observable comment
+    @observable commentPictures = []
 
     //OnWalk button
-    @observable onwalk 
-    
+    @observable onwalk
+
     //upload image
     @observable newImage
 
@@ -49,7 +51,10 @@ export class Inputs {
 
     @action handleHours = val => {
         this.hours.push(val)
-        // console.log(this.hours)
+    }
+
+    @action handleArrayInput = (name, val) => {
+        this[name].push(val)
     }
 
     @action deleteHour = val => {

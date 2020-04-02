@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
+import UploadFile from '../UploadFile';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -52,18 +53,23 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
 
 
         const post = {
+            picture:props.InputStore.commentPictures,
             comment: comment,
             senderId: props.MainStore.curUser.id,
             time: new Date()
         }
         props.MainStore.addPost(post)
 
+        console.log(post);
+        
         axios.post('http://localhost:3001/post', post)
             .then(res => {
                 console.log(`post sent`)
             })
 
         setComment("")
+        props.InputStore.handleInput('commentPictures',[])
+        props.InputStore.handleInput('comment','')
     }
 
     return (
@@ -71,12 +77,13 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
             <label htmlFor="comment"><b>Add Post : </b></label>
             <form className={classes.root} noValidate autoComplete='off'>
                 <TextField id="comment" value={comment} name="comment" onChange={inputHandler} label="What's on your mind?" variant="outlined" />
+                <UploadFile imagesInputName='commentPictures' />
                 <AddComment onClick={addPost} />
             </form>
             <br></br>
-            <button onClick={() => {setMyFriendsOrAll(true); console.log(myFriendsOrAll);
+            <button onClick={() => {setMyFriendsOrAll(true);
             }}>My Friends</button>
-            <button onClick={() => {setMyFriendsOrAll(false); console.log(myFriendsOrAll);
+            <button onClick={() => {setMyFriendsOrAll(false);
             }}>All</button>
             <div>
                 {props.MainStore.posts.filter(p =>
