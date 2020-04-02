@@ -27,22 +27,19 @@ const Walk = inject("MainStore", "InputStore")(observer((props) => {
   const [onwalk, setOnWalk] = React.useState(props.InputStore.onwalk);
 
   const handleChange = async () => {
-    props.InputStore.handleInput(!onwalk)
+    props.InputStore.handleInput("onwalk", !onwalk)
     props.MainStore.goOnWalk(!onwalk)
     await axios.put(`http://localhost:3001/walk/${props.MainStore.curUser.id}`, {data: !onwalk})
     setOnWalk(!onwalk)
   }
-  const goWalk = async () => {
-    await axios.put(`http://localhost:3001/walk/${props.MainStore.curUser.id}`, {data: !onwalk})
-  }
+
 
   return (
     <div>
       {
         props.MainStore.curUser ?
-          <GreenSwitch checked={props.MainStore.isOnWalk} onChange={handleChange} name="onwalk" /> :
-          // <GreenSwitch checked={onwalk} onChange={handleChange} name="onwalk" /> 
-          null
+        <GreenSwitch checked={props.MainStore.isOnWalk} onChange={handleChange} name="onwalk" /> :
+        null
       }
     </div>
   );
