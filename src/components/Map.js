@@ -116,7 +116,7 @@ export default function GoogleMaps() {
           option.structured_formatting.main_text,
           matches.map((match) => [match.offset, match.offset + match.length]),
         );
-
+      
         return (
           <Grid container alignItems="center">
             <Grid item>

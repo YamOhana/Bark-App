@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import UploadFile from '../UploadFile';
+import MapInput from '../Map'
 
 
 
@@ -61,9 +62,14 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         inp.handleInput(e.target.name, e.target.checked) &&
         setDominant(e.target.checked)  
     }
+
+    const signup = () => {
+        props.signup()
+    }
         
     return (
         <div>
+            {/* <MapInput /> */}
 
         <label for="dogName">Dog's name:</label>
         <input type="text" id="dogName" value={dogName} name="dogName" onChange={inputHandler}></input>
@@ -124,7 +130,7 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
         <input type="checkbox" id="dominant" value={dominant} name="dominant" onChange={inputHandler}></input>
         <br></br>
 
-
+        {/* <button onClick={signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button> */}
     </div>
     )
 }))

@@ -44,7 +44,7 @@ router.post('/user', (req, res) => {
         phoneNum: req.body.phoneNum,
         address: req.body.address,
         gender: req.body.gender,
-        hours: [],
+        hours: req.body.hours,
         friends: [],
         messeges: [],
         dogs: [req.body.dog],
