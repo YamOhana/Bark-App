@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import fire from '../Fire';
 import { observer, inject } from 'mobx-react'
-import NavbarLeftMenu from './Menu/NavbarLeftMenu'      
+import NavbarLeftMenu from './Menu/NavbarLeftMenu' 
 import Profile from './Profile/Profile'
 import Friends from './Profile/Friends'
 import Home from './Main Pages/Home'
@@ -11,6 +11,8 @@ import Maps from './Maps'
 import axios from 'axios'
 import Footer from './Handlers/Onwalk'
 
+ 
+
 @inject("MainStore")
 
 @observer
@@ -18,8 +20,9 @@ class Landing extends Component {
     constructor(props) {
         super(props);
         this.logout = this.logout.bind(this);
-
+        
     }
+
 
     async componentDidMount() {
         const users = await this.getUsers()
@@ -49,16 +52,14 @@ class Landing extends Component {
     }
 
     render() {
-
+       
+        
         return (
             <Router>
                 <div className="landing">
                 
                     <div id="main-links">
                         <NavbarLeftMenu logout={this.logout}/>
-                        {/* <Footer /> */}
-                        {/* <Link to="/">Home</Link>
-                        <Link to="/Profile">Profile</Link> */}
                     </div>
 
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
@@ -68,9 +69,6 @@ class Landing extends Component {
                     <Route path="/Friends" exact render={() => <Friends key='friendsPage'/>}/>
                     {/* <Route path="/Friends/:id" exact render={({ match }) => <Friends match={match} key='friendsPage'/>}/> */}
                     <Footer />
-                    {/* <div id='footer'>
-                        <Footer />
-                    </div> */}
                 </div>
             </Router>
         )
