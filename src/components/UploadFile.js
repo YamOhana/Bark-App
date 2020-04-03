@@ -12,16 +12,16 @@ const UploadFile = inject("MainStore", "InputStore")(observer((props) => {
 
     const handleChange = (e) => {
         const newImage = e.target.files[0]
-        
+
         if (newImage) {
             handleUpload(newImage)
             setImage(newImage)
         }
-        
+
     }
     const handleUpload = img => {
         console.log(img);
-        
+
         const uploadTask = storage.ref(`images/${img.name}`).put(img)
         uploadTask.on('state_changed',
             (snapshot) => {
@@ -38,13 +38,14 @@ const UploadFile = inject("MainStore", "InputStore")(observer((props) => {
             })
     }
 
+    // console.log(uploadProgress) && `${Math.floor(uploadProgress)} %`
     return (
         <div>
 
-            <input type="file" onChange={handleChange}  name='newImage' />
-            {/* <progress value={uploadProgress} max="100" /> */}
-            {/* <img src={url || 'http://via.placeholder.com/400x300'} alt="Upload Image" height="300" width="400"></img> */}
-            
+            <input type="file" onChange={handleChange} name='newImage' />
+            {(uploadProgress < 100 && uploadProgress > 0) ? (<progress value={uploadProgress} max="100" />) : null}
+            {/* <img src={url || null} alt="Upload Image" height="300" width="400"></img> */}
+
         </div>
     )
 }))
