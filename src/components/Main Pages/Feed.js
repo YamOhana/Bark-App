@@ -70,6 +70,7 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
         setComment("")
         props.InputStore.handleInput('commentPictures',[])
         props.InputStore.handleInput('comment','')
+
     }
 
     return (
@@ -78,6 +79,8 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
             <form className={classes.root} noValidate autoComplete='off'>
                 <TextField id="comment" value={comment} name="comment" onChange={inputHandler} label="What's on your mind?" variant="outlined" />
                 <UploadFile imagesInputName='commentPictures' />
+                {props.InputStore.commentPictures.length ? <img src={props.InputStore.commentPictures || null} alt="Upload Image" height="300" width="400"></img> : null}
+
                 <AddComment onClick={addPost} />
             </form>
             <br></br>
