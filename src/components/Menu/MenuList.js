@@ -11,8 +11,7 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import Friends from '@material-ui/icons/PersonAdd'
 import Map from '@material-ui/icons/Map'
 import { Link } from 'react-router-dom';
-
-// import fire from '../Fire';
+import ChatIcon from '@material-ui/icons/Chat'
 
 
 
@@ -51,6 +50,14 @@ export const FolderListItems = ({ user }) => {
           <Friends />
         </ListItemIcon>
         <ListItemText primary="Friends" />
+      </ListItem>
+    </Link>
+    <Link to='/Chat'>
+      <ListItem button>
+        <ListItemIcon>
+          <ChatIcon />
+        </ListItemIcon>
+        <ListItemText primary="Chat" />
       </ListItem>
     </Link>
     <Link to='/Maps'>
