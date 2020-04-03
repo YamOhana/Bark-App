@@ -44,8 +44,8 @@ export class Inputs {
     @action handleInput = (name, val) => {
         this[name] = val
         // if(name === "address" || name === "park") {
-        //     console.log(name);
-        //     console.log(val);
+        //     console.log(name)
+        //     console.log(val)
         // }
     }
 

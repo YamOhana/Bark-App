@@ -116,7 +116,7 @@ const Dog = inject("MainStore")(observer((props) => {
                 />
                 <CardMedia
                     className={classes.media}
-                    image={props.d.images || props.d.image}
+                    image={props.d.images ? props.d.images[0] : props.d.image}
                     title={props.d.dogName}
                       />
                 <CardContent>
