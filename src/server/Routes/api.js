@@ -43,6 +43,7 @@ router.post('/user', (req, res) => {
         smoker: req.body.smoker,
         phoneNum: req.body.phoneNum,
         address: req.body.address,
+        homeCoord: req.body.homeCoord,
         gender: req.body.gender,
         hours: req.body.hours,
         images: req.body.images,

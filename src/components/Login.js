@@ -5,6 +5,8 @@ import AddDog from './Handlers/AddDog';
 import axios from 'axios';
 import '../styles/Login.css'
 import { inject } from 'mobx-react'
+const opencage = require('opencage-api-client');
+
 
 
 @inject('InputStore')
@@ -51,6 +53,9 @@ class Login extends Component {
                 case "userImages":
                     val = prompt(`You forgot to put your image`)
                     return val
+                case "address":
+                    val = prompt(`You forgot to put your Address`)
+                    return val
                 case "smoker":
                     return false
                 case "hours":
@@ -71,12 +76,42 @@ class Login extends Component {
             }
         }
         return this.props.InputStore[field]
-    }
+    };
+
+    async getCoordinates(stringAddress) {
+        console.log(stringAddress)
+        try {
+            const location = await opencage.geocode({q: stringAddress, key: '566a660cd08e4cdabc79d2abc4369dd6'})
+            if (location.status.code == 200) {
+                if (location.results.length > 0) {
+                    const place = location.results[0];
+                    console.log(place.formatted);
+                    console.log(place.geometry);
+                    return place.geometry
+                }
+            } else if (location.status.code == 402) {
+                console.log('hit free-trial daily limit');
+                return null
+            } else {
+                console.log('error', location.status.message);
+                return null
+            }
+            
+        } catch (error) {
+            console.log('error', error.message);
+            return null
+        }
+
+    } 
+
+    
 
     signup(e) {
         e.preventDefault();
 
-        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+        fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(async (u) => {
+            
+            
             let newUser = {
                 userId: u.user.uid,
                 email: this.state.email,
@@ -85,6 +120,7 @@ class Login extends Component {
                 birthDate: this.checkField('birthDate'),
                 phoneNum: this.checkField('phoneNum'),
                 address: this.checkField('address'),
+                homeCoord: await this.getCoordinates(this.checkField('address')),
                 gender: this.checkField('gender'),
                 smoker: this.checkField('smoker'),
                 hours: this.checkField('hours'),
@@ -93,6 +129,7 @@ class Login extends Component {
                     dogName: this.checkField('dogName'),
                     dogGender: this.checkField('dogGender'),
                     park: this.checkField('park'),
+                    parkCoord: await this.getCoordinates(this.checkField('park')),
                     vaccinated: this.checkField('vaccinated'),
                     neutered: this.checkField('neutered'),
                     images: this.checkField('dogImages'),
@@ -104,8 +141,6 @@ class Login extends Component {
                     dominant: this.checkField('dominant')
                 }
             }
-            console.log(this.props.InputStore.gender);
-            console.log(newUser.gender);
 
 
             axios.post('http://localhost:3001/user', newUser).then(res => {

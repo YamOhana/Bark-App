@@ -154,7 +154,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
 
         <label htmlFor="address">Address:</label>
         {/* <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input> */}
-        <AdressInput call={"address"} input={props.InputStore.address}/>
+        <AdressInput call={'address'} input={props.InputStore.address}/>
         <br></br>
 
         <label htmlFor="smoker">Smoking?</label>
