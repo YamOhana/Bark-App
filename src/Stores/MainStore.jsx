@@ -12,13 +12,14 @@ export class MainStore {
     @observable userIndex
     @observable posts = []
     @observable filters = { 
-        age: 'none', 
-        size: 'none',
-        nature: 'none'
+        age: null, 
+        size: null,
+        nature: null,
+        range: 100
     }
     
     @computed get isFiltering() {
-        if(this.filters. age === 'none' && this.filters.nature === 'none' && this.filters.size === 'none') {
+        if(this.filters.age === null && this.filters.nature === null && this.filters.size === null && this.filters.range === 100 ) {
             return 0
         } 
         return 1
@@ -83,17 +84,36 @@ export class MainStore {
     @action updateFilters = (filterType, val) => this.filters[filterType] = val
 
     @action filterAge = (owner, term) => {
-        const range = term.split("-")
+        const ageRange = term.split("-")
         const dogAge = this.calculateAge(owner.dogs[0].dogBirthDate)
-        if(dogAge[0] === 0 && range[0] == "0.5") {
+        if(!dogAge) { return 0}
+        if(dogAge[0] === 0 && ageRange[0] == "0.5") {
             if(dogAge[1] > 5) {
                 return 1
             }
         }
-        if(dogAge[0] >= parseInt(range[0]) && dogAge[0] <= parseInt(range[1])) {
+        if(dogAge[0] >= parseInt(ageRange[0]) && dogAge[0] <= parseInt(ageRange[1])) {
             return 1
         }
         return 0
+    }
+    
+    @action filterRange = (owner, term) => {
+        if(term === 100) { return 1}
+        if(!owner.homeCoord) {
+            return 0
+        } else {
+            const userCord = this.owners[this.userIndex].homeCoord
+            const dist = this.calculateDistance(userCord.lat, userCord.lng, owner.homeCoord.lat, owner.homeCoord.lng)
+            if(dist === null) {
+                console.log(`dist is undefined ${dist}`);
+                return 0
+            } else if(dist <= term) {
+                return 1
+            } else {
+                return 0
+            }
+        }
     }
 
     @action filterSize = (owner, term) => {
@@ -115,17 +135,31 @@ export class MainStore {
         for(let owner of this.owners) {
             let control = 0
             let filterCheck = 0
-            if(this.filters.age !== 'none') {
+            if(this.filters.age) {
                 control++
                 filterCheck += this.filterAge(owner, this.filters.age)
             }
-            if(this.filters.size !== 'none') {
+            if(this.filters.size) {
                 control++
                 filterCheck += this.filterSize(owner, this.filters.size)
             }
-            if(this.filters.nature !== 'none') {
+            if(this.filters.nature) {
                 control++
                 filterCheck += this.filterNature(owner, this.filters.nature)
+            }
+            if(this.filters.range) {
+                // console.log(this.filters.range)
+                if(this.filters.range === 100) {
+                    control++
+                    filterCheck++
+                } else {
+                    control++
+                    if(!this.owners[this.userIndex].homeCoord) {
+                        filterCheck++
+                    } else {
+                        filterCheck += this.filterRange(owner, this.filters.range)
+                    }
+                }
             }
             if(control === filterCheck) {
                 newOwners.push(owner)
@@ -135,6 +169,10 @@ export class MainStore {
     }
 
     @action calculateAge = birthday => {
+        if(!birthday) {
+            console.log(`birthday is null ${birthday}`);
+            return null
+        }
         const today = new Date()
         const todayYear = today.getFullYear()
         const todayMonth = today.getMonth() + 1
@@ -165,5 +203,27 @@ export class MainStore {
             }
         }
         return myFriends
+    }
+
+    @action calculateDistance = (lat1, lng1, lat2, lng2) => {
+        if(lat1 == undefined || lat2 == undefined || lng1 == undefined || lng2 == undefined) { return null}
+        if ((lat1 == lat2) && (lng1 == lng2)) {
+            return 0;
+        }
+        else {
+            const radlat1 = Math.PI * lat1/180;
+            const radlat2 = Math.PI * lat2/180;
+            const theta = lng1-lng2;
+            const radtheta = Math.PI * theta/180;
+            let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344 
+            return dist;
+        }
     }
 }

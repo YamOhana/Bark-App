@@ -6,7 +6,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
-import Slider from './Slider'
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -16,22 +17,59 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  root: {
+    width: 200,
+  },
+  margin: {
+    height: theme.spacing(3),
+  },
   sliderControl: {
     margin: theme.spacing(1),
     width: 200,
   }
 }));
 
+const marks = [
+    {
+      value: 0,
+      label: '0',
+    },
+    {
+      value: 20,
+      label: '1k',
+    },
+    {
+      value: 40,
+      label: '2k',
+    },
+    {
+      value: 60,
+      label: '3k',
+    },
+    {
+      value: 80,
+      label: '4k',
+    },
+    {
+      value: 100,
+      label: '5k',
+    },
+];
+
 const NativeSelects = inject("MainStore", "InputStore")(observer((props) => { 
     const classes = useStyles();
     const [state, setState] = React.useState({
-        age: '',
-        size: '',
-        nature: ''
+        age: props.MainStore.filters.age,
+        size: props.MainStore.filters.size,
+        nature: props.MainStore.filters.nature,
+        range: props.InputStore.range
     });
 
     const handleChange = (event) => {
         const name = event.target.name;
+        if(name == 'range') {
+            console.log(event.target.value)
+        }
         props.MainStore.updateFilters(event.target.name, event.target.value)
         setState({
             ...state,
@@ -39,6 +77,15 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
         });
         props.MainStore.filterOwners()
     };
+    const valuetext = val => {
+        console.log(val)
+        props.MainStore.updateFilters('range', val)
+        // const target = {name: 'range', value: val}
+        // const eve = { target }
+        // console.log(eve)
+        // handleChange(eve)
+        return `${val}`;
+    }
 
 
     return (
@@ -55,8 +102,8 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             id: 'age-native-simple',
             }}
             >
-            <option aria-label="None" value="" />
-            <option value={'none'}>None</option>
+            <option aria-label="None" value={null} />
+            {/* <option value={null}>None</option> */}
             <option value={'0.5-4'}>0.5-4</option>
             <option value={'5-10'}>5-10</option>
             <option value={'11-15'}>11-15</option>
@@ -75,8 +122,8 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             id: 'size-native-helper',
             }}
             >
-            <option aria-label="None" value="" />
-            <option value={'none'}>None</option>
+            <option aria-label="None" value={null} />
+            {/* <option value={null}>None</option> */}
             <option value={'small'}>Small</option>
             <option value={'medium'}>Medium</option>
             <option value={'large'}>Large</option>
@@ -95,8 +142,8 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             id: 'nature-native-helper',
             }}
             >
-            <option aria-label="None" value="" />
-            <option value={'none'}>None</option>
+            <option aria-label="None" value={null} />
+            {/* <option value={null}>None</option> */}
             <option value={'shy'}>Shy</option>
             <option value={'energetic'}>Energetic</option>
             <option value={'dominant'}>Dominant</option>
@@ -106,7 +153,21 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
 
         <FormControl className={classes.sliderControl}>
         {/* <InputLabel htmlFor="size-native-helper">Range</InputLabel> */}
-            <Slider />
+            <Slider
+            className={classes.root}
+            value={state.range}
+            defaultValue={100}
+            getAriaValueText={valuetext}
+            aria-labelledby="discrete-slider-always"
+            step={1}
+            name='range'
+            marks={marks}
+            // onChange={handleChange}
+            valueLabelDisplay="onClick"
+            />
+            <Typography id="discrete-slider-always" gutterBottom>
+                    Range
+            </Typography>
         {/* <FormHelperText>Some important helper text</FormHelperText> */}
         </FormControl>
 
