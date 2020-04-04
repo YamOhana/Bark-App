@@ -15,11 +15,11 @@ export class MainStore {
         age: null, 
         size: null,
         nature: null,
-        range: null
+        range: 100
     }
-    // && this.filters.range === null 
+    
     @computed get isFiltering() {
-        if(this.filters.age === null && this.filters.nature === null && this.filters.size === null) {
+        if(this.filters.age === null && this.filters.nature === null && this.filters.size === null && this.filters.range === 100 ) {
             return 0
         } 
         return 1
@@ -97,6 +97,24 @@ export class MainStore {
         }
         return 0
     }
+    
+    @action filterRange = (owner, term) => {
+        if(term === 100) { return 1}
+        if(!owner.homeCoord) {
+            return 0
+        } else {
+            const userCord = this.owners[this.userIndex].homeCoord
+            const dist = this.calculateDistance(userCord.lat, userCord.lng, owner.homeCoord.lat, owner.homeCoord.lng)
+            if(dist === null) {
+                console.log(`dist is undefined ${dist}`);
+                return 0
+            } else if(dist <= term) {
+                return 1
+            } else {
+                return 0
+            }
+        }
+    }
 
     @action filterSize = (owner, term) => {
         if(owner.dogs[0].size === term) {
@@ -128,6 +146,20 @@ export class MainStore {
             if(this.filters.nature) {
                 control++
                 filterCheck += this.filterNature(owner, this.filters.nature)
+            }
+            if(this.filters.range) {
+                // console.log(this.filters.range)
+                if(this.filters.range === 100) {
+                    control++
+                    filterCheck++
+                } else {
+                    control++
+                    if(!this.owners[this.userIndex].homeCoord) {
+                        filterCheck++
+                    } else {
+                        filterCheck += this.filterRange(owner, this.filters.range)
+                    }
+                }
             }
             if(control === filterCheck) {
                 newOwners.push(owner)
@@ -174,6 +206,7 @@ export class MainStore {
     }
 
     @action calculateDistance = (lat1, lng1, lat2, lng2) => {
+        if(lat1 == undefined || lat2 == undefined || lng1 == undefined || lng2 == undefined) { return null}
         if ((lat1 == lat2) && (lng1 == lng2)) {
             return 0;
         }

@@ -55,11 +55,6 @@ const marks = [
       label: '5k',
     },
 ];
-  
-function valuetext(value) {
-    console.log(value)
-    return `${value}`;
-}
 
 const NativeSelects = inject("MainStore", "InputStore")(observer((props) => { 
     const classes = useStyles();
@@ -72,9 +67,9 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
 
     const handleChange = (event) => {
         const name = event.target.name;
-        // if(name == 'range') {
-        //     console.log(event.target.value)
-        // }
+        if(name == 'range') {
+            console.log(event.target.value)
+        }
         props.MainStore.updateFilters(event.target.name, event.target.value)
         setState({
             ...state,
@@ -82,6 +77,15 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
         });
         props.MainStore.filterOwners()
     };
+    const valuetext = val => {
+        console.log(val)
+        props.MainStore.updateFilters('range', val)
+        // const target = {name: 'range', value: val}
+        // const eve = { target }
+        // console.log(eve)
+        // handleChange(eve)
+        return `${val}`;
+    }
 
 
     return (
@@ -152,13 +156,13 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             <Slider
             className={classes.root}
             value={state.range}
-            defaultValue={50}
+            defaultValue={100}
             getAriaValueText={valuetext}
             aria-labelledby="discrete-slider-always"
             step={1}
             name='range'
             marks={marks}
-            onChange={handleChange}
+            // onChange={handleChange}
             valueLabelDisplay="onClick"
             />
             <Typography id="discrete-slider-always" gutterBottom>
