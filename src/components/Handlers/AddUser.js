@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import AddHour from './addHour';
-
 import AdressInput from '../Map'
-
-
+import 'date-fns';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -21,7 +19,12 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
 import UploadFile from '../UploadFile';
-
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 
 
@@ -122,6 +125,21 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
             <br></br>
         </Grid>
 
+        <Grid item xs={12} sm={6}>
+
+        <AdressInput
+        variant="outlined"
+        required
+        fullWidth
+        label="Address"
+        autoFocus
+       call={'address'} input={props.InputStore.address}/>
+        {/* <label htmlFor="address">Address:</label>
+        {/* <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input> */}
+        {/* <AdressInput call={'address'} input={props.InputStore.address}/> */} 
+
+        <br></br>
+        </Grid>
 
         <UploadFile imagesInputName='userImages' />
 
@@ -137,13 +155,31 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         </Grid>
      
 
-      
-    <Grid>
-    <label htmlFor="birthDate">Date of Birth:</label>
-        <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
-        <br></br>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
 
+    <Grid container justify="space-around">
+
+      <KeyboardDatePicker
+      disableToolbar
+      variant="inline"
+      format="dd/MM/yyyy"
+      margin="normal"
+      id="birthDate"
+      label="Birthday"
+      value={birthDate}
+      onChange={inputHandler}
+      KeyboardButtonProps={{
+        'aria-label': 'change date'
+      }}
+      />
+<br></br>
     </Grid>
+      </MuiPickersUtilsProvider>
+
+    {/* <label htmlFor="birthDate">Date of Birth:</label>
+        <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
+      <br></br> */}
+    
         {/* <label htmlFor="birthDate">Date of Birth:</label>
         <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
         <br></br> */}
@@ -152,10 +188,6 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         <input type="text" id="phoneNum" value={phoneNum} name="phoneNum" onChange={inputHandler}></input>
         <br></br>
 
-        <label htmlFor="address">Address:</label>
-        {/* <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input> */}
-        <AdressInput call={'address'} input={props.InputStore.address}/>
-        <br></br>
 
         <label htmlFor="smoker">Smoking?</label>
         <input type="checkbox" id="smoker" value={smoker} name="smoker" onChange={inputHandler}></input>

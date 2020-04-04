@@ -5,7 +5,38 @@ import AddDog from './Handlers/AddDog';
 import axios from 'axios';
 import '../styles/Login.css'
 import { inject } from 'mobx-react'
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+
+import Button from '@material-ui/core/Button';
+
 const opencage = require('opencage-api-client');
+
+
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+        marginTop: theme.spacing(8),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(3),
+    },
+    submit: {
+        margin: theme.spacing(3, 0, 2),
+    },
+}));
+
+
 
 
 
@@ -22,6 +53,8 @@ class Login extends Component {
             signOrLog: true
         };
     }
+
+
 
     handleChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -81,7 +114,7 @@ class Login extends Component {
     async getCoordinates(stringAddress) {
         console.log(stringAddress)
         try {
-            const location = await opencage.geocode({q: stringAddress, key: '566a660cd08e4cdabc79d2abc4369dd6'})
+            const location = await opencage.geocode({ q: stringAddress, key: '566a660cd08e4cdabc79d2abc4369dd6' })
             if (location.status.code == 200) {
                 if (location.results.length > 0) {
                     const place = location.results[0];
@@ -96,22 +129,22 @@ class Login extends Component {
                 console.log('error', location.status.message);
                 return null
             }
-            
+
         } catch (error) {
             console.log('error', error.message);
             return null
         }
 
-    } 
+    }
 
-    
+
 
     signup(e) {
         e.preventDefault();
 
         fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then(async (u) => {
-            
-            
+
+
             let newUser = {
                 userId: u.user.uid,
                 email: this.state.email,
@@ -154,7 +187,33 @@ class Login extends Component {
             })
     }
 
+
+
+
+    useStyles = makeStyles((theme) => ({
+        paper: {
+            marginTop: theme.spacing(8),
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+        },
+        avatar: {
+            margin: theme.spacing(1),
+            backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+            width: '100%', // Fix IE 11 issue.
+            marginTop: theme.spacing(3),
+        },
+        submit: {
+            margin: theme.spacing(3, 0, 2),
+        },
+    }));
+
+
+
     render() {
+
         return (
 
             <div className="col-md-6">
@@ -162,15 +221,51 @@ class Login extends Component {
                 <button onClick={() => { this.setState({ signOrLog: false }) }} style={{ marginLeft: '25px' }} className="chooseSign">Signup</button>
                 <div>
 
-                    <div className="form-group1">
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                id="exampleInputEmail1"
+                                name="email"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                label="Email"
+                                autoFocus
+                                value={this.state.email}
+                                onChange={this.handleChange}
+                            />
+                            <br></br>
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2} >
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                id="exampleInputPassword1"
+                                name="password"
+                                variant="outlined"
+                                required
+                                fullWidth
+                                label="Password"
+                                autoFocus
+                                value={this.state.password}
+                                onChange={this.handleChange}
+                            />
+                            <br></br>
+
+                        </Grid>
+
+
+                    </Grid>
+                    {/* <div className="form-group">
                         <label htmlFor="exampleInputEmail1">Email address</label>
                         <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div className="form-group2">
+                    </div> */}
+                    {/* <div className="form-group">
                         <label htmlFor="exampleInputPassword1">Password</label>
                         <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-                    </div>
+                    </div> */}
                     {this.state.signOrLog ? <button type="submit" onClick={this.login} className="btn btn-primary">Send</button> :
                         <div>
                             <AddUser />
@@ -182,6 +277,7 @@ class Login extends Component {
                 </div>
 
             </div>
+
         );
     }
 }

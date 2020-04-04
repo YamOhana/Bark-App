@@ -1,7 +1,13 @@
 import React, { Component, Profiler } from 'react'
 import firebase from 'firebase';
 import { TextField, List, ListItem, ListItemText } from "@material-ui/core"
+import Grid from '@material-ui/core/Grid'
+import { observer, inject } from 'mobx-react'
 
+
+
+
+@inject("MainStore")
 
 class Chat extends Component{
 
@@ -63,6 +69,13 @@ class Chat extends Component{
       render() {
         return (
           <div className="App">
+
+<Grid>
+
+
+
+</Grid>
+
             <List>{this.renderMessages()}</List>
             <TextField
               autoFocus={true}

@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Grid from '@material-ui/core/Grid'
 import clsx from 'clsx';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -176,17 +177,19 @@ const Dog = inject("MainStore")(observer((props) => {
                 </CardActions>
                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                     <CardContent>
-                        <Typography paragraph>More Information:</Typography>
+                        <Typography paragraph>Additional Information:</Typography>
                         <Typography paragraph>
 
-
+                            <Grid>
                             I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated <br></br>
+                            </Grid>
                             I'm {props.d.neutered ? null : 'NOT!'} Neutered <br></br>
                             I'm {props.d.shy ? null : 'NOT!'} Shy <br></br>
                             I'm {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
                             I'm {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
                             I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years 
                             and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
+
                             
 
 
