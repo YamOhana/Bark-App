@@ -41,6 +41,12 @@ export class Inputs {
     //upload image
     @observable newImage
 
+    // Filters
+    @observable range
+    // @observable natureFilter
+    // @observable ageFilter
+    // @observable sizeFilter
+
     @action handleInput = (name, val) => {
         this[name] = val
         // if(name === "address" || name === "park") {
