@@ -78,12 +78,8 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
         props.MainStore.filterOwners()
     };
     const valuetext = val => {
-        console.log(val)
+        // console.log(val)
         props.MainStore.updateFilters('range', val)
-        // const target = {name: 'range', value: val}
-        // const eve = { target }
-        // console.log(eve)
-        // handleChange(eve)
         return `${val}`;
     }
 
@@ -162,7 +158,7 @@ const NativeSelects = inject("MainStore", "InputStore")(observer((props) => {
             step={1}
             name='range'
             marks={marks}
-            // onChange={handleChange}
+            onChange={handleChange}
             valueLabelDisplay="onClick"
             />
             <Typography id="discrete-slider-always" gutterBottom>

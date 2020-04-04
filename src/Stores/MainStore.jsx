@@ -19,8 +19,9 @@ export class MainStore {
     }
     
     @computed get isFiltering() {
-        if(this.filters.age === null && this.filters.nature === null && this.filters.size === null && this.filters.range === 100 ) {
-            return 0
+        if(!this.filters.age && !this.filters.nature && !this.filters.size && this.filters.range == 100 ) {
+            // console.log(this.filters.range)
+            return false
         } 
         return 1
     }
@@ -82,6 +83,8 @@ export class MainStore {
     }
 
     @action updateFilters = (filterType, val) => this.filters[filterType] = val
+       
+    
 
     @action filterAge = (owner, term) => {
         const ageRange = term.split("-")
@@ -108,9 +111,13 @@ export class MainStore {
             if(dist === null) {
                 console.log(`dist is undefined ${dist}`);
                 return 0
-            } else if(dist <= term) {
+            } else if(dist <= term / 20) {
+                // console.log(dist)
+                // console.log(term /20)
                 return 1
             } else {
+                // console.log(dist)
+                // console.log(term /20)
                 return 0
             }
         }
@@ -148,11 +155,10 @@ export class MainStore {
                 filterCheck += this.filterNature(owner, this.filters.nature)
             }
             if(this.filters.range) {
-                // console.log(this.filters.range)
-                if(this.filters.range === 100) {
+                if(this.filters.range >= 100) {
                     control++
-                    filterCheck++
-                } else {
+                    filterCheck++ 
+                } else if(this.filters.range >= 0) {
                     control++
                     if(!this.owners[this.userIndex].homeCoord) {
                         filterCheck++

@@ -11,11 +11,15 @@ const Dogs = inject("MainStore")(observer((props) => {
             Im Dogs
             { props.MainStore.isFiltering ?
             props.MainStore.filteredOwners.map(o => {
+                // console.log(`filtering!!!!!!!`)
+                // console.log(props.MainStore.filters.range)
                 return o.dogs.map(d => <Dog d={d} o={o} />)
             }) :
 
             props.MainStore.owners.map(o => {
-                    return o.dogs.map(d => <Dog d={d} o={o} />)
+                // console.log(`not filtering`)
+                // console.log(props.MainStore.filters.range)
+                return o.dogs.map(d => <Dog d={d} o={o} />)
             })
             }
         </div>
