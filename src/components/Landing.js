@@ -34,17 +34,17 @@ class Landing extends Component {
     }
 
     getUsers = async () => {
-        return await axios.get('http://localhost:3001/users')
+        return await axios.get(`https://bark-hackathon.firebaseapp.com/users` || `http://localhost:3001/users`)
     }
     getCurrentUser = async () => {
         const curUser = await fire.auth().currentUser
         if (curUser) {
-            return await axios.get(`http://localhost:3001/user/${curUser.uid}`)
+            return await axios.get(`https://bark-hackathon.firebaseapp.com/user/${curUser.uid}` || `http://localhost:3001/user/${curUser.uid}`)
         }
     }
 
     getPosts = async () => {
-        return await axios.get('http://localhost:3001/posts')
+        return await axios.get(`https://bark-hackathon.firebaseapp.com/posts` || 'http://localhost:3001/posts')
     }
 
     logout() {

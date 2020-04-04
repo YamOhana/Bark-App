@@ -29,7 +29,7 @@ const Walk = inject("MainStore", "InputStore")(observer((props) => {
   const handleChange = async () => {
     props.InputStore.handleInput("onwalk", !onwalk)
     props.MainStore.goOnWalk(!onwalk)
-    await axios.put(`http://localhost:3001/walk/${props.MainStore.curUser.id}`, {data: !onwalk})
+    await axios.put(`https://bark-hackathon.firebaseapp.com/walk/${props.MainStore.curUser.id}` || `http://localhost:3001/walk/${props.MainStore.curUser.id}`, {data: !onwalk})
     setOnWalk(!onwalk)
   }
 

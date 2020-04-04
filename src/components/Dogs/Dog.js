@@ -70,13 +70,13 @@ const Dog = inject("MainStore")(observer((props) => {
 
     const addFriend = () => {
         props.MainStore.addFriend(props.o.id)
-        axios.put(`http://localhost:3001/requestFriend/${props.MainStore.curUser.id}/${props.o.id}`)
+        axios.put(`https://bark-hackathon.firebaseapp.com/requestFriend/${props.MainStore.curUser.id}/${props.o.id}` || `http://localhost:3001/requestFriend/${props.MainStore.curUser.id}/${props.o.id}`)
 
     }
 
     const acceptFriend = () => {
         props.MainStore.acceptFriendship(props.o.id)
-        axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
+        axios.put(`https://bark-hackathon.firebaseapp.com/addFriend/${props.MainStore.curUser.id}/${props.o.id}` || `http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
     }
 
     return (

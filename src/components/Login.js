@@ -143,7 +143,7 @@ class Login extends Component {
             }
 
 
-            axios.post('http://localhost:3001/user', newUser).then(res => {
+            axios.post(`https://bark-hackathon.firebaseapp.com/user` || 'http://localhost:3001/user', newUser).then(res => {
                 // this.props.clients.updateList(res.data)
             })
 

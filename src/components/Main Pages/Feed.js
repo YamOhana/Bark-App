@@ -62,7 +62,7 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
 
         console.log(post);
         
-        axios.post('http://localhost:3001/post', post)
+        axios.post(`https://bark-hackathon.firebaseapp.com/post` || 'http://localhost:3001/post', post)
             .then(res => {
                 console.log(`post sent`)
             })
