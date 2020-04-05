@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { observer } from 'mobx-react'
 import fire from './Fire';
-import Login from './components/Login';
+import Login from './components/Login/Login';
+import Signup from './components/Login/Singup'
 import Landing from './components/Landing';
 
 

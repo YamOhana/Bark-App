@@ -1,25 +1,24 @@
 import React, { Component } from 'react';
-import fire from '../Fire';
-import AddUser from './Handlers/AddUser';
-import AddDog from './Handlers/AddDog';
+import fire from '../../Fire';
+import AddUser from '../Handlers/AddUser';
+import AddDog from '../Handlers/AddDog';
 import axios from 'axios';
-import '../styles/Login.css'
+import '../../styles/Login.css'
 import { inject } from 'mobx-react'
 const opencage = require('opencage-api-client');
 
 
 
 @inject('InputStore')
-class Login extends Component {
+class Singup extends Component {
     constructor(props) {
         super(props);
-        this.login = this.login.bind(this);
+        // this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.signup = this.signup.bind(this);
         this.state = {
             email: '',
-            password: '',
-            signOrLog: true
+            password: ''
         };
     }
 
@@ -27,13 +26,14 @@ class Login extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    login(e) {
-        e.preventDefault();
-        fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-        }).catch((error) => {
-            console.log(error);
-        });
-    }
+    // login(e) {
+    //     e.preventDefault();
+    //     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
+    //     }).catch((error) => {
+    //         console.log(error);
+    //     });
+    // }
+
     checkField(field) {
         if (this.props.InputStore[field] == undefined) {
             let val = ""
@@ -158,8 +158,9 @@ class Login extends Component {
         return (
 
             <div className="col-md-6">
-                <button onClick={() => { this.setState({ signOrLog: true }) }} className="chooseLog">Login</button>
-                <button onClick={() => { this.setState({ signOrLog: false }) }} style={{ marginLeft: '25px' }} className="chooseSign">Signup</button>
+                {/* <button onClick={() => { this.setState({ signOrLog: true }) }} className="chooseLog">Login</button>
+                <button onClick={() => { this.setState({ signOrLog: false }) }} style={{ marginLeft: '25px' }} className="chooseSign">Signup</button> */}
+                
                 <div>
 
                     <div className="form-group1">
@@ -171,18 +172,18 @@ class Login extends Component {
                         <label htmlFor="exampleInputPassword1">Password</label>
                         <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
                     </div>
-                    {this.state.signOrLog ? <button type="submit" onClick={this.login} className="btn btn-primary">Send</button> :
-                        <div>
-                            <AddUser />
-                            <div><b>Dog details:</b></div>
-                            <AddDog />
-                            <button onClick={this.signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button>
-                        </div>
-                    }
+                    
+                    <div>
+                        <AddUser />
+                        <div><b>Dog details:</b></div>
+                        <AddDog />
+                        <button onClick={this.signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button>
+                    </div>
+                    
                 </div>
 
             </div>
         );
     }
 }
-export default Login;
+export default Singup;
