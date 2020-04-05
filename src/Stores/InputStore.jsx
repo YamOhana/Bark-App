@@ -15,9 +15,7 @@ export class Inputs {
     @observable smoker
     @observable hours = []
     @observable userImages = []
-    //chat
-    @observable chat_count = 0
-    @observable new_messages = 0
+   
 
 
     //dog
