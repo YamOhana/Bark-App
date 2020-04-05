@@ -17,9 +17,9 @@ const fire = firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
 
 //for chat
-firebase.firestore().settings({
-    timestampsInSnapshots: true
-})
+// firebase.firestore().settings({
+//     timestampsInSnapshots: true
+// })
 
 
 export default fire

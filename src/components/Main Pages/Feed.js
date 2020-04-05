@@ -3,12 +3,9 @@ import { observer, inject } from 'mobx-react'
 import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import AddComment from '@material-ui/icons/AddCircleOutline'
-import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import UploadFile from '../UploadFile';
+import Post from './Post'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -20,24 +17,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
-const useStylesComment = makeStyles((theme) => ({
-    rooter: {
-        flexGrow: 1,
-        overflow: 'hidden',
-        padding: theme.spacing(0, 3),
-    },
-    paper: {
-        maxWidth: 400,
-        margin: `${theme.spacing(1)}px auto`,
-        padding: theme.spacing(2),
-    },
-}));
-
-
 const Feed = inject("MainStore", "InputStore")(observer((props) => {
 
-    const commentClasses = useStylesComment()
     const classes = useStyles();
     const [comment, setComment] = useState(props.InputStore.comment)
 
@@ -94,27 +75,7 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
                 ).map(p => {
                     const sender = props.MainStore.owners.find(o => o.id === p.senderId)
                     return (
-
-                        <div>
-
-                            {/* <div className={commentClasses.rooter}>
-                            <Paper className={commentClasses.paper}>
-                                <Grid container wrap="nowrap" spacing={2}>
-                                    <Grid item>
-                                        <Avatar>W</Avatar>
-                                    </Grid>
-                                    <Grid item xs>
-                                        <Typography>{p.time}</Typography>
-                                        <Typography>{sender.firstName}</Typography>
-                                        <Typography>{p.comment}</Typography>
-                                    </Grid>
-                                </Grid>
-                            </Paper>
-                        </div> */}
-
-
-                            <span>{p.comment}</span>
-                        </div>
+                        <Post p={p} sender={sender} />
                     )
                 })}
             </div>
