@@ -15,6 +15,9 @@ export class Inputs {
     @observable smoker
     @observable hours = []
     @observable userImages = []
+    //chat
+    @observable chat_count = 0
+    @observable new_messages = 0
 
 
     //dog
@@ -46,6 +49,8 @@ export class Inputs {
     // @observable natureFilter
     // @observable ageFilter
     // @observable sizeFilter
+
+    
 
     @action handleInput = (name, val) => {
         this[name] = val
