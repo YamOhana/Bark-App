@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import AddHour from './addHour';
-
 import AdressInput from '../Map'
-
-
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -22,9 +19,21 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
 import UploadFile from '../UploadFile';
 
-
-
-
+const genders = [
+  {
+    value: 'male',
+    label: 'Male',
+  },
+  {
+    value: 'female',
+    label: 'Female',
+  },
+  {
+    value: 'other',
+    label: 'Other',
+  },
+  
+];
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -43,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      // width: '100%',
     },
   }));
 
@@ -88,11 +102,10 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     }
         
     return (
-        <div className={classes.paper}>
-<form className={classes.form} noValidate>
-
-        <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
+      
+        <Grid container marginBottom={5} spacing={2}>
+        
+          <Grid item xs={12} sm={6}>
             <TextField
             id="firstName"
             name="firstName"
@@ -104,69 +117,138 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
             value={firstName}
             onChange={inputHandler} 
             />
-            <br></br>
+          </Grid>
 
-        </Grid>
-        <Grid item xs={12} sm={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
-            id="lastName"
-            name="lastName"
-            variant="outlined"
-            required
-            fullWidth
-            label="Last Name"
-            autoFocus
-            value={lastName}
-            onChange={inputHandler} 
+              id="lastName"
+              name="lastName"
+              variant="outlined"
+              required
+              fullWidth
+              label="Last Name"
+              autoFocus
+              value={lastName}
+              onChange={inputHandler} 
             />
-            <br></br>
-        </Grid>
+          </Grid>
 
+          <Grid item xs={12} sm={6}>
+            <UploadFile imagesInputName='userImages' />
+          </Grid>
 
-        <UploadFile imagesInputName='userImages' />
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="outlined-select-gender"
+              select
+              label="Gender"
+              value={gender}
+              onChange={inputHandler}
+              helperText="Please select your gender"
+              variant="outlined"
+            >
+              {genders.map((option) => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
+          </Grid>
 
-        <Grid>
-        <label htmlFor="gender">Gender:</label>
-        <select type="text" id="gender" value={gender} name="gender" onChange={inputHandler}>
-
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
-        <br></br>
-        </Grid>
-     
-
-      
-    <Grid>
-    <label htmlFor="birthDate">Date of Birth:</label>
-        <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
-        <br></br>
-
-    </Grid>
-        {/* <label htmlFor="birthDate">Date of Birth:</label>
-        <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
-        <br></br> */}
-
-        <label htmlFor="phoneNum">Phone Number:</label>
-        <input type="text" id="phoneNum" value={phoneNum} name="phoneNum" onChange={inputHandler}></input>
-        <br></br>
-
-        <label htmlFor="address">Address:</label>
-        {/* <input type="text" id="address" value={address} name="address" onChange={inputHandler}></input> */}
-        <AdressInput call={'address'} input={props.InputStore.address}/>
-        <br></br>
-
-        <label htmlFor="smoker">Smoking?</label>
-        <input type="checkbox" id="smoker" value={smoker} name="smoker" onChange={inputHandler}></input>
-        <br></br>
-
-        <AddHour />
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="birthDate"
+              label="Birthday"
+              type="date"
+              // defaultValue="2017-05-24"
+              value={birthDate}
+              className={classes.textField}
+              name="birthDate" 
+              onChange={inputHandler}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /> 
+          </Grid>
         
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="phoneNum"
+              value={phoneNum} 
+              name="phoneNum" 
+              onChange={inputHandler}
+              variant="outlined"
+              required
+              fullWidth
+              label="Phone Number"
+              autoFocus
+            />
+          </Grid>
+            
+          <Grid item xs={12} sm={6}>
+            <AdressInput call={'address'} input={props.InputStore.address}/>
+          </Grid>
+          
+          <Grid item xs={12} sm={6}>
+            <FormControlLabel
+                control={<Checkbox value={smoker} name="smoker" onChange={inputHandler} color="primary" />}
+                label="Are you a smoker?"
+            />
+          </Grid>
+          
+          <Grid item xs={12} sm={6}> 
+            <AddHour />
+          </Grid>
+
         </Grid>
-</form>
-    </div>
+
+    
     )
 }))
 
 export default AddUser
+
+
+// <Grid item xs={12} sm={6}>
+//     <TextField
+//         autoComplete="fname"
+//         name="firstName"
+//         variant="outlined"
+//         required
+//         fullWidth
+//         id="firstName"
+//         label="First Name"
+//         // autoFocus
+//     />
+// </Grid>
+
+// <Grid item xs={12} sm={6}>
+//     <TextField
+//         variant="outlined"
+//         required
+//         fullWidth
+//         id="lastName"
+//         label="Last Name"
+//         name="lastName"
+//         autoComplete="lname"
+//     />
+// </Grid> 
+
+{/* <label htmlFor="gender">Gender:</label>
+            <select type="text" id="gender" value={gender} name="gender" onChange={inputHandler}>
+
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <br></br> */}
+            {/* <label htmlFor="birthDate">Date of Birth:</label>
+              <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
+              <br></br> */}
+
+              {/* <label htmlFor="phoneNum">Phone Number:</label>
+            <input type="text" id="phoneNum" value={phoneNum} name="phoneNum" onChange={inputHandler}></input>
+            <br></br> */}
+            {/* <label htmlFor="smoker">Smoking?</label>
+            <input type="checkbox" id="smoker" value={smoker} name="smoker" onChange={inputHandler}></input>
+            <br></br> */}

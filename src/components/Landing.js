@@ -61,7 +61,7 @@ class Landing extends Component {
                     <div id="main-links">
                         <NavbarLeftMenu logout={this.logout}/>
                     </div>
-
+                    {/* <NavbarLeftMenu logout={this.logout}/> */}
                     <Route path="/" exact render={() => <Home key='homePage' logout={this.logout}/>}/>
                     <Route path="/Feed" exact render={() => <Feed key='feedPage'/>}/>
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>

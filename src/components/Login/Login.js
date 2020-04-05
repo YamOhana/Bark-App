@@ -62,7 +62,7 @@ const Login = inject("MainStore")(observer((props) => {
     const [password, setPassword] = useState('')
     const [singORlog, setSing] = useState(true)
 
-    const handleChanges = (e) => {
+    const handleChange = (e) => {
         e.target.name === "email" ?
         setEmail(e.target.value) :
         setPassword(e.target.value)
@@ -102,7 +102,7 @@ const Login = inject("MainStore")(observer((props) => {
                     name="email"
                     value={email}
                     type="email"
-                    onChange={handleChanges}
+                    onChange={handleChange}
                     autoComplete="email"
                     autoFocus
                     />
@@ -112,7 +112,7 @@ const Login = inject("MainStore")(observer((props) => {
                     required
                     fullWidth
                     value={password}
-                    onChange={handleChanges}
+                    onChange={handleChange}
                     name="password"
                     label="Password"
                     type="password"

@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { observer, inject } from 'mobx-react'
-
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import DeleteForeverOutlinedIcon from '@material-ui/icons/DeleteForeverOutlined';
 
 
 
 const Hour = inject("MainStore", "InputStore")(observer((props) => {
 
-    // const [hour, setHour] = useState(props.time)
-     
     const deleteTime = () => {
         props.delete(props.time)
     }
 
     return (
-        <div>
-            <span>{props.time}</span>
-            <span onClick={deleteTime}>-</span>
-        </div>
+        <Grid>
+            <Typography component="span" variant="h5">
+                {props.time}
+                <DeleteForeverOutlinedIcon onClick={deleteTime}/>
+            </Typography>
+        </Grid>
     )
  }))
 
- export default Hour
+export default Hour
