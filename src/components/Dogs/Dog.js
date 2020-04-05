@@ -23,6 +23,8 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
+import Popover from '@material-ui/core/Popover';
+import OtherProfile from '../Profile/OtherProfile';
 
 const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
 
@@ -50,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
     orange: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: deepOrange[500],
-      },
+    },
     green: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: "#76ff03",
@@ -63,7 +65,20 @@ const Dog = inject("MainStore")(observer((props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
 
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -89,13 +104,29 @@ const Dog = inject("MainStore")(observer((props) => {
         //<span>{props.d.energetic ? 'Dnergetic': null}</span>
         //<span>{props.d.dominant ? 'Dominant': null}</span>
 
-       
+
 
         <div className='dog-container'>
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                <OtherProfile o={props.o} />
+            </Popover>
             <Card className='dog-card'>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="dog" className='user-avatar' src={props.o.images}>
+                        <Avatar aria-label="dog" className='user-avatar' src={props.o.images} onClick={handleClick} >
                             {props.d.dogName[0]}
                         </Avatar>
                     }
@@ -103,11 +134,11 @@ const Dog = inject("MainStore")(observer((props) => {
                         <IconButton aria-label="settings">
                             {props.o.onwalk ?
                                 <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
-                                W
+                                    W
                             </Avatar> :
-                            <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.orange} >
-                            H
-                            </Avatar> 
+                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.orange} >
+                                    H
+                            </Avatar>
 
                             }
                         </IconButton>
@@ -120,7 +151,7 @@ const Dog = inject("MainStore")(observer((props) => {
                     image={props.d.images ? props.d.images[0] : props.d.image}
 
                     title={props.d.dogName}
-                      />
+                />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.d.size}
@@ -185,9 +216,9 @@ const Dog = inject("MainStore")(observer((props) => {
                             I'm {props.d.shy ? null : 'NOT!'} Shy <br></br>
                             I'm {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
                             I'm {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
-                            I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years 
+                            I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years
                             and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
-                            
+
 
 
 

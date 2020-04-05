@@ -57,13 +57,13 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
     return (
         <div>
             <label htmlFor="comment"><b>Add Post : </b></label>
-            <form className={classes.root} noValidate autoComplete='off'>
+            <div className={classes.root} noValidate autoComplete='off'>
                 <TextField id="comment" value={comment} name="comment" onChange={inputHandler} label="What's on your mind?" variant="outlined" />
                 <UploadFile imagesInputName='commentPictures' />
                 {props.InputStore.commentPictures.length ? <img src={props.InputStore.commentPictures || null} alt="Upload Image" height="300" width="400"></img> : null}
 
                 <AddComment onClick={addPost} />
-            </form>
+            </div>
             <br></br>
             <button onClick={() => {setMyFriendsOrAll(true);
             }}>My Friends</button>
@@ -71,7 +71,7 @@ const Feed = inject("MainStore", "InputStore")(observer((props) => {
             }}>All</button>
             <div>
                 {props.MainStore.posts.filter(p =>
-                    (myFriendsOrAll ? props.MainStore.curUser.friends.includes(p.senderId) : true)
+                    ((p.senderId==props.MainStore.curUser.id)||(myFriendsOrAll ? props.MainStore.curUser.friends.includes(p.senderId) : true))
                 ).map(p => {
                     const sender = props.MainStore.owners.find(o => o.id === p.senderId)
                     return (
