@@ -1,7 +1,9 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
 import Dog from '../Dogs/Dog';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import Popover from '@material-ui/core/Popover';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -50,11 +52,25 @@ const DogFriends = inject("MainStore")(observer((props) => {
         avatar: {
             backgroundColor: red[500],
         },
+        typography: {
+            padding: theme.spacing(2)
+        }
 
     }));
 
     const classes = useStyles()
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
 
     // const friendlyDog = props.mainStore.curFriends.map(f => {
@@ -65,27 +81,61 @@ const DogFriends = inject("MainStore")(observer((props) => {
 
     return (
         <div>
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
 
+                <Typography>
+                    More information about {props.d.dogName} :
+                            <br></br>
+                    {props.d.vaccinated ? null : 'NOT!'} Vaccinated <br></br>
+                    {props.d.neutered ? null : 'NOT!'} Neutered <br></br>
+                    {props.d.shy ? null : 'NOT!'} Shy <br></br>
+                    {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
+                    {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
+                    {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years
+                            and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
+
+                    </Typography>
+
+            </Popover>
             <Card className={classes.root}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="dog" className='dog-avatar' src={props.d.images}>
+                        <Avatar aria-label="dog" className='dog-avatar' src={props.d.images} onClick={handleClick}>
                             {props.d.dogName[0]}
+
+
                         </Avatar>
                     }
                     action={
-                        <IconButton aria-label="settings" onHvr="send messege">
-                            <Chat />
-                        </IconButton>
+                        <Link to="Chat">
+
+                            <IconButton aria-label="settings">
+                                <Chat />
+                            </IconButton>
+
+                        </Link>
                     }
                     title={props.d.dogName}
                     subheader={` The owener is ${props.o.firstName}`}
                 />
                 <CardContent>
-                    <Pets />
+                    {/* <Pets /> */}
                     {props.o.onwalk ?
-                        <DirectionsWalk /> :
-                        <Home />
+                        <DirectionsWalk></DirectionsWalk> :
+                        <Home></Home>
                     }
                 </CardContent>
             </Card>
