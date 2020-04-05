@@ -10,8 +10,8 @@ import Feed from './Main Pages/Feed'
 import Maps from './Maps'
 import axios from 'axios'
 import Footer from './Handlers/Onwalk'
-import MyChats from './Chat/MyChats'
- 
+import MainChat from './Chat/MainChat'
+
 
 @inject("MainStore")
 
@@ -67,7 +67,10 @@ class Landing extends Component {
                     <Route path="/Profile" exact render={() => <Profile key='profilePage'/>}/>
                     <Route path="/Maps" exact render={() => <Maps key='mappage'/>}/>
                     <Route path="/Friends" exact render={() => <Friends key='friendsPage'/>}/>
-                    <Route path="/Chat" exact render={() => <MyChats key='chatPage'/>}/>
+                    {/* <Route path="/Chat" exact render={() => <Chat key='chatPage'/>}/> */}
+                    <Route path="/MainChat" exact render={() => <MainChat key='chatlistPage'/>}/>
+                    {/* <Route path="/dashboard" component={Dashboard}/> */}
+
                     {/* <Route path="/Friends/:id" exact render={({ match }) => <Friends match={match} key='friendsPage'/>}/> */}
                     <Footer />
                 </div>
