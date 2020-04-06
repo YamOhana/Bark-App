@@ -1,33 +1,41 @@
 import React from 'react'
 import { observer, inject } from 'mobx-react'
-import Dog from '../Dogs/Dog';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Popover from '@material-ui/core/Popover';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Home from '@material-ui/icons/Home'
 import DirectionsWalk from '@material-ui/icons/DirectionsWalk'
-import Chat from '@material-ui/icons/Chat'
-import Pets from '@material-ui/icons/Pets'
-import Tooltip from '@material-ui/core/Tooltip';
-
-
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Collapse } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import SendIcon from '@material-ui/icons/Send';
+import axios from 'axios';
 
 const DogFriends = inject("MainStore")(observer((props) => {
+
+
+
+    const useStyles2 = makeStyles((theme) => ({
+        root2: {
+          '& > *': {
+            margin: theme.spacing(1),
+            width: '40ch',
+          },
+        },
+      }));
+
+      const classes2 = useStyles2();
 
 
 
@@ -61,9 +69,16 @@ const DogFriends = inject("MainStore")(observer((props) => {
     const classes = useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
 
+    const [expanded, setExpanded] = React.useState(false);
+
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const handleExpandClick = () => {
+        setExpanded(!expanded);
+      };
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -72,81 +87,118 @@ const DogFriends = inject("MainStore")(observer((props) => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
+    const addMessage = () => {
 
-    // const friendlyDog = props.mainStore.curFriends.map(f => {
-    //     return f.dogs.map(d => <Dog d={d} o={f} />)
-    // })
+
+        const message = {
+            senderId: props.MainStore.curUser.id,
+            time: new Date()
+        }
+        props.MainStore.addMessage(message)
+
+        console.log(message);
+        
+        axios.post('http://localhost:3001/messages', message)
+            .then(res => {
+                console.log(`message sent`)
+            })
+
+    }
+    
 
 
 
     return (
         <div>
-            <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-            >
+            <List>
 
-                <Typography>
-                    More information about {props.d.dogName} :
-                            <br></br>
-                    {props.d.vaccinated ? null : 'NOT!'} Vaccinated <br></br>
-                    {props.d.neutered ? null : 'NOT!'} Neutered <br></br>
-                    {props.d.shy ? null : 'NOT!'} Shy <br></br>
-                    {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
-                    {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
-                    {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years
-                            and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
+                <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
+                >
 
-                    </Typography>
-
-            </Popover>
-            <Card className={classes.root}>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="dog" className='dog-avatar' src={props.d.images} onClick={handleClick}>
-                            {props.d.dogName[0]}
+                    <form className={classes2.root2} noValidate autoComplete="off">
+                       <TextField id="outlined-basic" label={`Send ${props.o.firstName} a quick message`} variant="outlined" onSubmit={'ddd'} >
+                       </TextField>
+                           <SendIcon  onClick={addMessage}/>
+                    </form>
+              
+                </Popover>
+                <Card className={classes.root}>
+                    <CardHeader
+                        avatar={
+                            <Avatar aria-label="dog" className='dog-avatar' src={props.d.images} onClick={handleClick}>
+                                {props.d.dogName[0]}
 
 
-                        </Avatar>
-                    }
-                    action={
-                        <Link to="Chat">
+                            </Avatar>
+                        }
+                        action={
+                            
+                            <IconButton>
 
-                            <IconButton aria-label="settings">
-                                <Chat />
+                                {props.o.onwalk ?
+                                    <DirectionsWalk></DirectionsWalk> :
+                                    <Home></Home>
+                                }
+
                             </IconButton>
+                            
 
-                        </Link>
-                    }
-                    title={props.d.dogName}
-                    subheader={` The owener is ${props.o.firstName}`}
-                />
-                <CardContent>
-                    {/* <Pets /> */}
-                    {props.o.onwalk ?
-                        <DirectionsWalk></DirectionsWalk> :
-                        <Home></Home>
-                    }
-                </CardContent>
-            </Card>
-
-            <br></br>
+                        }
+                        title={props.d.dogName}
+                        subheader={` ${props.o.firstName}'s dog`}
+ 
+                    />
+                 
+                    <CardActions disableSpacing>
+                         <IconButton
+                        className={clsx(classes.expand, {
+                            [classes.expandOpen]: expanded,
+                        })}
+                        onClick={handleExpandClick}
+                        aria-expanded={expanded}
+                        aria-label="show more"
+                    >
+                        <ExpandMoreIcon />
+                    </IconButton>
+                </CardActions>
+                <Collapse in={expanded} timeout="auto" unmountOnExit>
+                    <CardContent>
+                        <Typography paragraph>In case you forgot who I am...</Typography>
+                        <Typography paragraph>
+                            I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated <br></br>
+                            I'm {props.d.neutered ? null : 'NOT!'} Neutered <br></br>
+                            I'm {props.d.shy ? null : 'NOT!'} Shy <br></br>
+                            I'm {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
+                            I'm {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
+                            I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years
+                            and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
+                        </Typography>
+                    </CardContent>
+                </Collapse>
+                </Card>
+            </List>
             <br></br>
         </div>
     )
-
-
+    
+    
 }))
 
 
 export default DogFriends
+
+
+
+  

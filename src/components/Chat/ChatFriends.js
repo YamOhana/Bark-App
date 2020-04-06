@@ -20,6 +20,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ChatIcon from '@material-ui/icons/Chat'
 import MainChat from './MainChat'
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+const firebase = require("firebase");
 
 const ChatFriends = inject("MainStore")(observer((props) => {
 
@@ -73,22 +74,50 @@ const ChatFriends = inject("MainStore")(observer((props) => {
             <div className={classes.toolbar} />
             <Divider /> Friends List
             <List>
-                {props.MainStore.curFriends.map(f => {return f.dogs.map(d => <MainChat d={d} o={f} />)}).map((text, index) => (
+                {props.MainStore.curFriends.map(f => { return f.dogs.map(d => <MainChat d={d} o={f} />) }).map((text, index) => (
                     <ListItem button key={text}>
-                        
+
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
             </List>
             <Divider />
-           
+
         </div>
     );
 
+    const buildDocKey = (friend) => [props.MainStore.owner, friend].sort().join(':');
 
+
+    const newChatSubmit = async (chatObj) => {
+        const docKey = this.buildDocKey(chatObj.sendTo);
+        await
+            firebase
+                .firestore()
+                .collection('chats')
+                .doc(docKey)
+                .set({
+                    messages: [{
+                        message: chatObj.message,
+                        sender: props.MainStore.curUser
+                    }],
+                    users: [props.MainStore.curUser, chatObj.sendTo],
+                    receiverHasRead: false
+                })
+        this.selectChat(props.MainStore.chats - 1);
+    }
+
+
+
+    // const goToChat = async (docKey, msg) => {
+    //     const usersInChat = docKey.split(':')
+    //     const chat = this.props.MainStore.chats.find(_chat => usersInChat.every(_user => _chat.users.includes(_user)))
+    //     this.props.MainStore.chats.push(chat)
+
+    // }
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} >
             <CssBaseline />
             <Toolbar position="fixed" className={classes.appBar}>
                 <ChatIcon
@@ -138,9 +167,9 @@ const ChatFriends = inject("MainStore")(observer((props) => {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Typography paragraph>
-                   Chat with your friends!
+                    Chat with your friends!
         </Typography>
-             
+
             </main>
         </div>
     )
