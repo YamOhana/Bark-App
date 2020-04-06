@@ -50,10 +50,15 @@ const MainChat = inject("MainStore")(observer((props) => {
 
     const classes = useStyles()
 
+    const ContactUser = (c) => {
+
+        props.MainStore.addChat(c.target.name)
+    }
+
     return (
 
         <div>
-            <Card className={classes.root}>
+            <Card className={classes.root} onClick={ContactUser}>
                 <CardHeader
                     avatar={
                         <Avatar aria-label="dog" className='dog-avatar' src={props.d.images}>
