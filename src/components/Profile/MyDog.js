@@ -3,12 +3,15 @@ import { observer, inject } from 'mobx-react'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import clsx from 'clsx';
+import EditIcon from '@material-ui/icons/Edit';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
@@ -23,6 +26,7 @@ import { red } from '@material-ui/core/colors';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
+import EditDog from '../Handlers/EditDog'
 
 const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
 
@@ -61,12 +65,17 @@ const useStyles = makeStyles((theme) => ({
 
 const MyDog = inject("MainStore")(observer((props) => {
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [edditing , setEdditing] = useState(true)
 
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
+    const editProfile = () => {
+        setEdditing(false)
+    }
 
     return (     
 
@@ -78,16 +87,22 @@ const MyDog = inject("MainStore")(observer((props) => {
                             {props.d.dogName[0]}
                         </Avatar>
                     }
-                    
                     title={props.d.dogName}
+                    action={
+                        <CardActions  disableSpacing>
+                            <IconButton onClick={editProfile} aria-label="edit">
+                                <EditIcon />
+                            </IconButton>
+                        </CardActions>
+                    }
                 />
+
                 <CardMedia
                     className={classes.media}
-
                     image={props.d.images ? props.d.images[0] : props.d.image}
-
                     title={props.d.dogName}
-                      />
+                />
+
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.d.size}
@@ -97,6 +112,23 @@ const MyDog = inject("MainStore")(observer((props) => {
                         {props.d.type}
                     </Typography>
                 </CardContent>
+                
+                {edditing ?
+                    null :
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        className={classes.button}
+                        startIcon={<SaveIcon />}
+                    >
+                        Save Changes
+                    </Button>  
+                }
+                {edditing ?
+                null :
+                <EditDog />
+                }
                 <CardActions disableSpacing>
                     <IconButton
                         className={clsx(classes.expand, {

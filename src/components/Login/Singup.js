@@ -238,7 +238,7 @@ class Singup extends Component {
                             </Grid>
                             
                             <Grid container item xs={12}>
-                                    <AddUser />
+                                    <AddUser edit={false}/>
                             </Grid>
 
                             <Grid container item xs={12}>

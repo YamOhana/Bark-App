@@ -3,6 +3,8 @@ import { observer, inject } from 'mobx-react'
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Button from '@material-ui/core/Button';
+import SaveIcon from '@material-ui/icons/Save';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import clsx from 'clsx';
@@ -16,6 +18,7 @@ import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
 import EditIcon from '@material-ui/icons/Edit';
 import UploadFile from '../UploadFile';
+import EditUser from '../Handlers/EditUser'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,13 +48,22 @@ const useStyles = makeStyles((theme) => ({
     green: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: "#76ff03",
-    }
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
 }));
 
 
 
 const MyProfile = inject("MainStore")(observer((props) => {
     const classes = useStyles();
+    const [edditing , setEdditing] = useState(true)
+    
+    const editProfile = () => {
+        setEdditing(false)
+    }
+    
     return (
 
         <Card className='ProfileComponent'>
@@ -61,15 +73,21 @@ const MyProfile = inject("MainStore")(observer((props) => {
                     props.MainStore.curUser.onwalk ?
                         <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
                             W
-                            </Avatar> :
+                        </Avatar> :
                         <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.orange} >
                             H
-                            </Avatar>
-
+                        </Avatar>
 
                 }
 
                 title={`${props.MainStore.curUser.firstName} ${props.MainStore.curUser.lastName}`}
+                action={
+                    <CardActions  disableSpacing>
+                        <IconButton onClick={editProfile} aria-label="edit">
+                            <EditIcon />
+                        </IconButton>
+                    </CardActions>
+                }
             />
             
             {
@@ -89,8 +107,20 @@ const MyProfile = inject("MainStore")(observer((props) => {
                     : null
             }
             
-        {/* <UploadFile imagesInputName='userImages' /> */}
+            {edditing ?
+            null :
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                className={classes.button}
+                startIcon={<SaveIcon />}
+            >
+                Save Changes
+            </Button>  
+            }
 
+            { edditing ?
             <Typography>
                 Address: {props.MainStore.curUser.address}
                 <br></br>
@@ -104,13 +134,13 @@ const MyProfile = inject("MainStore")(observer((props) => {
                 <br></br>
                 Phone Number: {props.MainStore.curUser.phoneNum}
                 <br></br>
-                Smoker: {props.MainStore.curUser.smoker}
-            </Typography>
-            <CardActions disableSpacing>
-                <IconButton aria-label="edit">
-                    <EditIcon />
-                </IconButton>
-            </CardActions>
+                {props.MainStore.curUser.smoker ? "I'm a Smoker" : null}
+            </Typography> :
+
+            <EditUser /> 
+            }
+            
+            
         </Card>
 
 

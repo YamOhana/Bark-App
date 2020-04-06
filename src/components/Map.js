@@ -104,6 +104,7 @@ const addressInput = inject("MainStore", "InputStore")(observer((props) => {
       options={options}
       onSelect={handleChange}
       autoComplete
+      value={inputValue}
       includeInputInList
       renderInput={(params) => (
         <TextField
