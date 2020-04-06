@@ -52,15 +52,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
-
-
 const Login = inject("MainStore")(observer((props) => { 
     const classes = useStyles();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [singORlog, setSing] = useState(true)
+    const [signORlog, setSign] = useState(true)
 
     const handleChange = (e) => {
         e.target.name === "email" ?
@@ -76,85 +72,100 @@ const Login = inject("MainStore")(observer((props) => {
         });
     }
 
-    const singMeIn = () => {
-        setSing(false)
+    const signMeIn = () => {
+        setSign(!signORlog)
     }
 
     return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                {singORlog ? 
+                {signORlog ? 
                 <div className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Sign in
-                </Typography>
-                <form className={classes.form} noValidate>
-                    <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    value={email}
-                    type="email"
-                    onChange={handleChange}
-                    autoComplete="email"
-                    autoFocus
-                    />
-                    <TextField
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    value={password}
-                    onChange={handleChange}
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    />
-                    <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                    />
-                    <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                    onClick={login}
-                    >
-                    Sign In
-                    </Button>
-                    <Grid container>
-                    <Grid item xs>
-                        <Link href="#" variant="body2">
-                        Forgot password?
-                        </Link>
-                    </Grid>
-                    <Grid item>
-                        <Button 
-                        // fullWidth
-                        // variant="contained"
-                        color="primary"
-                        className={classes.logbtn}
-                        onClick={singMeIn}>
-                        Don't have an account? Sign Up
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <form className={classes.form} noValidate>
+                        
+                        <TextField
+                            variant="outlined"
+                            helperText="Enter your email"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            value={email}
+                            type="email"
+                            onChange={handleChange}
+                            autoComplete="email"
+                            autoFocus
+                        />
+
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            helperText="Enter Password"
+                            required
+                            fullWidth
+                            value={password}
+                            onChange={handleChange}
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={login}
+                        >
+                            Sign In
                         </Button>
-                    </Grid>
-                    </Grid>
-                </form>
+
+                        <Grid item xs>
+                            <Link href="#" variant="body2">
+                                Forgot password?
+                            </Link>
+                        </Grid>
+                    </form>
                 </div> :
                 <Singup />
                 } 
-                <Box mt={8}>
+                {signORlog ?
+                <Grid item>
+                    <Button 
+                        color="primary"
+                        className={classes.logbtn}
+                        onClick={signMeIn}>
+                        Don't have an account? Sign Up
+                    </Button>
+                </Grid> :
+
+                <Grid item>
+                    <Button 
+                        color="primary"
+                        className={classes.logbtn}
+                        onClick={signMeIn}>
+                        Already have an account? Sign in
+                    </Button>
+                </Grid>
+                }
+
+                <Box mt={4}>
                 <Copyright />
                 </Box>
             </Container>

@@ -57,7 +57,7 @@ const AddHour = inject("MainStore", "InputStore")(observer((props) => {
     }
     
     return (
-        <Grid>
+        <Grid >
         <TextField
             id="outlined-select-hours"
             select

@@ -16,23 +16,12 @@ import Container from '@material-ui/core/Container';
 import AddUser from '../Handlers/AddUser';
 import AddDog from '../Handlers/AddDog';
 import axios from 'axios';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
 import '../../styles/Login.css'
 import { inject } from 'mobx-react'
 const opencage = require('opencage-api-client');
-
-function Copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Your Website
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-}
-
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -51,9 +40,15 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1)
       
     },
+    formControl: {
+        margin: theme.spacing(3),
+    },
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
+    logbtn: {
+        margin: theme.spacing(3, 2, 3),
+    }
 }));
 
   
@@ -63,7 +58,6 @@ const useStyles = makeStyles((theme) => ({
 class Singup extends Component {
     constructor(props) {
         super(props);
-        // this.login = this.login.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.signup = this.signup.bind(this);
         this.state = {
@@ -76,13 +70,9 @@ class Singup extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    // login(e) {
-    //     e.preventDefault();
-    //     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u) => {
-    //     }).catch((error) => {
-    //         console.log(error);
-    //     });
-    // }
+    signIn() {
+        this.props.signOut()
+    }
 
     checkField(field) {
         if (this.props.InputStore[field] == undefined) {
@@ -220,13 +210,14 @@ class Singup extends Component {
                         Sign up
                     </Typography>
                     <form className={this.classes.form} noValidate>
-                        <Grid container spacing={2}>
-                            
+                    <Grid container spacing={2}>
+                        
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
                                     required
                                     fullWidth
+                                    helperText="Enter Email"
                                     id="email"
                                     label="Email Address"
                                     type="email"
@@ -240,6 +231,7 @@ class Singup extends Component {
                             <Grid item xs={12}>
                                 <TextField
                                     variant="outlined"
+                                    helperText="Enter Password"
                                     required
                                     fullWidth
                                     name="password"
@@ -251,19 +243,21 @@ class Singup extends Component {
                                     value={this.state.password}
                                 />
                             </Grid>
-
-                            <Grid item xs={12}>
-                                <AddUser />
+                            
+                            <Grid container item xs={12}>
+                                    <AddUser />
                             </Grid>
 
-                            <Grid item xs={12}>
+                            <Grid container item xs={12}>
                                 <Typography component="span" variant="h5">
                                     Dog Details:
                                 </Typography>
+
                                 <AddDog />
                             </Grid>
-                        
+
                         </Grid>
+
                         <Button
                             type="submit"
                             fullWidth
@@ -273,234 +267,12 @@ class Singup extends Component {
                         >
                             Sign Up
                         </Button>
-                        <Grid container justify="flex-end">
-                            <Grid item>
-                                <Link href="#" variant="body2">
-                                    Already have an account? Sign in
-                                </Link>
-                            </Grid>
-                        </Grid>
+                    
                     </form>
                 </div>
-            {/* <Box mt={5}>
-                <Copyright />
-            </Box> */}
         </Container>
             
         );
     }
 }
 export default Singup;
-
-// <div className="col-md-6">
-//                 {/* <button onClick={() => { this.setState({ signOrLog: true }) }} className="chooseLog">Login</button>
-//                 <button onClick={() => { this.setState({ signOrLog: false }) }} style={{ marginLeft: '25px' }} className="chooseSign">Signup</button> */}
-                
-//                 <div>
-
-//                     <div className="form-group1">
-//                         <label htmlFor="exampleInputEmail1">Email address</label>
-//                         <input value={this.state.email} onChange={this.handleChange} type="email" name="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-//                         <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-//                     </div>
-//                     <div className="form-group2">
-//                         <label htmlFor="exampleInputPassword1">Password</label>
-//                         <input value={this.state.password} onChange={this.handleChange} type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
-//                     </div>
-                    
-//                     <div>
-//                         <AddUser />
-//                         <div><b>Dog details:</b></div>
-//                         <AddDog />
-//                         <button onClick={this.signup} style={{ marginLeft: '25px' }} className="btn btn-success">Signup</button>
-//                     </div>
-                    
-//                 </div>
-
-//             </div>
-
-
-// export default function SignUp() {
-  
-
-//   return (
-//     <Container component="main" maxWidth="xs">
-//       <CssBaseline />
-//       <div className={this.classes.paper}>
-//         <Avatar className={classes.avatar}>
-//           <LockOutlinedIcon />
-//         </Avatar>
-//         <Typography component="h1" variant="h5">
-//           Sign up
-//         </Typography>
-//         <form className={classes.form} noValidate>
-//             <Grid item xs={12}>
-//               <TextField
-//                 variant="outlined"
-//                 required
-//                 fullWidth
-//                 id="email"
-//                 label="Email Address"
-//                 type="email"
-//                 name="email"
-//                 autoComplete="email"
-//                 value={this.state.email}
-//                 onChange={this.handleChange}
-//               />
-//             </Grid>
-//             <Grid item xs={12}>
-//               <TextField
-//                 variant="outlined"
-//                 required
-//                 fullWidth
-//                 name="password"
-//                 label="Password"
-//                 type="password"
-//                 id="password"
-//                 autoComplete="current-password"
-//                 onChange={this.handleChange}
-//                 value={this.state.password}
-//               />
-//             </Grid>
-//             <Grid container spacing={2}>
-//             <Grid item xs={12} sm={6}>
-//               <TextField
-//                 autoComplete="fname"
-//                 name="firstName"
-//                 variant="outlined"
-//                 required
-//                 fullWidth
-//                 id="firstName"
-//                 label="First Name"
-//                 autoFocus
-//               />
-//             </Grid>
-//             <Grid item xs={12} sm={6}>
-//               <TextField
-//                 variant="outlined"
-//                 required
-//                 fullWidth
-//                 id="lastName"
-//                 label="Last Name"
-//                 name="lastName"
-//                 autoComplete="lname"
-//               />
-//             </Grid>
-//             <Grid item xs={12}>
-//               <FormControlLabel
-//                 control={<Checkbox value="allowExtraEmails" color="primary" />}
-//                 label="I want to receive inspiration, marketing promotions and updates via email."
-//               />
-//             </Grid>
-//           </Grid>
-//           <Button
-//             type="submit"
-//             fullWidth
-//             variant="contained"
-//             color="primary"
-//             className={classes.submit}
-//           >
-//             Sign Up
-//           </Button>
-//           <Grid container justify="flex-end">
-//             <Grid item>
-//               <Link href="#" variant="body2">
-//                 Already have an account? Sign in
-//               </Link>
-//             </Grid>
-//           </Grid>
-//         </form>
-//       </div>
-//       <Box mt={5}>
-//         <Copyright />
-//       </Box>
-//     </Container>
-//   );
-// }
-
-{/* <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign up
-        </Typography>
-        <form className={classes.form} noValidate>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Sign Up
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container> */}

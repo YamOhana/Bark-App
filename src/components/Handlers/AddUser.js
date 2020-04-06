@@ -16,6 +16,7 @@ import Container from '@material-ui/core/Container';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import UploadFile from '../UploadFile';
 
@@ -56,7 +57,6 @@ const useStyles = makeStyles((theme) => ({
     textField: {
       marginLeft: theme.spacing(1),
       marginRight: theme.spacing(1),
-      // width: '100%',
     },
   }));
 
@@ -73,7 +73,6 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     const [address, setAddress] = useState(props.InputStore.address)
     const [gender , setGender] = useState(props.InputStore.gender)
     const [smoker, setSmoker] = useState(props.InputStore.smoker)
-    // const [hours , setHours] = useState(props.InputStore.hours)
  
     
     const inputHandler = (e) => {
@@ -102,14 +101,14 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     }
         
     return (
-      
-        <Grid container marginBottom={5} spacing={2}>
+      <Grid container marginBottom={5} spacing={2}>
         
           <Grid item xs={12} sm={6}>
             <TextField
             id="firstName"
             name="firstName"
             variant="outlined"
+            helperText="Enter First Name"
             required
             fullWidth
             label="First Name"
@@ -124,6 +123,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
               id="lastName"
               name="lastName"
               variant="outlined"
+              helperText="Enter Last Name"
               required
               fullWidth
               label="Last Name"
@@ -133,8 +133,19 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
             />
           </Grid>
 
-          <Grid item xs={12} sm={6}>
-            <UploadFile imagesInputName='userImages' />
+          <Grid item xs={12} >
+            <TextField
+              id="phoneNum"
+              value={phoneNum} 
+              name="phoneNum" 
+              onChange={inputHandler}
+              helperText="Enter Phone number"
+              variant="outlined"
+              // required
+              fullWidth
+              label="Phone Number"
+              autoFocus
+            />
           </Grid>
 
           <Grid item xs={12} sm={6}>
@@ -144,7 +155,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
               label="Gender"
               value={gender}
               onChange={inputHandler}
-              helperText="Please select your gender"
+              helperText="Select your gender"
               variant="outlined"
             >
               {genders.map((option) => (
@@ -160,7 +171,6 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
               id="birthDate"
               label="Birthday"
               type="date"
-              // defaultValue="2017-05-24"
               value={birthDate}
               className={classes.textField}
               name="birthDate" 
@@ -170,85 +180,29 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
               }}
             /> 
           </Grid>
-        
-          <Grid item xs={12} sm={6}>
-            <TextField
-              id="phoneNum"
-              value={phoneNum} 
-              name="phoneNum" 
-              onChange={inputHandler}
-              variant="outlined"
-              required
-              fullWidth
-              label="Phone Number"
-              autoFocus
-            />
+
+          <Grid item xs={12}>
+            <UploadFile imagesInputName='userImages' />
           </Grid>
             
-          <Grid item xs={12} sm={6}>
+          <Grid item xs={12}>
             <AdressInput call={'address'} input={props.InputStore.address}/>
           </Grid>
           
-          <Grid item xs={12} sm={6}>
-            <FormControlLabel
-                control={<Checkbox value={smoker} name="smoker" onChange={inputHandler} color="primary" />}
-                label="Are you a smoker?"
-            />
+          <Grid item xs={12}>
+              <FormControlLabel
+                  control={<Checkbox value={smoker} name="smoker" onChange={inputHandler} color="primary" />}
+                  label="Are you a smoker?"
+              />
           </Grid>
           
-          <Grid item xs={12} sm={6}> 
+          <Grid item xs={12}> 
             <AddHour />
           </Grid>
 
         </Grid>
-
     
     )
 }))
 
 export default AddUser
-
-
-// <Grid item xs={12} sm={6}>
-//     <TextField
-//         autoComplete="fname"
-//         name="firstName"
-//         variant="outlined"
-//         required
-//         fullWidth
-//         id="firstName"
-//         label="First Name"
-//         // autoFocus
-//     />
-// </Grid>
-
-// <Grid item xs={12} sm={6}>
-//     <TextField
-//         variant="outlined"
-//         required
-//         fullWidth
-//         id="lastName"
-//         label="Last Name"
-//         name="lastName"
-//         autoComplete="lname"
-//     />
-// </Grid> 
-
-{/* <label htmlFor="gender">Gender:</label>
-            <select type="text" id="gender" value={gender} name="gender" onChange={inputHandler}>
-
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
-            </select>
-            <br></br> */}
-            {/* <label htmlFor="birthDate">Date of Birth:</label>
-              <input type="date" id="birthDate" value={birthDate} name="birthDate" onChange={inputHandler}></input>
-              <br></br> */}
-
-              {/* <label htmlFor="phoneNum">Phone Number:</label>
-            <input type="text" id="phoneNum" value={phoneNum} name="phoneNum" onChange={inputHandler}></input>
-            <br></br> */}
-            {/* <label htmlFor="smoker">Smoking?</label>
-            <input type="checkbox" id="smoker" value={smoker} name="smoker" onChange={inputHandler}></input>
-            <br></br> */}
