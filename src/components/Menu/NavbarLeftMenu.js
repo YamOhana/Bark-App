@@ -12,9 +12,15 @@ import DogFace from '@material-ui/icons/Pets'
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SettingsIcon from '@material-ui/icons/Settings';
+import NotificationsOffIcon from '@material-ui/icons/NotificationsOff';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
+import Grid from '@material-ui/core/Grid';
 
-import { Link } from 'react-router-dom';
+import { observer, inject } from 'mobx-react'
+
 import { FolderListItems } from './MenuList';
+import { Popover } from '@material-ui/core';
+import Notifications from './Notifications';
 
 
 
@@ -29,9 +35,20 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar
 });
 
+@inject('MainStore')
+@observer
 class NavbarLeftMenu extends React.Component {
   state = {
-    left: false
+    left: false,
+    anchorEl: null
+  };
+
+  handleClick = (event) => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  handleClose = () => {
+    this.setState({ anchorEl: null });
   };
 
   toggleDrawer = open => () => {
@@ -50,21 +67,21 @@ class NavbarLeftMenu extends React.Component {
 
     return (
       <div>
-          
-          <ListItem button>
-            <ListItemIcon>
-              <SettingsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Settings" />
-          </ListItem>
-        
-          <ListItem button onClick={this.logout}>
-            <ListItemIcon>
-              <ExitToAppIcon />
-            </ListItemIcon>
-            <ListItemText primary='Log-Out' />
-          </ListItem>
-        
+
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Settings" />
+        </ListItem>
+
+        <ListItem button onClick={this.logout}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText primary='Log-Out' />
+        </ListItem>
+
       </div>
     )
   }
@@ -85,9 +102,57 @@ class NavbarLeftMenu extends React.Component {
       </div>
     );
 
+
+
+    const open = Boolean(this.state.anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
     return (
       <div>
-        <MenuIcon onClick={this.toggleDrawer(true)} />
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          {this.props.MainStore.curUser ?
+            <Notifications requestsIds={this.props.MainStore.curUser.requests.filter(e => !this.props.MainStore.curUser.friends.includes(e))} />
+            : null
+          }
+        </Popover>
+
+        <Grid container>
+          <Grid item xs={1} justify="flex-start">
+            <MenuIcon onClick={this.toggleDrawer(true)} />
+          </Grid>
+          <Grid item xs={10}>
+          </Grid>
+          <Grid item xs={1} justify="flex-end">
+
+            {
+              this.props.MainStore.curUser ? (
+                this.props.MainStore.curUser.requests.every(e => this.props.MainStore.curUser.friends.includes(e)) ?
+                  <NotificationsOffIcon />
+                  :
+                  <NotificationsActiveIcon onClick={this.handleClick} />
+
+              )
+                :
+
+                <NotificationsOffIcon />
+
+            }
+
+          </Grid>
+        </Grid>
         <Drawer open={left} onClose={this.toggleDrawer(false)}>
           <div
             tabIndex={0}
