@@ -101,8 +101,10 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     }
         
     return (
-      <Grid container marginBottom={5} spacing={2}>
-        
+      <FormGroup>
+
+        <Grid container marginBottom={5} spacing={2}>
+          
           <Grid item xs={12} sm={6}>
             <TextField
             id="firstName"
@@ -201,7 +203,8 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
           </Grid>
 
         </Grid>
-    
+      </FormGroup>
+
     )
 }))
 
