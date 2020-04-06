@@ -107,7 +107,8 @@ const addressInput = inject("MainStore", "InputStore")(observer((props) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Add a location"
+          helperText={`Please select your ${props.call} location`}
+          label={`Add your ${props.call}`}
           variant="outlined"
           fullWidth
           onChange={handleChange}
@@ -121,7 +122,7 @@ const addressInput = inject("MainStore", "InputStore")(observer((props) => {
         );
       
         return (
-          <Grid container alignItems="center">
+          <Grid container alignItems="center" xs={12} sm={6}>
             <Grid item>
               <LocationOnIcon className={classes.icon} />
             </Grid>

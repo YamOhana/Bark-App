@@ -2,11 +2,65 @@ import React, { useState } from 'react';
 import { observer, inject } from 'mobx-react'
 import UploadFile from '../UploadFile';
 import AdressInput from '../Map'
-const opencage = require('opencage-api-client');
+import { makeStyles } from '@material-ui/core/styles';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Grid from '@material-ui/core/Grid';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
+const genders = [
+    {
+      value: 'male',
+      label: 'Male',
+    },
+    {
+      value: 'female',
+      label: 'Female',
+    },
+];
+
+const sizes = [
+    {value: "small", label: 'Small'},
+    {value: "medium", label: 'Medium'},
+    {value: "large", label: 'Large'},
+]
+
+const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: theme.spacing(8),
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    },
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    form: {
+      width: '100%', // Fix IE 11 issue.
+      marginTop: theme.spacing(3),
+    },
+    submit: {
+      margin: theme.spacing(3, 0, 2),
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
+    formControl: {
+        margin: theme.spacing(3),
+      },
+  }));
 
 
 const AddDog = inject("MainStore", "InputStore")(observer((props) => { 
+
+    const classes = useStyles();
 
     const [dogName, setDogName] = useState(props.InputStore.dogName)
     const [dogGender, setDogGender] = useState(props.InputStore.dogGender)
@@ -25,7 +79,6 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
     
     const inputHandler = (e) => {
 
-        //props.InputStore.handleInput(e.target.name, e.target.value)
         const inp = props.InputStore
         e.target.name === "dogName" ?
         inp.handleInput(e.target.name, e.target.value) &&
@@ -65,65 +118,136 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
     }
     
     return (
-        <div>
+        <FormGroup>
+        <Grid container marginBottom={5} spacing={2}>
+            
+            <Grid item xs={12} sm={6}>
+                <TextField
+                    id="dogName"
+                    name="dogName"
+                    variant="outlined"
+                    helperText="Enter your Dog's name"
+                    required
+                    fullWidth
+                    label="Dog's Name"
+                    autoFocus
+                    value={dogName}
+                    onChange={inputHandler} 
+                />
+            </Grid>
 
-        <label for="dogName">Dog's name:</label>
-        <input type="text" id="dogName" value={dogName} name="dogName" onChange={inputHandler}></input>
-        <br></br>
+            <Grid item xs={12} sm={6}>
+                <TextField
+                id="outlined-select-size"
+                select
+                label="size"
+                value={size}
+                onChange={inputHandler}
+                helperText="Please select your Dog's size"
+                variant="outlined"
+                >
+                {sizes.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                    </MenuItem>
+                ))}
+                </TextField>
+            </Grid>
 
-        <label for="dogGender">Dog's gender:</label>
-        <select type="text" id="dogGender" value={dogGender} name="dogGender" onChange={inputHandler}>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-        </select>
-        <br></br>
+            <Grid item xs={12} sm={6}>
+                <TextField
+                id="outlined-select-dogGender"
+                select
+                label="dogGender"
+                value={dogGender}
+                onChange={inputHandler}
+                helperText="Please select your Dog's gender"
+                variant="outlined"
+                >
+                {   
+                    genders.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                        </MenuItem>))
+                }
+                </TextField>
+            </Grid>
 
-        <label for="park">Favorie park:</label>
-        {/* <input type="text" id="park" value={park} name="park" onChange={inputHandler}></input> */}
-        <AdressInput call={'park'} input={props.InputStore.park}/>
-        <br></br>
+            <Grid item xs={12} sm={6}>
+                <TextField
+                id="dogBirthDate"
+                label="Your Dog's Birthday"
+                type="date"
+                value={dogBirthDate}
+                className={classes.textField}
+                name="dogBirthDate" 
+                onChange={inputHandler}
+                InputLabelProps={{
+                    shrink: true,
+                }}
+                /> 
+            </Grid>
 
-        <label for="vaccinated">Vaccinated:</label>
-        <input type="checkbox" id="vaccinated" value={vaccinated} name="vaccinated" onChange={inputHandler}></input>
-        <br></br>
+            <Grid item xs={12}>
+                <AdressInput call={'park'} input={props.InputStore.park}/>
+            </Grid>
 
-        <label for="neutered">Neutered:</label>
-        <input type="checkbox" id="neutered" value={neutered} name="neutered" onChange={inputHandler}></input>
-        <br></br>
-        
-        <UploadFile imagesInputName='dogImages' />
-        <br></br>
+            <Grid item xs={12}>
+                <UploadFile imagesInputName='dogImages' />
+            </Grid>
 
-        <label for="dogBirthDate">Dog Birth Date :</label>
-        <input type="date" id="dogBirthDate" value={dogBirthDate} name="dogBirthDate" onChange={inputHandler}></input>
-        <br></br>
-        
-        <label for="size">Dog Size :</label>
-        <select type="text" id="size" value={size} name="size" onChange={inputHandler}>
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-        </select>
-        <br></br>
+            <Grid item xs={12}>
+                <TextField
+                    id="type"
+                    name="type"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    label="Dog's Type"
+                    autoFocus
+                    value={type}
+                    onChange={inputHandler} 
+                />
+            </Grid>
 
-        <label for="type">Dog type :</label>
-        <input type="text" id="type" value={type} name="type" onChange={inputHandler}></input>
-        <br></br>
+            <Grid item xs={12} >
+                <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend">Your Dog's Data</FormLabel>
+                    <FormGroup>
+                        <FormControlLabel
+                            control={<Checkbox value={vaccinated} name="vaccinated" onChange={inputHandler} color="primary" />}
+                            label="Is your Dog vaccinated?"
+                        />
+                    
+                        <FormControlLabel
+                            control={<Checkbox value={neutered} name="neutered" onChange={inputHandler} color="primary" />}
+                            label="Is your Dog Neutered?"
+                        />
+                    </FormGroup> 
 
-        <label for="shy">Dog shy :</label>
-        <input type="checkbox" id="shy" value={shy} name="shy" onChange={inputHandler}></input>
-        <br></br>
+                <FormLabel component="legend">Your Dog's Nature</FormLabel>
+                    <FormGroup>
+                        <FormControlLabel
+                        control={<Checkbox checked={shy} onChange={inputHandler} name="shy" />}
+                        label="Is your Dog Shy?"
+                        />
+                        <FormControlLabel
+                        control={<Checkbox checked={energetic} onChange={inputHandler} name="energetic" />}
+                        label="Is your Dog Energetic?"
+                        />
+                        <FormControlLabel
+                        control={<Checkbox checked={dominant} onChange={inputHandler} name="dominant" />}
+                        label="Is your Dog Dominant?"
+                        />
+                    </FormGroup>
+                <FormHelperText>You can always change it later</FormHelperText>
+                </FormControl>
+            </Grid>
 
-        <label for="energetic">Dog energy :</label>
-        <input type="checkbox" id="energetic" value={energetic} name="energetic" onChange={inputHandler}></input>
-        <br></br>
+        </Grid>
+        </FormGroup> 
 
-        <label for="dominant">Dog dominant :</label>
-        <input type="checkbox" id="dominant" value={dominant} name="dominant" onChange={inputHandler}></input>
-        <br></br>
-
-    </div>
+    
     )
 }))
 
