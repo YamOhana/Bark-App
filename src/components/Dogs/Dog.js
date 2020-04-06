@@ -25,6 +25,8 @@ import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
 import Popover from '@material-ui/core/Popover';
 import OtherProfile from '../Profile/OtherProfile';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
 
@@ -63,9 +65,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Dog = inject("MainStore")(observer((props) => {
     const classes = useStyles();
+
     const [expanded, setExpanded] = React.useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    
+    const [imageNum, setImageNum] = React.useState(0);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -93,7 +98,14 @@ const Dog = inject("MainStore")(observer((props) => {
         props.MainStore.acceptFriendship(props.o.id)
         axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
     }
-
+    
+    const previousImage = () => {
+        if(imageNum>0) setImageNum(imageNum-1)
+    }
+    const nextImage = () => {
+        if(props.d.images && (imageNum<props.d.images.length-1)) setImageNum(imageNum+1)
+    }
+    
     return (
 
         //    <div>
@@ -145,13 +157,21 @@ const Dog = inject("MainStore")(observer((props) => {
                     }
                     title={props.d.dogName}
                 />
+
                 <CardMedia
                     className={classes.media}
 
-                    image={props.d.images ? props.d.images[0] : props.d.image}
+                    image={props.d.images ? props.d.images[imageNum] : props.d.image}
 
                     title={props.d.dogName}
                 />
+                
+          <IconButton aria-label="previous" onClick={previousImage}>
+            <NavigateBeforeIcon />
+          </IconButton>
+          <IconButton aria-label="next" onClick={nextImage}>
+            <NavigateNextIcon />
+          </IconButton>
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {props.d.size}
