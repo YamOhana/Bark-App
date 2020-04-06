@@ -15,6 +15,7 @@ export class MainStore {
         chat: []
     }
     @observable posts = []
+    @observable userAddress
     @observable filters = {
         age: null,
         size: null,
@@ -37,6 +38,7 @@ export class MainStore {
     @action getData = dataArr => {
         this.owners = dataArr.owners
         this.curUser = dataArr.user
+        this.userAddress = dataArr.user.address
         this.userIndex = this.owners.findIndex(o => o.id === this.curUser.id)
         this.curFriends = this.getMyFriends()
     }

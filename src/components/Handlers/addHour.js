@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer, inject } from 'mobx-react'
 import Hour from './Hour'
 import TextField from '@material-ui/core/TextField';
@@ -28,6 +28,17 @@ const hoursArr = [
 const AddHour = inject("MainStore", "InputStore")(observer((props) => { 
 
     const [hours , setHours] = useState(props.InputStore.hours)
+
+    // useEffect(() => {
+    //   if(props.edit) {
+    //     console.log(`trying to edit`)
+    //     insertData()
+    //   }
+    // }, [])
+
+    // const insertData = () => {
+    //     setHours(props.times)
+    // }
 
     const inputHandler = async (e) => {
         if(hours.length) {

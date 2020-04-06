@@ -42,24 +42,23 @@ const genders = [
 
 
 const hoursArr = [
-  {value: "08:00-09:00", label: "08:00-09:00"},
-  {value: "09:00-10:00", label: "09:00-10:00"},
-  {value: "10:00-11:00", label: "10:00-11:00"},
-  {value: "11:00-12:00", label: "11:00-12:00"},
-  {value: "12:00-13:00", label: "12:00-13:00"},
-  {value: "13:00-14:00", label: "13:00-14:00"},
-  {value: "14:00-15:00", label: "14:00-15:00"},
-  {value: "15:00-16:00", label: "15:00-16:00"},
-  {value: "16:00-17:00", label: "16:00-17:00"},
-  {value: "17:00-18:00", label: "17:00-18:00"},
-  {value: "18:00-19:00", label: "18:00-19:00"},
-  {value: "19:00-20:00", label: "19:00-20:00"},
-  {value: "20:00-21:00", label: "20:00-21:00"},
-  {value: "21:00-22:00", label: "21:00-22:00"},
-  {value: "22:00-23:00", label: "22:00-23:00"},
-  {value: "23:00-00:00", label: "23:00-00:00"}
+    {value: "08:00-09:00", label: "08:00-09:00"},
+    {value: "09:00-10:00", label: "09:00-10:00"},
+    {value: "10:00-11:00", label: "10:00-11:00"},
+    {value: "11:00-12:00", label: "11:00-12:00"},
+    {value: "12:00-13:00", label: "12:00-13:00"},
+    {value: "13:00-14:00", label: "13:00-14:00"},
+    {value: "14:00-15:00", label: "14:00-15:00"},
+    {value: "15:00-16:00", label: "15:00-16:00"},
+    {value: "16:00-17:00", label: "16:00-17:00"},
+    {value: "17:00-18:00", label: "17:00-18:00"},
+    {value: "18:00-19:00", label: "18:00-19:00"},
+    {value: "19:00-20:00", label: "19:00-20:00"},
+    {value: "20:00-21:00", label: "20:00-21:00"},
+    {value: "21:00-22:00", label: "21:00-22:00"},
+    {value: "22:00-23:00", label: "22:00-23:00"},
+    {value: "23:00-00:00", label: "23:00-00:00"}
 ];
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -85,22 +84,25 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(1),
     },
     formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-      maxWidth: 300,
+        margin: theme.spacing(1),
+        minWidth: 120,
+        maxWidth: 300,
+    },
+    adresInp: {
+        width: '100%',
+        margin: theme.spacing(3),
     },
     chips: {
-      display: 'flex',
-      flexWrap: 'wrap',
+        display: 'flex',
+        flexWrap: 'wrap',
     },
     chip: {
-      margin: 2,
+        margin: 2,
     },
     noLabel: {
-      marginTop: theme.spacing(3),
+        marginTop: theme.spacing(3),
     },
   }));
-
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -123,24 +125,25 @@ function getStyles(name, personName, theme) {
 }
 
 
+  
 
-const AddUser = inject("MainStore", "InputStore")(observer((props) => { 
+
+
+const EditUser = inject("MainStore", "InputStore")(observer((props) => { 
 
 
     const classes = useStyles();
     const theme = useTheme();
 
-    const [firstName, setFirstName] = useState(props.InputStore.firstName)
-    const [lastName, setLastName] = useState(props.InputStore.lastName)
-    const [birthDate, setbirthDate] = useState(props.InputStore.birthDate)
-    const [phoneNum, setPhoneNum] = useState(props.InputStore.phoneNum)
-    const [address, setAddress] = useState(props.InputStore.address)
-    const [gender , setGender] = useState(props.InputStore.gender)
-    const [smoker, setSmoker] = useState(props.InputStore.smoker)
-    const [hours, setHours] = useState(props.InputStore.hours)
+    const [firstName, setFirstName] = useState(props.MainStore.curUser.firstName)
+    const [lastName, setLastName] = useState(props.MainStore.curUser.lastName)
+    const [birthDate, setbirthDate] = useState(props.MainStore.curUser.birthDate)
+    const [phoneNum, setPhoneNum] = useState(props.MainStore.curUser.phoneNum)
+    const [address, setAddress] = useState(props.MainStore.curUser.address)
+    const [gender , setGender] = useState(props.MainStore.curUser.gender)
+    const [smoker, setSmoker] = useState(props.MainStore.curUser.smoker)    
+    const [hours, setHours] = useState(props.MainStore.curUser.hours)
 
-
-    
     const inputHandler = (e) => {
         const inp = props.InputStore
         e.target.name === "firstName" ?
@@ -167,9 +170,9 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     }
 
     const handleChange = (event) => {
-      setHours(event.target.value);
-    };
-  
+        setHours(event.target.value);
+      };
+    
     return (
       <FormGroup>
 
@@ -253,17 +256,17 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
             /> 
           </Grid>
 
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <UploadFile imagesInputName='userImages' />
-          </Grid>
+          </Grid> */}
             
-          <Grid item xs={12}>
-            <AdressInput call={'address'} input={props.InputStore.address}/>
+          <Grid className={classes.adresInp} item xs={12}>
+            <AdressInput call={'address'} input={props.MainStore.userAddress}/>
           </Grid>
           
           <Grid item xs={12}>
               <FormControlLabel
-                  control={<Checkbox value={smoker}  name="smoker" onChange={inputHandler} color="primary" />}
+                  control={<Checkbox value={smoker} checked={smoker} name="smoker" onChange={inputHandler} color="primary" />}
                   label="Are you a smoker?"
               />
           </Grid>
@@ -304,4 +307,34 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
     )
 }))
 
-export default AddUser
+export default EditUser
+
+{/* <FormControl className={classes.formControl}>
+        <InputLabel id="outlined-label">Favorite hours</InputLabel>
+        <Select
+          labelId="outlined-label"
+          id="outlined"
+          multiple
+          value={hours}
+          onChange={inputHandler}
+          name={"hours"}
+          input={<Input id="select-multiple-hours" />}
+          renderValue={(selected) => (
+            <div className={classes.chips}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} className={classes.chip} />
+              ))}
+            </div>
+          )}
+          MenuProps={MenuProps}
+        >
+          {hoursArr.map((option) => (
+            // <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
+            //   {name}
+            // </MenuItem>
+            <MenuItem key={option.value} value={option.value} style={getStyles(name, personName, theme)}>
+            {option.label}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl> */}
