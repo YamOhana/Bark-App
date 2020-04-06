@@ -79,14 +79,14 @@ const Login = inject("MainStore")(observer((props) => {
     return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                {signORlog ? 
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Sign {signORlog ?  "in" : "up"}
                     </Typography>
+                    {signORlog ?  
                     <form className={classes.form} noValidate>
                         
                         <TextField
@@ -141,10 +141,10 @@ const Login = inject("MainStore")(observer((props) => {
                                 Forgot password?
                             </Link>
                         </Grid>
-                    </form>
-                </div> :
-                <Singup />
+                    </form> :
+                    <Singup />
                 } 
+                </div>
                 {signORlog ?
                 <Grid item>
                     <Button 

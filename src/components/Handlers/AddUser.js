@@ -19,6 +19,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormGroup from '@material-ui/core/FormGroup';
 import MenuItem from '@material-ui/core/MenuItem';
 import UploadFile from '../UploadFile';
+import UploadIcon from '../UploadIcons'
 
 const genders = [
   {
@@ -184,6 +185,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
           </Grid>
 
           <Grid item xs={12}>
+            {/* <UploadIcon /> */}
             <UploadFile imagesInputName='userImages' />
           </Grid>
             

@@ -21,6 +21,7 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import '../../styles/Login.css'
 import { inject } from 'mobx-react'
+import Divider from '@material-ui/core/Divider';
 const opencage = require('opencage-api-client');
 
 const useStyles = makeStyles((theme) => ({
@@ -36,9 +37,8 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
       width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(3),
-      marginBottom: theme.spacing(1)
-      
+      margin: theme.spacing(3),
+    //   marginBottom: theme.spacing(3)
     },
     formControl: {
         margin: theme.spacing(3),
@@ -200,15 +200,8 @@ class Singup extends Component {
 
     render() {
         return (
-            <Container component="main" maxWidth="xs">
-                <CssBaseline />
-                <div className={this.classes.paper}>
-                    <Avatar className={this.classes.avatar}>
-                        <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                        Sign up
-                    </Typography>
+
+           
                     <form className={this.classes.form} noValidate>
                     <Grid container spacing={2}>
                         
@@ -269,9 +262,8 @@ class Singup extends Component {
                         </Button>
                     
                     </form>
-                </div>
-        </Container>
-            
+             
+           
         );
     }
 }
