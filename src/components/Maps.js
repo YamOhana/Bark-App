@@ -29,12 +29,20 @@ const apiKey= 'AIzaSyDWpOziiBhAmxB-mylJys5a4WZsOeJzwLY'
     };
 
    
+
+    
     render() {
+
+      const style = {
+        width: '50vw',
+        height: '50vw'
+      };
       return (
         <Map google={this.props.google}
             onClick={this.onMapClicked}>
           <Marker onClick={this.onMarkerClick}
-                  name={'Current location'} />
+                  name={'Current location'}
+                  style={style} />
    
           <InfoWindow
             marker={this.state.activeMarker}
