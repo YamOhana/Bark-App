@@ -25,8 +25,13 @@ import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
 import Popover from '@material-ui/core/Popover';
 import OtherProfile from '../Profile/OtherProfile';
+import MapContainer from '../Maps'
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
+
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,17 +71,27 @@ const Dog = inject("MainStore")(observer((props) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorE2, setAnchorE2] = React.useState(null);
+
+
+    const apiKey = 'AIzaSyDWpOziiBhAmxB-mylJys5a4WZsOeJzwLY'
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+    const handleClick2 = (event) => {
+        setAnchorE2(event.currentTarget);
+    };
 
     const handleClose = () => {
         setAnchorEl(null);
+        setAnchorE2(null);
     };
 
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
+    const open2 = Boolean(anchorE2);
+    const id2 = open ? 'simple-popover' : undefined;
 
     
     const handleExpandClick = () => {
@@ -123,6 +138,23 @@ const Dog = inject("MainStore")(observer((props) => {
             >
                 <OtherProfile o={props.o} />
             </Popover>
+            <Popover
+                id={id2}
+                open={open2}
+                anchorE2={anchorE2}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+
+                HELLO
+            </Popover>
             <Card className='dog-card'>
                 <CardHeader
                     avatar={
@@ -131,9 +163,9 @@ const Dog = inject("MainStore")(observer((props) => {
                         </Avatar>
                     }
                     action={
-                        <IconButton aria-label="settings">
+                        <IconButton aria-label="settings" onClick={handleClick2}>
                             {props.o.onwalk ?
-                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green} >
+                                <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.green}  >
                                     W
                             </Avatar> :
                                 <Avatar alt="Remy Sharp" src="/broken-image.jpg" className={classes.orange} >
