@@ -86,26 +86,26 @@ const ChatFriends = inject("MainStore")(observer((props) => {
         </div>
     );
 
-    const buildDocKey = (friend) => [props.MainStore.owner, friend].sort().join(':');
+    // const buildDocKey = (friend) => [props.MainStore.owner, friend].sort().join(':');
 
 
-    const newChatSubmit = async (chatObj) => {
-        const docKey = this.buildDocKey(chatObj.sendTo);
-        await
-            firebase
-                .firestore()
-                .collection('chats')
-                .doc(docKey)
-                .set({
-                    messages: [{
-                        message: chatObj.message,
-                        sender: props.MainStore.curUser
-                    }],
-                    users: [props.MainStore.curUser, chatObj.sendTo],
-                    receiverHasRead: false
-                })
-        this.selectChat(props.MainStore.chats - 1);
-    }
+    // const newChatSubmit = async (chatObj) => {
+    //     const docKey = this.buildDocKey(chatObj.sendTo);
+    //     await
+    //         firebase
+    //             .firestore()
+    //             .collection('chats')
+    //             .doc(docKey)
+    //             .set({
+    //                 messages: [{
+    //                     message: chatObj.message,
+    //                     sender: props.MainStore.curUser
+    //                 }],
+    //                 users: [props.MainStore.curUser, chatObj.sendTo],
+    //                 receiverHasRead: false
+    //             })
+    //     this.selectChat(props.MainStore.chats - 1);
+    // }
 
 
 
@@ -177,8 +177,3 @@ const ChatFriends = inject("MainStore")(observer((props) => {
 ))
 
 export default ChatFriends;
-
-//  {props.MainStore.curFriends.map(f => {
-//        return f.dogs.map(d => <MainChat d={d} o={f} />)
-// })
-// } 

@@ -16,7 +16,7 @@ const PersonalChat = inject("MainStore", "InputStore")(observer((props) => {
 
 
 
-    const addPost = () => {
+    const addChat = () => {
 
 
         const chat = {
