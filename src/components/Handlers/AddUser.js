@@ -142,9 +142,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
 
     
     const inputHandler = (e) => {
-      if(e.target.name === "gender") {
-        console.log(`gendeeerrr`)
-    }  
+      
       const inp = props.InputStore
         e.target.name === "firstName" ?
         inp.handleInput(e.target.name, e.target.value) &&
@@ -164,6 +162,9 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
         e.target.name === "address" ?
         inp.handleInput(e.target.name, e.target.value) &&
         setAddress(e.target.value) :
+        e.target.name === "hours" ?
+        inp.handleInput(e.target.name, e.target.value) &&
+        setHours(e.target.value) :
         inp.handleInput(e.target.name, e.target.checked) &&
         setSmoker(e.target.checked) 
         
@@ -279,7 +280,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
                     labelId="outlined-label"
                     id="outlined"
                     multiple
-                    onChange={handleChange}
+                    onChange={inputHandler}
                     name="hours"
                     value={hours}
                     input={<Input id="select-multiple-hours" />}
