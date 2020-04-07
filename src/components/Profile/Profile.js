@@ -72,8 +72,8 @@ const Profile = inject("MainStore", "InputStore")(observer((props) => {
 
                     <CardContent>
                             <Typography variant="body2" color="textSecondary" component="p">
-                                <div>{props.MainStore.curUser.dogs.map(d => {
-                                    return <MyDog d={d} o={props.MainStore.curUser} />
+                                <div>{props.MainStore.curUser.dogs.map((d, i) => {
+                                    return <MyDog d={d} i={i} o={props.MainStore.curUser} />
                                 })}</div>
                             </Typography>
                         </CardContent>

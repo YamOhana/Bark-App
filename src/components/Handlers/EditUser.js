@@ -124,25 +124,19 @@ function getStyles(name, personName, theme) {
     };
 }
 
-
-  
-
-
-
 const EditUser = inject("MainStore", "InputStore")(observer((props) => { 
-
 
     const classes = useStyles();
     const theme = useTheme();
 
-    const [firstName, setFirstName] = useState(props.MainStore.curUser.firstName)
-    const [lastName, setLastName] = useState(props.MainStore.curUser.lastName)
-    const [birthDate, setbirthDate] = useState(props.MainStore.curUser.birthDate)
-    const [phoneNum, setPhoneNum] = useState(props.MainStore.curUser.phoneNum)
-    const [address, setAddress] = useState(props.MainStore.curUser.address)
-    const [gender , setGender] = useState(props.MainStore.curUser.gender)
-    const [smoker, setSmoker] = useState(props.MainStore.curUser.smoker)    
-    const [hours, setHours] = useState(props.MainStore.curUser.hours)
+    const [firstName, setFirstName] = useState(props.InputStore.firstName)
+    const [lastName, setLastName] = useState(props.InputStore.lastName)
+    const [birthDate, setbirthDate] = useState(props.InputStore.birthDate)
+    const [phoneNum, setPhoneNum] = useState(props.InputStore.phoneNum)
+    const [address, setAddress] = useState(props.InputStore.address)
+    const [gender , setGender] = useState(props.InputStore.gender)
+    const [smoker, setSmoker] = useState(props.InputStore.smoker)
+    const [hours, setHours] = useState(props.InputStore.hours)
 
     const inputHandler = (e) => {
         const inp = props.InputStore
@@ -164,14 +158,13 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
         e.target.name === "address" ?
         inp.handleInput(e.target.name, e.target.value) &&
         setAddress(e.target.value) :
+        e.target.name === "hours" ?
+        inp.handleInput(e.target.name, e.target.value) &&
+        setHours(e.target.value) :
         inp.handleInput(e.target.name, e.target.checked) &&
         setSmoker(e.target.checked) 
         
     }
-
-    const handleChange = (event) => {
-        setHours(event.target.value);
-      };
     
     return (
       <FormGroup>
@@ -188,7 +181,7 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
             fullWidth
             label="First Name"
             autoFocus
-            value={firstName}
+            defaultValue={props.firstName}
             onChange={inputHandler} 
             />
           </Grid>
@@ -203,7 +196,7 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
               fullWidth
               label="Last Name"
               autoFocus
-              value={lastName}
+              defaultValue={props.lastName}
               onChange={inputHandler} 
             />
           </Grid>
@@ -211,7 +204,7 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
           <Grid item xs={12} >
             <TextField
               id="phoneNum"
-              value={phoneNum} 
+              defaultValue={props.phoneNum} 
               name="phoneNum" 
               onChange={inputHandler}
               helperText="Enter Phone number"
@@ -228,7 +221,8 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
               id="outlined-select-gender"
               select
               label="Gender"
-              value={gender}
+              name="gender"
+              defaultValue={props.gender}
               onChange={inputHandler}
               helperText="Select your gender"
               variant="outlined"
@@ -246,7 +240,7 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
               id="birthDate"
               label="Birthday"
               type="date"
-              value={birthDate}
+              defaultValue={props.birthDate}
               className={classes.textField}
               name="birthDate" 
               onChange={inputHandler}
@@ -255,18 +249,14 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
               }}
             /> 
           </Grid>
-
-          {/* <Grid item xs={12}>
-            <UploadFile imagesInputName='userImages' />
-          </Grid> */}
             
           <Grid className={classes.adresInp} item xs={12}>
-            <AdressInput call={'address'} input={props.MainStore.userAddress}/>
+            <AdressInput call={'address'} input={props.InputStore.address}/>
           </Grid>
           
           <Grid item xs={12}>
               <FormControlLabel
-                  control={<Checkbox value={smoker} checked={smoker} name="smoker" onChange={inputHandler} color="primary" />}
+                  control={<Checkbox defaultChecked={props.smoker}  name="smoker" onChange={inputHandler} color="primary" />}
                   label="Are you a smoker?"
               />
           </Grid>
@@ -278,9 +268,9 @@ const EditUser = inject("MainStore", "InputStore")(observer((props) => {
                     labelId="outlined-label"
                     id="outlined"
                     multiple
-                    value={hours}
-                    onChange={handleChange}
-                    name={"hours"}
+                    defaultValue={props.hours}
+                    onChange={inputHandler}
+                    name="hours"
                     input={<Input id="select-multiple-hours" />}
                     renderValue={(selected) => (
                         <div className={classes.chips}>

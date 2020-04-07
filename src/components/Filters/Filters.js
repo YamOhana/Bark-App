@@ -12,9 +12,6 @@ import Slider from '@material-ui/core/Slider';
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    // position: 'fixed',
-    // top: 0,
-    // height: '90vh', 
     width: 95,
   },
   selectEmpty: {

@@ -142,7 +142,10 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
 
     
     const inputHandler = (e) => {
-        const inp = props.InputStore
+      if(e.target.name === "gender") {
+        console.log(`gendeeerrr`)
+    }  
+      const inp = props.InputStore
         e.target.name === "firstName" ?
         inp.handleInput(e.target.name, e.target.value) &&
         setFirstName(e.target.value) :
@@ -226,6 +229,7 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
               select
               label="Gender"
               value={gender}
+              name="gender"
               onChange={inputHandler}
               helperText="Select your gender"
               variant="outlined"
