@@ -14,19 +14,27 @@ const Friends = inject("MainStore")(observer((props) => {
     return (
         <div classNamae='my-friends'>
             <List>
-                 {props.MainStore.curFriends.map(f => {
-                     return f.dogs.map(d => <DogFriends d={d} o={f} />)
-                    })
-                }
+           
+            {props.MainStore.owners.map(o => {
+                
+                return (props.MainStore.curUser && (props.MainStore.curUser.friends.includes(o.id) && props.MainStore.curUser.id != o.id)?
+                 o.dogs.map(d => <DogFriends d={d} o={o} />):null)
+            })
+            }
+
+                
             </List>
                  
             <Divider variant="middle" />
 
         </div>
     )}
-))
-
-export default Friends;
-
-
-// props.o.onwalk
+    ))
+    
+    export default Friends;
+    
+    
+    //     {/* {props.MainStore.curFriends.map(f => {
+    //         return f.dogs.map(d => <DogFriends d={d} o={f} />)
+    //        })
+    //    } */}
