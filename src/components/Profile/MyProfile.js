@@ -200,13 +200,13 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
             />
             
             {
-                props.MainStore.curUser ? (props.MainStore.curUser.images ? (props.MainStore.curUser.images.map(i =>
+                props.MainStore.curUser ? (props.MainStore.curUser.images ? 
                     <CardMedia
                         className={classes.media}
-                        image={i}
-                        title={i}
+                        image={props.MainStore.curUser.images[0]}
+                        title={props.MainStore.curUser.images[0]}
                     />
-                )) :
+                 :
                 (<CardMedia
                         className={classes.media}
                         image={props.MainStore.curUser.image}
