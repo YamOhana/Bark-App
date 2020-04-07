@@ -104,21 +104,21 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
 
     } 
 
-    const checkField = field => {
+    const checkField = async field => {
         const u = props.MainStore.curUser
         if (props.InputStore[field] == undefined) {
             let val = ""
             switch (field) {
                 case "firstName":
-                    val = prompt(`You forgot to fill your First Name`)
+                    val = await prompt(`You forgot to fill your First Name`)
                     u.firstName = val
                     return val
                 case "lastName":
-                    val = prompt(`You forgot to fill your Last Name`)
+                    val = await prompt(`You forgot to fill your Last Name`)
                     u.lastName = val
                     return val
                 case "address":
-                    val = prompt(`You forgot to put your Address`)
+                    val = await prompt(`You forgot to put your Address`)
                     u.address = val
                     return val
                 case "smoker":
@@ -128,21 +128,6 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
                     console.log(`hours false`)
                     u.hours = []
                     return []
-                case "vaccinated":
-                    u.vaccinated = false
-                    return false
-                case "neutered":
-                    u.neutered = false
-                    return false
-                case "shy":
-                    u.shy = false
-                    return false
-                case "energetic":
-                    u.energetic = false
-                    return false
-                case "dominant":
-                    u.dominant = false
-                    return false
                 default:
                     u[field] = null
                     return null
@@ -154,17 +139,17 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
 
 
 
-    const saveUserChanges = async data => {
+    const saveUserChanges = async () => {
         const updatedUser = {
-            firstName: checkField('firstName'),
-            lastName: checkField('lastName'),
-            birthDate: checkField('birthDate'),
-            phoneNum: checkField('phoneNum'),
-            address: checkField('address'),
-            homeCoord: await getCoordinates(checkField('address')),
-            gender: checkField('gender'),
-            smoker: checkField('smoker'),
-            hours: checkField('hours'),
+            firstName: await checkField('firstName'),
+            lastName: await checkField('lastName'),
+            birthDate: await checkField('birthDate'),
+            phoneNum: await checkField('phoneNum'),
+            address: await checkField('address'),
+            homeCoord: await getCoordinates(await checkField('address')),
+            gender: await checkField('gender'),
+            smoker: await checkField('smoker'),
+            hours: await checkField('hours'),
         }
         axios.put(`http://localhost:3001/user/${props.MainStore.curUser.id}`, updatedUser).then(res => {
                

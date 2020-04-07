@@ -150,6 +150,24 @@ router.put('/user/:id', (req, res) => {
         console.log("Error getting document:", error)
     });
 })
+
+//update dog data
+router.put('/dog/:uId', (req, res) => {
+    database.collection("users").doc(`${req.params.id}`).update({
+        dogs: [req.body]
+    }).then(function (doc) {
+
+        if (doc.exists) {
+            user = doc.data();
+            res.status(200).send(user)
+        } else {
+            res.status(400).send("No User")
+        }
+    }).catch(function (error) {
+        console.log("Error getting document:", error)
+    });
+})
+
 //update dog profile
 router.put('/dog-info', (req, res) => {
     //can't update element in array, only remove or add to array
