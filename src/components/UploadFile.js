@@ -73,7 +73,7 @@ const UploadFile = inject("MainStore", "InputStore")(observer((props) => {
 
     return (
         <Grid item xs={12} className={classes.root}>
-            <TextField type="file" id="filled-basic" value={newImage} onChange={handleChange} name='newImage' variant="filled" /> 
+            <TextField type="file" id="filled-basic" onChange={handleChange} name='newImage' variant="filled" /> 
             {(uploadProgress < 100 && uploadProgress > 0) ? (<LinearProgress variant="buffer" value={uploadProgress} valueBuffer={buffer} color="secondary" />) : null}
 
         </Grid>
