@@ -7,7 +7,6 @@ import Dog from './Dog';
 const Dogs = inject("MainStore")(observer((props) => { 
     return (
         <div>
-            Im Dogs
             { props.MainStore.isFiltering ?
             props.MainStore.filteredOwners.map(o => {
                 // console.log(`filtering!!!!!!!`)

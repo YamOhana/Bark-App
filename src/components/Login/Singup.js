@@ -257,6 +257,7 @@ class Singup extends Component {
                             variant="contained"
                             color="primary"
                             className={this.classes.submit}
+                            onClick={this.signup}
                         >
                             Sign Up
                         </Button>
