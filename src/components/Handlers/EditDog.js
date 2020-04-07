@@ -135,7 +135,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                     fullWidth
                     label="Dog's Name"
                     autoFocus
-                    value={dogName}
+                    defaultValue={props.dogName}
                     onChange={inputHandler} 
                 />
             </Grid>
@@ -145,7 +145,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 id="outlined-select-size"
                 select
                 label="size"
-                value={size}
+                defaultValue={props.size}
                 onChange={inputHandler}
                 helperText="Please select your Dog's size"
                 variant="outlined"
@@ -163,7 +163,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 id="outlined-select-dogGender"
                 select
                 label="dogGender"
-                value={dogGender}
+                defaultValue={props.dogGender}
                 onChange={inputHandler}
                 helperText="Please select your Dog's gender"
                 variant="outlined"
@@ -182,7 +182,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 id="dogBirthDate"
                 label="Your Dog's Birthday"
                 type="date"
-                value={dogBirthDate}
+                defaultValue={props.dogBirthDate}
                 className={classes.textField}
                 name="dogBirthDate" 
                 onChange={inputHandler}
@@ -205,7 +205,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                     fullWidth
                     label="Dog's Type"
                     autoFocus
-                    value={type}
+                    defaultValue={props.type}
                     onChange={inputHandler} 
                 />
             </Grid>
@@ -215,12 +215,12 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 <FormLabel component="legend">Your Dog's Data</FormLabel>
                     <FormGroup>
                         <FormControlLabel
-                            control={<Checkbox value={vaccinated} checked={vaccinated} name="vaccinated" onChange={inputHandler} color="primary" />}
+                            control={<Checkbox defaultChecked={props.vaccinated} name="vaccinated" onChange={inputHandler} color="primary" />}
                             label="Is your Dog vaccinated?"
                         />
                     
                         <FormControlLabel
-                            control={<Checkbox value={neutered} checked={neutered} name="neutered" onChange={inputHandler} color="primary" />}
+                            control={<Checkbox defaultChecked={props.neutered} name="neutered" onChange={inputHandler} color="primary" />}
                             label="Is your Dog Neutered?"
                         />
                     </FormGroup> 
@@ -228,15 +228,15 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 <FormLabel component="legend">Your Dog's Nature</FormLabel>
                     <FormGroup>
                         <FormControlLabel
-                        control={<Checkbox checked={shy} checked={shy} onChange={inputHandler} name="shy" />}
+                        control={<Checkbox defaultChecked={props.shy} onChange={inputHandler} name="shy" />}
                         label="Is your Dog Shy?"
                         />
                         <FormControlLabel
-                        control={<Checkbox checked={energetic} checked={energetic} onChange={inputHandler} name="energetic" />}
+                        control={<Checkbox defaultChecked={props.energetic} onChange={inputHandler} name="energetic" />}
                         label="Is your Dog Energetic?"
                         />
                         <FormControlLabel
-                        control={<Checkbox checked={dominant} checked={dominant} onChange={inputHandler} name="dominant" />}
+                        control={<Checkbox defaultChecked={props.dominant} onChange={inputHandler} name="dominant" />}
                         label="Is your Dog Dominant?"
                         />
                     </FormGroup>

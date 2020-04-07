@@ -15,7 +15,6 @@ export class MainStore {
         chat: []
     }
     @observable posts = []
-    // @observable userAddress
     @observable filters = {
         age: null,
         size: null,
@@ -43,6 +42,14 @@ export class MainStore {
         this.curFriends = this.getMyFriends()
     }
 
+    @action updateDog = (index, dog) => {
+        for(let i = 0; i < this.curUser.dogs; i++) {
+            if(i === index) {
+                this.curUser.dogs[i] = dog
+            }
+        }
+        return this.curUser.dogs
+    }
 
     @action getPosts = data => this.posts = data
 
