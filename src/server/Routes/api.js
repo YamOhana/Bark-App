@@ -138,6 +138,7 @@ router.put('/user/:id', (req, res) => {
         homeCoord: req.body.homeCoord,
         gender: req.body.gender,
         hours: req.body.hours,
+        images: req.body.images
     }).then(function (doc) {
 
         if (doc.exists) {

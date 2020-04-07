@@ -92,7 +92,7 @@ class Singup extends Component {
                     return val
                 case "userImages":
                     val = prompt(`You forgot to put your image`)
-                    return val
+                    return [val]
                 case "address":
                     val = prompt(`You forgot to put your Address`)
                     return val
@@ -254,6 +254,7 @@ class Singup extends Component {
                         <Button
                             type="submit"
                             fullWidth
+                            onClick={this.signup}
                             variant="contained"
                             color="primary"
                             className={this.classes.submit}
