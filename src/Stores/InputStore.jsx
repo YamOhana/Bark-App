@@ -63,7 +63,21 @@ export class Inputs {
     }
 
     @action handleArrayInput = (name, val) => {
-        this[name].push(val)
+        this[name].unshift(val)
+        // if(name === "userImages") {
+        //     console.log(this.userImages)
+        //     this.userImages.unshift(val)
+        // }
+        // if(name === "dogImages") {
+        //     this.dogImages.unshift(val)
+        // }
+        // if(name === "commentPictures") {
+        //     this.commentPictures.unshift(val)
+        // }
+    }
+
+    @action editProfilePic = (name, val) => {
+        this[name].unshift(val)
     }
 
     @action deleteHour = val => {

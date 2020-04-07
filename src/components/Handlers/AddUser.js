@@ -279,9 +279,8 @@ const AddUser = inject("MainStore", "InputStore")(observer((props) => {
                     labelId="outlined-label"
                     id="outlined"
                     multiple
-                    value={hours}
                     onChange={handleChange}
-                    name={"hours"}
+                    name="hours"
                     input={<Input id="select-multiple-hours" />}
                     renderValue={(selected) => (
                         <div className={classes.chips}>
