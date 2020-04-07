@@ -1,9 +1,19 @@
 import React from 'react';
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 import { Avatar } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Friends from '@material-ui/icons/PersonAdd'
+import IconButton from '@material-ui/core/IconButton';
+import axios from 'axios'
 
-const Notification = (observer((props) => {
+
+const Notification =  inject("MainStore")(observer((props) => {
+
+    const acceptFriend = () => {
+        props.MainStore.acceptFriendship(props.user.id)
+        axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.user.id}`)
+    }
+
     return (
 
         <Grid container>
@@ -18,7 +28,10 @@ const Notification = (observer((props) => {
                 </Avatar>
             </Grid>
             <Grid item xs={4} justify="flex-end">
-                <button>Accept</button>
+                <IconButton aria-label="accept friendship" onClick={acceptFriend}>
+                    <Friends />
+                </IconButton>
+
             </Grid>
 
 
