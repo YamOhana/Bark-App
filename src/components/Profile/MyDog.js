@@ -177,7 +177,7 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
             dominant: await checkField('dominant'), 
         }
         const newDogs = props.MainStore.updateDog(props.i, updatedDog)
-        console.log(updatedDog);
+        console.log(newDogs);
         
         axios.put(`http://localhost:3001/dog/${props.MainStore.curUser.id}`, newDogs).then(res => {
             

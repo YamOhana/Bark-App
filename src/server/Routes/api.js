@@ -152,9 +152,9 @@ router.put('/user/:id', (req, res) => {
 })
 
 //update dog data
-router.put('/dog/:uId', (req, res) => {
+router.put('/dog/:id', (req, res) => {
     database.collection("users").doc(`${req.params.id}`).update({
-        dogs: [req.body]
+        dogs: req.body
     }).then(function (doc) {
 
         if (doc.exists) {
