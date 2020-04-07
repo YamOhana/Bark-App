@@ -96,6 +96,7 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
         props.InputStore.handleInput('shy', props.d.park)
         props.InputStore.handleInput('energetic', props.d.energetic)
         props.InputStore.handleInput('dominant', props.d.dominant)
+        props.InputStore.handleInput("dogImages", props.d.images)
     }
 
     const getCoordinates = async (stringAddress) => {
@@ -255,7 +256,7 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
                 }
                 {!editPic ?
                 <Grid item xs={12}>
-                    <UploadFile imagesInputName='userImages' />
+                    <UploadFile imagesInputName='dogImages' />
                 </Grid> :
                 null
                 }

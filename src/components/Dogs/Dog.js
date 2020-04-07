@@ -171,7 +171,7 @@ const Dog = inject("MainStore")(observer((props) => {
                 <CardHeader
                     avatar={
                         <Avatar aria-label="dog" className='user-avatar' src={props.o.images} onClick={handleClick} >
-                            {props.d.dogName[0]}
+                            {props.d.dogName}
                         </Avatar>
                     }
                     action={
