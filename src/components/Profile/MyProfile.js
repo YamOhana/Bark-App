@@ -64,7 +64,7 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
     const classes = useStyles();
     const [edditing , setEdditing] = useState(true)
     const [editPic , setEditpic] = useState(true)
-    const [savePic , setSavepic] = useState(true)
+    // const [savePic , setSavepic] = useState(true)
 
     const updateInputs = () => {
         props.InputStore.handleInput("firstName", props.MainStore.curUser.firstName)
@@ -150,9 +150,6 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
         if(!editPic) {setEditpic(!editPic)}
     }
     const savePicture = async () => {
-        // const pics = [...props.InputStore.userImages]
-        // const profPic = pics.splice(pics.length - 1, 1)
-        // props.InputStore.editProfilePic('userImages', profPic)
         setEditpic(!editPic)
         await saveUserChanges()
     }
