@@ -28,7 +28,7 @@ import OtherProfile from '../Profile/OtherProfile';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import MapContainer from '../Maps'
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
 const imgURL = 'https://www.hsppr.org/sites/default/files/Donate-dog_0.jpg'
 
@@ -74,13 +74,13 @@ const Dog = inject("MainStore")(observer((props) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
-    
+
     const [imageNum, setImageNum] = React.useState(0);
-  
+
     const [anchorE2, setAnchorE2] = React.useState(null);
 
     const apiKey = 'AIzaSyDWpOziiBhAmxB-mylJys5a4WZsOeJzwLY'
-    
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -98,7 +98,7 @@ const Dog = inject("MainStore")(observer((props) => {
     const open2 = Boolean(anchorE2);
     const id2 = open ? 'simple-popover' : undefined;
 
-    
+
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
@@ -113,26 +113,15 @@ const Dog = inject("MainStore")(observer((props) => {
         props.MainStore.acceptFriendship(props.o.id)
         axios.put(`http://localhost:3001/addFriend/${props.MainStore.curUser.id}/${props.o.id}`)
     }
-    
+
     const previousImage = () => {
-        if(imageNum>0) setImageNum(imageNum-1)
+        if (imageNum > 0) setImageNum(imageNum - 1)
     }
     const nextImage = () => {
-        if(props.d.images && (imageNum<props.d.images.length-1)) setImageNum(imageNum+1)
+        if (props.d.images && (imageNum < props.d.images.length - 1)) setImageNum(imageNum + 1)
     }
-    
+
     return (
-
-        //    <div>
-        //      <span>I'm {props.d.dogName},a {props.d.size} size {props.d.type} {props.d.dogGender} Dog</span>
-        //    <span>I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated</span>
-        //  <span>I'm {props.d.neutered ? null : 'NOT!'} Neutered</span>
-        //<span>{props.d.shy ? 'Shy': null}</span>
-        //<span>{props.d.energetic ? 'Dnergetic': null}</span>
-        //<span>{props.d.dominant ? 'Dominant': null}</span>
-
-
-
         <div className='dog-container'>
             <Popover
                 id={id}
@@ -197,22 +186,21 @@ const Dog = inject("MainStore")(observer((props) => {
 
                     title={props.d.dogName}
                 />
-                
-          <IconButton aria-label="previous" onClick={previousImage}>
-            <NavigateBeforeIcon />
-          </IconButton>
-          <IconButton aria-label="next" onClick={nextImage}>
-            <NavigateNextIcon />
-          </IconButton>
+
+                <IconButton aria-label="previous" onClick={previousImage}>
+                    <NavigateBeforeIcon />
+                </IconButton>
+                <IconButton aria-label="next" onClick={nextImage}>
+                    <NavigateNextIcon />
+                </IconButton>
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {props.d.size}
-                        <br></br>
-                        {props.d.dogGender}
-                        <br></br>
-                        {props.d.type}
+                        {props.d.size} {props.d.size ? <br></br> : null}
+                        {props.d.dogGender} {props.d.dogGender ? <br></br> : null}
+                        {props.d.type}  {props.d.type ? <br></br> : null}
+                        {(props.MainStore.getDistance(props.o) != -1 ? `I'm ${Math.round(props.MainStore.getDistance(props.o) * 100) / 100} km away` : null)}
                     </Typography>
-                </CardContent>
+                </CardContent >
                 <CardActions disableSpacing>
 
                     {
@@ -262,24 +250,20 @@ const Dog = inject("MainStore")(observer((props) => {
                         <Typography paragraph>More Information:</Typography>
                         <Typography paragraph>
 
-
-                            I'm {props.d.vaccinated ? null : 'NOT!'} Vaccinated <br></br>
-                            I'm {props.d.neutered ? null : 'NOT!'} Neutered <br></br>
-                            I'm {props.d.shy ? null : 'NOT!'} Shy <br></br>
-                            I'm {props.d.energetic ? null : 'NOT!'} Energetic <br></br>
-                            I'm {props.d.dominant ? null : 'NOT!'} Dominant <br></br>
-                            I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years
-                            and {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old
-
-
-
+                            {props.d.vaccinated ? `I'm Vaccinated` : null} {props.d.vaccinated ? <br></br> : null}
+                            {props.d.neutered ? `I'm Neutered` : null} {props.d.neutered ? <br></br> : null}
+                            {props.d.shy ? `I'm Shy` : null} {props.d.shy ? <br></br> : null}
+                            {props.d.energetic ? `I'm Energetic` : null} {props.d.energetic ? <br></br> : null}
+                            {props.d.dominant ? `I'm Dominant` : null} {props.d.dominant ? <br></br> : null}
+                         I'm {props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0] == 0 ? null : `${props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[0]} Years and`}
+                            {Number.isInteger(props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]) ? ` ${props.MainStore.calculateAge(`${props.d.dogBirthDate}`)[1]} Months old` : `1 Year Old`}
 
                         </Typography>
 
 
                     </CardContent>
                 </Collapse>
-            </Card>
+            </Card >
 
 
         </div >

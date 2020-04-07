@@ -40,8 +40,8 @@ export class MainStore {
     }
 
     @action updateDog = (index, dog) => {
-        for(let i = 0; i < this.curUser.dogs; i++) {
-            if(i === index) {
+        for (let i = 0; i < this.curUser.dogs; i++) {
+            if (i === index) {
                 this.curUser.dogs[i] = dog
             }
         }
@@ -133,6 +133,22 @@ export class MainStore {
                 // console.log(dist)
                 // console.log(term /20)
                 return 0
+            }
+        }
+    }
+
+    @action getDistance = (owner) => {
+        console.log(owner.homeCoord);
+        if (!owner.homeCoord || !this.owners[this.userIndex].homeCoord) {
+            return -1
+        } else {
+            const userCord = this.owners[this.userIndex].homeCoord
+            const dist = this.calculateDistance(userCord.lat, userCord.lng, owner.homeCoord.lat, owner.homeCoord.lng)
+            if (dist === null) {
+                console.log(`dist is undefined ${dist}`);
+                return -1
+            } else {
+                return dist
             }
         }
     }
