@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer, inject } from 'mobx-react'
 import UploadFile from '../UploadFile';
 import AdressInput from '../Map'
@@ -54,11 +54,15 @@ const useStyles = makeStyles((theme) => ({
     },
     formControl: {
         margin: theme.spacing(3),
-      },
+    },
+    adresInp: {
+        width: '100%',
+        margin: theme.spacing(3),
+    },
   }));
 
 
-const AddDog = inject("MainStore", "InputStore")(observer((props) => { 
+const EditDog = inject("MainStore", "InputStore")(observer((props) => { 
 
     const classes = useStyles();
 
@@ -188,12 +192,8 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
                 /> 
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid className={classes.adresInp} item xs={12}>
                 <AdressInput call={'park'} input={props.InputStore.park}/>
-            </Grid>
-
-            <Grid item xs={12}>
-                <UploadFile imagesInputName='dogImages' />
             </Grid>
 
             <Grid item xs={12}>
@@ -215,12 +215,12 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
                 <FormLabel component="legend">Your Dog's Data</FormLabel>
                     <FormGroup>
                         <FormControlLabel
-                            control={<Checkbox value={vaccinated} name="vaccinated" onChange={inputHandler} color="primary" />}
+                            control={<Checkbox value={vaccinated} checked={vaccinated} name="vaccinated" onChange={inputHandler} color="primary" />}
                             label="Is your Dog vaccinated?"
                         />
                     
                         <FormControlLabel
-                            control={<Checkbox value={neutered} name="neutered" onChange={inputHandler} color="primary" />}
+                            control={<Checkbox value={neutered} checked={neutered} name="neutered" onChange={inputHandler} color="primary" />}
                             label="Is your Dog Neutered?"
                         />
                     </FormGroup> 
@@ -228,19 +228,18 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
                 <FormLabel component="legend">Your Dog's Nature</FormLabel>
                     <FormGroup>
                         <FormControlLabel
-                        control={<Checkbox checked={shy} onChange={inputHandler} name="shy" />}
+                        control={<Checkbox checked={shy} checked={shy} onChange={inputHandler} name="shy" />}
                         label="Is your Dog Shy?"
                         />
                         <FormControlLabel
-                        control={<Checkbox checked={energetic} onChange={inputHandler} name="energetic" />}
+                        control={<Checkbox checked={energetic} checked={energetic} onChange={inputHandler} name="energetic" />}
                         label="Is your Dog Energetic?"
                         />
                         <FormControlLabel
-                        control={<Checkbox checked={dominant} onChange={inputHandler} name="dominant" />}
+                        control={<Checkbox checked={dominant} checked={dominant} onChange={inputHandler} name="dominant" />}
                         label="Is your Dog Dominant?"
                         />
                     </FormGroup>
-                <FormHelperText>You can always change it later</FormHelperText>
                 </FormControl>
             </Grid>
 
@@ -251,4 +250,4 @@ const AddDog = inject("MainStore", "InputStore")(observer((props) => {
     )
 }))
 
-export default AddDog
+export default EditDog

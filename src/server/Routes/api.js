@@ -127,9 +127,17 @@ router.put('/requestFriend/:currentUserId/:friendId', (req, res) => {
 router.get('/map', (req, res) => {
 })
 //update profile
-router.put('/user/:id/:fieldName', (req, res) => {
+router.put('/user/:id', (req, res) => {
     database.collection("users").doc(`${req.params.id}`).update({
-        [req.params.fieldName]: req.body
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        birthDate: req.body.birthDate,
+        smoker: req.body.smoker,
+        phoneNum: req.body.phoneNum,
+        address: req.body.address,
+        homeCoord: req.body.homeCoord,
+        gender: req.body.gender,
+        hours: req.body.hours,
     }).then(function (doc) {
 
         if (doc.exists) {

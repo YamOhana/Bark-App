@@ -58,12 +58,19 @@ const useStyles = makeStyles((theme) => ({
     green: {
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: "#76ff03",
-    }
+    },
+    adresInp: {
+        width: '100%',
+        margin: theme.spacing(3),
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
 }));
 
 
 
-const MyDog = inject("MainStore")(observer((props) => {
+const MyDog = inject("MainStore", "InputStore")(observer((props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const [edditing , setEdditing] = useState(true)
@@ -73,8 +80,19 @@ const MyDog = inject("MainStore")(observer((props) => {
         setExpanded(!expanded);
     };
 
-    const editProfile = () => {
-        setEdditing(false)
+    const editDogProfile = () => {
+        props.InputStore.handleInput('park', props.d.park)
+        props.InputStore.handleInput('dogName', props.d.dogName)
+        props.InputStore.handleInput('dogGender', props.d.dogGender)
+        props.InputStore.handleInput('vaccinated', props.d.vaccinated)
+        props.InputStore.handleInput('neutered', props.d.neutered)
+        props.InputStore.handleInput('dogBirthDate', props.d.dogBirthDate)
+        props.InputStore.handleInput('size', props.d.size)
+        props.InputStore.handleInput('type', props.d.type)
+        props.InputStore.handleInput('shy', props.d.park)
+        props.InputStore.handleInput('energetic', props.d.energetic)
+        props.InputStore.handleInput('dominant', props.d.dominant)
+        setEdditing(!edditing)
     }
 
     return (     
@@ -90,7 +108,7 @@ const MyDog = inject("MainStore")(observer((props) => {
                     title={props.d.dogName}
                     action={
                         <CardActions  disableSpacing>
-                            <IconButton onClick={editProfile} aria-label="edit">
+                            <IconButton onClick={editDogProfile} aria-label="edit">
                                 <EditIcon />
                             </IconButton>
                         </CardActions>
@@ -127,7 +145,7 @@ const MyDog = inject("MainStore")(observer((props) => {
                 }
                 {edditing ?
                 null :
-                <EditDog />
+                <EditDog d={props.d}/>
                 }
                 <CardActions disableSpacing>
                     <IconButton

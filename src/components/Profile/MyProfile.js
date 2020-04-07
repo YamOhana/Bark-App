@@ -19,6 +19,7 @@ import axios from 'axios'
 import EditIcon from '@material-ui/icons/Edit';
 import UploadFile from '../UploadFile';
 import EditUser from '../Handlers/EditUser'
+const opencage = require('opencage-api-client');
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,12 +57,105 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-const MyProfile = inject("MainStore")(observer((props) => {
+const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
+    
     const classes = useStyles();
     const [edditing , setEdditing] = useState(true)
     
-    const editProfile = () => {
-        setEdditing(false)
+    const editProfile = async () => {
+        await updateInputs()
+        setEdditing(!edditing)
+    }
+
+    const updateInputs = () => {
+        props.InputStore.handleInput("firstName", props.MainStore.curUser.firstName)
+        props.InputStore.handleInput("lastName", props.MainStore.curUser.lastName)
+        props.InputStore.handleInput("birthDate", props.MainStore.curUser.birthDate)
+        props.InputStore.handleInput("phoneNum", props.MainStore.curUser.phoneNum)
+        props.InputStore.handleInput("address", props.MainStore.curUser.address)
+        props.InputStore.handleInput("gender", props.MainStore.curUser.gender)
+        props.InputStore.handleInput("smoker", props.MainStore.curUser.smoker)
+        props.InputStore.handleInput("hours", props.MainStore.curUser.hours)
+    }
+
+    const getCoordinates = async (stringAddress) => {
+        console.log(stringAddress)
+        try {
+            const location = await opencage.geocode({q: stringAddress, key: '566a660cd08e4cdabc79d2abc4369dd6'})
+            if (location.status.code == 200) {
+                if (location.results.length > 0) {
+                    const place = location.results[0];
+                    console.log(place.formatted);
+                    console.log(place.geometry);
+                    return place.geometry
+                }
+            } else if (location.status.code == 402) {
+                console.log('hit free-trial daily limit');
+                return null
+            } else {
+                console.log('error', location.status.message);
+                return null
+            }
+            
+        } catch (error) {
+            console.log('error', error.message);
+            return null
+        }
+
+    } 
+
+    const checkField = field => {
+        if (props.InputStore[field] == undefined) {
+            let val = ""
+            switch (field) {
+                case "firstName":
+                    val = prompt(`You forgot to fill your First Name`)
+                    return val
+                case "lastName":
+                    val = prompt(`You forgot to fill your Last Name`)
+                    return val
+                case "address":
+                    val = prompt(`You forgot to put your Address`)
+                    return val
+                case "smoker":
+                    return false
+                case "hours":
+                    console.log(`hours false`)
+                    return []
+                case "vaccinated":
+                    return false
+                case "neutered":
+                    return false
+                case "shy":
+                    return false
+                case "energetic":
+                    return false
+                case "dominant":
+                    return false
+                default:
+                    return null
+            }
+        }
+        return props.InputStore[field]
+    };
+
+
+
+    const saveUserChanges = async data => {
+        const updatedUser = {
+            firstName: checkField('firstName'),
+            lastName: checkField('lastName'),
+            birthDate: checkField('birthDate'),
+            phoneNum: checkField('phoneNum'),
+            address: checkField('address'),
+            homeCoord: await getCoordinates(checkField('address')),
+            gender: checkField('gender'),
+            smoker: checkField('smoker'),
+            hours: checkField('hours'),
+        }
+        axios.put(`http://localhost:3001/user/${props.MainStore.curUser.id}`, updatedUser).then(res => {
+                // this.props.clients.updateList(res.data)
+            })
     }
     
     return (
@@ -113,6 +207,7 @@ const MyProfile = inject("MainStore")(observer((props) => {
                 variant="contained"
                 color="primary"
                 size="small"
+                onClick={saveUserChanges}
                 className={classes.button}
                 startIcon={<SaveIcon />}
             >
@@ -137,7 +232,16 @@ const MyProfile = inject("MainStore")(observer((props) => {
                 {props.MainStore.curUser.smoker ? "I'm a Smoker" : null}
             </Typography> :
 
-            <EditUser /> 
+            <EditUser 
+                firstName={props.InputStore.firstName}
+                lastName={props.InputStore.lastName}
+                birthDate={props.InputStore.birthDate}
+                phoneNum={props.InputStore.phoneNum}
+                address={props.InputStore.address}
+                gender={props.InputStore.gender}
+                smoker={props.InputStore.smoker}
+                hours={props.InputStore.hours}
+            /> 
             }
             
             
