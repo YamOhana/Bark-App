@@ -52,12 +52,20 @@ export const FolderListItems = ({ user }) => {
         <ListItemText primary="Friends" />
       </ListItem>
     </Link>
-    <Link to='/MainChat'>
+    <Link to='/Chats'>
       <ListItem button>
         <ListItemIcon>
           <ChatIcon />
         </ListItemIcon>
         <ListItemText primary="Chat" />
+      </ListItem>
+    </Link>
+    <Link to='/Chat'>
+      <ListItem button>
+        <ListItemIcon>
+          <ChatIcon />
+        </ListItemIcon>
+        <ListItemText primary="Chats" />
       </ListItem>
     </Link>
     <Link to='/Maps'>
