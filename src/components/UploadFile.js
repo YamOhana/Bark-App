@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(2),
     },
   },
+  input: {
+    display: 'none',
+  },
 }));
 
 

@@ -145,6 +145,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 id="outlined-select-size"
                 select
                 label="size"
+                name="size"
                 defaultValue={props.size}
                 onChange={inputHandler}
                 helperText="Please select your Dog's size"
@@ -163,6 +164,7 @@ const EditDog = inject("MainStore", "InputStore")(observer((props) => {
                 id="outlined-select-dogGender"
                 select
                 label="dogGender"
+                name="dogGender"
                 defaultValue={props.dogGender}
                 onChange={inputHandler}
                 helperText="Please select your Dog's gender"

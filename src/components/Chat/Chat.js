@@ -48,8 +48,8 @@ class App extends Component {
   
 
   
-    getMessages = () => {
-        const messagesDB = firebase
+    getMessages = async () => {
+        const messagesDB = await firebase
         .database()
         .ref("messages/")
         .limitToLast(500)
@@ -75,6 +75,11 @@ class App extends Component {
       ))
     }
   
+
+    //  async componentWillUpdate () {
+    //   await this.getMessages()
+    // }
+
     render() {
       return (
         <div className="App">

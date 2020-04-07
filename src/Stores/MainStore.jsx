@@ -10,10 +10,7 @@ export class MainStore {
     @observable curUser
     @observable curFriends = []
     @observable userIndex
-    @observable chats = {
-        messages: [],
-        chat: []
-    }
+    @observable chats = []
     @observable posts = []
     @observable filters = {
         age: null,

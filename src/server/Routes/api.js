@@ -138,6 +138,7 @@ router.put('/user/:id', (req, res) => {
         homeCoord: req.body.homeCoord,
         gender: req.body.gender,
         hours: req.body.hours,
+        images: req.body.images
     }).then(function (doc) {
 
         if (doc.exists) {
@@ -152,9 +153,9 @@ router.put('/user/:id', (req, res) => {
 })
 
 //update dog data
-router.put('/dog/:uId', (req, res) => {
+router.put('/dog/:id', (req, res) => {
     database.collection("users").doc(`${req.params.id}`).update({
-        dogs: [req.body]
+        dogs: req.body
     }).then(function (doc) {
 
         if (doc.exists) {

@@ -27,6 +27,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { deepOrange } from '@material-ui/core/colors';
 import axios from 'axios'
 import EditDog from '../Handlers/EditDog'
+import UploadFile from '../UploadFile';
+import Grid from '@material-ui/core/Grid';
 const opencage = require('opencage-api-client');
 
 
@@ -76,16 +78,11 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const [edditing , setEdditing] = useState(true)
-
+    const [editPic , setEditpic] = useState(true)
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
-
-    const editDogProfile = async () => {
-        await loadInputs()
-        setEdditing(!edditing)
-    }
 
     const loadInputs = () => {
         props.InputStore.handleInput('park', props.d.park)
@@ -99,6 +96,7 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
         props.InputStore.handleInput('shy', props.d.park)
         props.InputStore.handleInput('energetic', props.d.energetic)
         props.InputStore.handleInput('dominant', props.d.dominant)
+        props.InputStore.handleInput("dogImages", props.d.images)
     }
 
     const getCoordinates = async (stringAddress) => {
@@ -160,6 +158,26 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
         return props.InputStore[field]
     };
 
+    
+
+    const editDogProfile = async () => {
+        await loadInputs()
+        setEdditing(!edditing)
+        if(!editPic) {setEditpic(!editPic)}
+    }
+
+    const uploadPic = () => {
+        console.log(`uploadPic`);
+        setEditpic(!editPic)
+        
+    }
+
+
+    const savePicture = async () => {
+        setEditpic(!editPic)
+        await saveDogChanges()
+    }
+
     const saveDogChanges = async () => {
         const updatedDog = {
             dogName: await checkField('dogName'),
@@ -177,7 +195,7 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
             dominant: await checkField('dominant'), 
         }
         const newDogs = props.MainStore.updateDog(props.i, updatedDog)
-        console.log(updatedDog);
+        console.log(newDogs);
         
         axios.put(`http://localhost:3001/dog/${props.MainStore.curUser.id}`, newDogs).then(res => {
             
@@ -222,13 +240,34 @@ const MyDog = inject("MainStore", "InputStore")(observer((props) => {
                     </Typography>
                 </CardContent>
                 
+                {!edditing ?
+            
+                <Button
+                    variant="contained"
+                    color="primary"
+                    size="small"
+                    onClick={uploadPic}
+                    className={classes.button}
+                    startIcon={<EditIcon />} 
+                >
+                    Edit pic
+                </Button> :
+                null
+                }
+                {!editPic ?
+                <Grid item xs={12}>
+                    <UploadFile imagesInputName='dogImages' />
+                </Grid> :
+                null
+                }
+
                 {edditing ?
                     null :
                     <Button
                         variant="contained"
                         color="primary"
                         size="small"
-                        onClick={saveDogChanges}
+                        onClick={savePicture}
                         className={classes.button}
                         startIcon={<SaveIcon />}
                     >

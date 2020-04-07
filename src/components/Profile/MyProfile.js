@@ -8,6 +8,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import IconButton from '@material-ui/core/IconButton';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import clsx from 'clsx';
+import Grid from '@material-ui/core/Grid';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
@@ -19,6 +20,7 @@ import axios from 'axios'
 import EditIcon from '@material-ui/icons/Edit';
 import UploadFile from '../UploadFile';
 import EditUser from '../Handlers/EditUser'
+import CollectionsIcon from '@material-ui/icons/Collections';
 const opencage = require('opencage-api-client');
 
 const useStyles = makeStyles((theme) => ({
@@ -61,11 +63,8 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
     
     const classes = useStyles();
     const [edditing , setEdditing] = useState(true)
-    
-    const editProfile = async () => {
-        await updateInputs()
-        setEdditing(!edditing)
-    }
+    const [editPic , setEditpic] = useState(true)
+    // const [savePic , setSavepic] = useState(true)
 
     const updateInputs = () => {
         props.InputStore.handleInput("firstName", props.MainStore.curUser.firstName)
@@ -76,6 +75,8 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
         props.InputStore.handleInput("gender", props.MainStore.curUser.gender)
         props.InputStore.handleInput("smoker", props.MainStore.curUser.smoker)
         props.InputStore.handleInput("hours", props.MainStore.curUser.hours)
+        props.InputStore.handleInput("hours", props.MainStore.curUser.hours)
+        props.InputStore.handleInput("userImages", props.MainStore.curUser.images)
     }
 
     const getCoordinates = async (stringAddress) => {
@@ -137,7 +138,21 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
         return props.InputStore[field]
     };
 
+    const uploadPic = () => {
+        console.log(`uploadPic`);
+        setEditpic(!editPic)
+        
+    }
 
+    const editProfile = async () => {
+        await updateInputs()
+        setEdditing(!edditing)
+        if(!editPic) {setEditpic(!editPic)}
+    }
+    const savePicture = async () => {
+        setEditpic(!editPic)
+        await saveUserChanges()
+    }
 
     const saveUserChanges = async () => {
         const updatedUser = {
@@ -150,6 +165,7 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
             gender: await checkField('gender'),
             smoker: await checkField('smoker'),
             hours: await checkField('hours'),
+            images: props.InputStore.userImages
         }
         axios.put(`http://localhost:3001/user/${props.MainStore.curUser.id}`, updatedUser).then(res => {
                
@@ -184,13 +200,13 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
             />
             
             {
-                props.MainStore.curUser ? (props.MainStore.curUser.images ? (props.MainStore.curUser.images.map(i =>
+                props.MainStore.curUser ? (props.MainStore.curUser.images ? 
                     <CardMedia
                         className={classes.media}
-                        image={i}
-                        title={i}
+                        image={props.MainStore.curUser.images[0]}
+                        title={props.MainStore.curUser.images[0]}
                     />
-                )) :
+                 :
                 (<CardMedia
                         className={classes.media}
                         image={props.MainStore.curUser.image}
@@ -199,14 +215,36 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
                     )
                     : null
             }
+
+            {!edditing ?
             
-            {edditing ?
-            null :
             <Button
                 variant="contained"
                 color="primary"
                 size="small"
-                onClick={saveUserChanges}
+                onClick={uploadPic}
+                className={classes.button}
+                startIcon={<EditIcon />} 
+            >
+                Edit pic
+            </Button> :
+            null
+            }
+            {!editPic ?
+            <Grid item xs={12}>
+                <UploadFile imagesInputName='userImages' />
+            </Grid> :
+            null
+            }
+
+            {edditing ?
+            null :
+            
+            <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                onClick={savePicture}
                 className={classes.button}
                 startIcon={<SaveIcon />}
             >
