@@ -20,6 +20,7 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import ChatIcon from '@material-ui/icons/Chat'
 import MainChat from './MainChat'
 import WhatsAppIcon from '@material-ui/icons/WhatsApp';
+import TextField from "@material-ui/core/TextField"
 const firebase = require("firebase");
 
 const ChatFriends = inject("MainStore")(observer((props) => {
@@ -167,7 +168,15 @@ const ChatFriends = inject("MainStore")(observer((props) => {
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Typography paragraph>
-                    Chat with your friends!
+                <TextField
+            autoFocus={true}
+            multiline={true}
+            rowsMax={3}
+            placeholder="Type something.."
+            style={{ width: "98vw", overflow: "hidden" }}
+          />
+
+                   
         </Typography>
 
             </main>

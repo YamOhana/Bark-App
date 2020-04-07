@@ -10,7 +10,11 @@ import Profile from '../Profile/Profile'
 import AddDog from '../Handlers/AddDog';
 import AddUser from '../Handlers/AddUser'
 
+
 import axios from 'axios'
+
+
+
 
 @inject("MainStore")
 
@@ -22,13 +26,14 @@ class Home extends Component {
 
     }
 
-
-
+    
 static logout = () => {
         console.log(`trying to logout`)
         this.props.logout()
         console.log(`loged out`)
     }
+
+    
 
     render() {
 
@@ -36,6 +41,7 @@ static logout = () => {
             <div>
                 <Navbar />
                 <Dogs />
+                <br></br>
             </div>
         )
     }

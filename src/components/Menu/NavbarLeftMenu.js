@@ -15,14 +15,38 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import NotificationsOffIcon from '@material-ui/icons/NotificationsOff';
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import Grid from '@material-ui/core/Grid';
-
+import Avatar from '@material-ui/core/Avatar'
 import { observer, inject } from 'mobx-react'
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
 
 import { FolderListItems } from './MenuList';
 import { Popover } from '@material-ui/core';
 import Notifications from './Notifications';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  small: {
+    width: theme.spacing(3),
+    height: theme.spacing(3),
+  },
+  large: {
+    width: theme.spacing(30),
+    height: theme.spacing(30),
+  },
+  root2: {
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
+  },
 
+}));
 
 
 const styles = theme => ({
@@ -62,6 +86,11 @@ class NavbarLeftMenu extends React.Component {
     this.props.logout()
     console.log(`loged out`)
   }
+
+  classes() {
+    return this.useStyles();
+  }
+
 
   OtherFolderListItems = () => {
 
@@ -108,7 +137,7 @@ class NavbarLeftMenu extends React.Component {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-      <div>
+      <div className={this.classes.root2}>
         <Popover
           id={id}
           open={open}
@@ -128,14 +157,15 @@ class NavbarLeftMenu extends React.Component {
             : null
           }
         </Popover>
-
-        <Grid container>
+          <AppBar position="fixed">
+        <Grid  container>
           <Grid item xs={1} justify="flex-start">
-            <MenuIcon onClick={this.toggleDrawer(true)} />
+          <Avatar src="https://www.clipartkey.com/mpngs/m/216-2161007_dog-bark-icon-png.png"
+              className={this.classes.large} onClick={this.toggleDrawer(true)} edge="start"/>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={10} justify="flex-end">
           </Grid>
-          <Grid item xs={1} justify="flex-end">
+          <Grid className={this.classes.title}>
 
             {
               this.props.MainStore.curUser ? (
@@ -153,6 +183,8 @@ class NavbarLeftMenu extends React.Component {
 
           </Grid>
         </Grid>
+        </AppBar>
+        <br></br>
         <Drawer open={left} onClose={this.toggleDrawer(false)}>
           <div
             tabIndex={0}
