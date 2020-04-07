@@ -15,7 +15,6 @@ export class MainStore {
         chat: []
     }
     @observable posts = []
-    // @observable userAddress
     @observable filters = {
         age: null,
         size: null,

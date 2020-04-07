@@ -105,37 +105,50 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
     } 
 
     const checkField = field => {
+        const u = props.MainStore.curUser
         if (props.InputStore[field] == undefined) {
             let val = ""
             switch (field) {
                 case "firstName":
                     val = prompt(`You forgot to fill your First Name`)
+                    u.firstName = val
                     return val
                 case "lastName":
                     val = prompt(`You forgot to fill your Last Name`)
+                    u.lastName = val
                     return val
                 case "address":
                     val = prompt(`You forgot to put your Address`)
+                    u.address = val
                     return val
                 case "smoker":
+                    u.smoker = false
                     return false
                 case "hours":
                     console.log(`hours false`)
+                    u.hours = []
                     return []
                 case "vaccinated":
+                    u.vaccinated = false
                     return false
                 case "neutered":
+                    u.neutered = false
                     return false
                 case "shy":
+                    u.shy = false
                     return false
                 case "energetic":
+                    u.energetic = false
                     return false
                 case "dominant":
+                    u.dominant = false
                     return false
                 default:
+                    u[field] = null
                     return null
             }
         }
+        u[field] = props.InputStore[field]
         return props.InputStore[field]
     };
 
@@ -154,8 +167,9 @@ const MyProfile = inject("MainStore", "InputStore")(observer((props) => {
             hours: checkField('hours'),
         }
         axios.put(`http://localhost:3001/user/${props.MainStore.curUser.id}`, updatedUser).then(res => {
-                // this.props.clients.updateList(res.data)
+               
             })
+        setEdditing(!edditing)
     }
     
     return (
