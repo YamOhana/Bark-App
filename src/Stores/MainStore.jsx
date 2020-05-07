@@ -1,5 +1,4 @@
 import { observable, action, computed } from 'mobx';
-import axios from 'axios';
 import data from './data.json'
 import allPosts from './posts.json'
 

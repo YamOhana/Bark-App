@@ -79,8 +79,6 @@ const Dog = inject("MainStore")(observer((props) => {
 
     const [anchorE2, setAnchorE2] = React.useState(null);
 
-    const apiKey = 'AIzaSyDWpOziiBhAmxB-mylJys5a4WZsOeJzwLY'
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
