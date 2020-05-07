@@ -1,9 +1,5 @@
-import React, { useState } from 'react';
-import { observer, inject } from 'mobx-react'
-// import SidePanel from './SidePanel';
+import React from 'react';
 
-
-// const Client = inject("MainStore", "InputStore")(observer((props) => { 
 const Header = () => {
 
 

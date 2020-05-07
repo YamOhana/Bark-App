@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-// import { socketio } from 'socket.io'
 import './App.css';
 import { observer } from 'mobx-react'
 import fire from './Fire';
 import Login from './components/Login/Login';
-import Signup from './components/Login/Singup'
 import Landing from './components/Landing';
 
 
